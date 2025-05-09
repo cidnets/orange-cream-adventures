@@ -52,3 +52,15 @@
 .page-write-up pre {
   margin-left: 1rem;
 }
+
+.page-write-up img {
+	max-width: 50%;
+	padding: 1rem;
+	float: left;
+}
+
+@media all and (max-width: 768px) {
+	.page-write-up img {
+		max-width: 100%;
+	}
+}

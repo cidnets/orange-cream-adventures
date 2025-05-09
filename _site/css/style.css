@@ -88,7 +88,7 @@ h4,
 h5 {
   line-height: 1em;
   color: var(--text);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 h2,
 h3,
@@ -97,21 +97,21 @@ h5 {
   font-family: var(--font-family-header-2);
 }
 h1 {
-  font-size: 5rem;
+  font-size: 4.2rem;
   color: var(--text-header);
   font-family: var(--font-family-header);
 }
 h2 {
-  font-size: 4rem;
+  font-size: 2.6rem;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 h4 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 h5 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 }
 small,
 .text_small {

@@ -13,7 +13,6 @@ footer .footer-content {
   position: relative;
   top: -4.75rem;
   width: 100%;
-  z-index: 100;
   padding: 0 1rem;
   text-align: center;
 }

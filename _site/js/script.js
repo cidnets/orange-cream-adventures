@@ -1,22 +1,24 @@
 console.log("hello, world!");
 
-$(document).ready(function() {
-  $('.hamburger').click(function() {
-    $('.nav-links').toggleClass('active');
-  });
-});
+// $(document).ready(function() {
+//  $('.hamburger').click(function() {
+//    $('.nav-links').slideToggle(); // This will toggle the visibility with a nice slide effect!
+    // Alternatively, you could use .toggle() for a simple show/hide
+    // $('.nav-links').toggle();
+//  });
+// });
 
 // Random Border Images
 document.addEventListener('DOMContentLoaded', function() {
   const postGrids = document.querySelectorAll('.posts-grid');
 
   const borderStyles = [
-{ url: 'url("https://cdn.glitch.global/17b0a683-376a-4c07-9955-5053391d0c1b/Border-orange-3.png?v=1745585352749")', backgroundColor: '#ffc97d' },
-  { url: 'url("https://cdn.glitch.global/17b0a683-376a-4c07-9955-5053391d0c1b/Border-peach.png?v=1745480097660")', backgroundColor: '#ffd5bd' },
-  { url: 'url("https://cdn.glitch.global/17b0a683-376a-4c07-9955-5053391d0c1b/Border-pink.png?v=1745480099740")', backgroundColor: '#ffd1de' },
-  { url: 'url("https://cdn.glitch.global/17b0a683-376a-4c07-9955-5053391d0c1b/Border-lpurple.png?v=1745572353207")', backgroundColor: '#faceff' },
-  { url: 'url("https://cdn.glitch.global/17b0a683-376a-4c07-9955-5053391d0c1b/Border-yellow.png?v=1745480104838")', backgroundColor: '#fff6bd' },
-  { url: 'url("https://cdn.glitch.global/17b0a683-376a-4c07-9955-5053391d0c1b/Border-base.png?v=1745480120938")', backgroundColor: '#ffffff' },
+{ url: 'url("/assets/Border-orange-3.png")', backgroundColor: '#ffc97d' }, //light orange
+  { url: 'url("/assets/Border-peach.png")', backgroundColor: '#ffd5bd' }, //peach
+  { url: 'url("/assets/Border-pink.png")', backgroundColor: '#ffd1de' }, //pink
+  { url: 'url("/assets/Border-lpurple.png")', backgroundColor: '#faceff' }, //light purple
+  { url: 'url("/assets/Border-yellow.png")', backgroundColor: '#fff6bd' }, //yellow
+  { url: 'url("/assets/Border-base.png")', backgroundColor: '#ffffff' }, //white
     // Add as many unique image/color pairs as you like!
   ];
 
@@ -70,5 +72,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(hideCutOffLinesJQuery);
 $(window).on('resize', hideCutOffLinesJQuery);
-  
 });
+
+//BACK TO TOP BUTTON
+// Get the button:
+let mybutton = document.getElementById("back-to-top-bttn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function backToTop() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}

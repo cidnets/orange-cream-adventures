@@ -9,9 +9,8 @@ description: This is the homepage
 
 <div class="wrapper home">
   <div class="content">
-    {{ content | safe }}
-    
     {# After the the content defined in index.md, list the blog posts in the collection #}
+	<h2>Featured Posts</h2>
     <ul class="homepage posts-grid">
       {%- for post in collections.posts.slice(0,4) -%}
       <li {% if page.url == post.url %} aria-current="page"{% endif %}>
@@ -29,5 +28,6 @@ description: This is the homepage
     <div>
       <a href="/archive" class="archive-button">View all posts</a>
     </div>
+	{{ content | safe }}
   </div>
 </div>
