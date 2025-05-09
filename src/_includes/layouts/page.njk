@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+{# The About page uses this template and you can customize / use it for any new pages you add #}
+
+<div class="wrapper">
+  <div class="content">
+    <div class="page-content-background">
+      <div class="page-content-container">
+        <div class="page-content">
+          <div class="page-title">
+            <h1 class="pageTitle">{{title}}</h1>
+          </div>
+          <div class="page-write-up">
+            {{ content | safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+:root {
+  --text: #7c3e68;
+  --background: #fff9f1;
+  --primary: #ff981a;
+  --secondary: #E2A7D9;
+  --accent-1: #FFB347;
+  --accent-2: #E2A7D9;
+  --accent-3: #49243c;
+  --accent-4: #9cd6aa;
+  --accent-5: #FFDBF9;
+  
+  --background-image: url("/assets/Heart-dot-bg.png");
+}

@@ -1,0 +1,100 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+pagination:
+  data: collections.posts
+  size: 4
+  alias: posts
+---
+
+{# This is the template for the Posts page–it lists the posts in the collection #}
+
+<div class="wrapper home">
+  <div class="content">
+    {{ content | safe }}
+    <ul class="archive posts-grid">
+      {%- for post in posts -%}
+        <li{% if page.url == post.url %} aria-current="page"{% endif %}>
+          <a class="archive-post-link" href="{{ post.url }}">
+			{% if post.data.featuredImage %}
+			<div class="archive-img-container">
+			<img src="{{post.data.featuredImage}}" />
+			</div>
+			{% endif %}
+            <div class="dongle date">
+             {{ post.data.page.date | myDateFormat }}
+            </div> 
+            <h1 class="jua archive-post-title">
+             {{ post.data.title }}
+            </h1>
+          </a></li>
+      {%- endfor -%}
+    </ul>
+    
+    <div aria-labelledby="archive-pagination" class="archive-pagination">
+      <ol>
+        <li>
+          {% if page.url != pagination.href.first %}
+          <a href="{{ pagination.href.first }}">
+            First
+          </a>
+          {% else %}
+          <a class="disabled">
+		  First
+		  </a>
+          {% endif %}
+        </li>
+        <li>
+          {% if pagination.href.previous %}
+          <a href="{{ pagination.href.previous }}">
+            <span class="material-symbols-rounded">
+				arrow_back
+			</span>
+          </a>
+          {% else %}
+          <a class="disabled">
+		  <span class="material-symbols-rounded">
+			arrow_back
+			</span>
+		  </a>
+          {% endif %}
+        </li>
+    {%- for pageEntry in pagination.pages %}
+        <li>
+		<a class="archive-pagination-numbers{% if page.url == pagination.hrefs[ loop.index0 ] %} pagination-active{% endif %}" href="{{ pagination.hrefs[ loop.index0 ] }}" aria-current="page"{% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page"{% endif %}>
+  {{ loop.index }}
+</a>
+          
+        </li>
+    {%- endfor %}
+        <li>
+          {% if pagination.href.next %}
+          <a href="{{ pagination.href.next }}">
+            <span class="material-symbols-rounded">
+				arrow_forward
+			</span>
+          </a>
+          {% else %}
+		  <a class="disabled">
+		  <span class="material-symbols-rounded">
+			arrow_forward
+			</span>
+		  </a>
+          {% endif %}
+        </li>
+        <li>
+          {% if page.url != pagination.href.last %}
+          <a href="{{ pagination.href.last }}">
+            Last
+          </a>
+          {% else %}
+          <a class="disabled">
+		  Last
+		  </a>
+          {% endif %}
+        </li>
+      </ol>
+    </div>
+    
+  </div>
+</div>

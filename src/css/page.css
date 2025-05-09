@@ -1,0 +1,54 @@
+.page-content-background {
+  position: relative;
+  height: 75vh;
+  padding: 1rem;
+  border-radius: 2rem;
+  border: 2px dotted var(--text);
+  background-image: url("/assets/g51.png");
+}
+.page-content-container {
+  position: relative;
+  height: 100%;
+  border-radius: 1rem;
+  border: 2px solid var(--text);
+  background-color: var(--background);
+  overflow: hidden;
+}
+.page-content {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+.page-title {
+  width: 100%;
+  background: #ffd0de;
+  background-clip: padding-box;
+  border-bottom: 30px solid transparent;
+  border-image: url("/assets/Large-border-pink.png") 30% round;
+  padding: 2rem 1rem 0;
+}
+.pageTitle {
+  color: var(--text);
+  font-family: var(--font-family-header);
+  text-align: center;
+  margin: 0;
+}
+.page-write-up {
+  margin: 0.75rem 0 4rem;
+  padding: 0 1rem;
+}
+.page-write-up h1,
+.page-write-up h2,
+.page-write-up h3,
+.page-write-up h4,
+.page-write-up h5,
+.page-write-up ol,
+.page-write-up ul,
+.page-write-up p {
+  margin-bottom: 0.5rem;
+}
+.page-write-up ul,
+.page-write-up ol,
+.page-write-up pre {
+  margin-left: 1rem;
+}

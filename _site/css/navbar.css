@@ -1,0 +1,163 @@
+.navbar {
+  display: -webkit-box;
+  display: flex;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  color: var(--background);
+  padding-top: 0.5rem;
+  z-index: 100;
+}
+.navbar a.active {
+	background-color: var(--accent-4);
+	border-color: var(--background);
+	box-shadow: 0 0 7px 5px white;
+}
+.navbar a.active::before {
+  content: url("/assets/tiny-hearts-pink.png");
+}
+.navbar a.active::after {
+  content: url("/assets/tiny-hearts-peach.png");
+}
+.navbar a.active:hover {
+	cursor: default;
+	box-shadow: 0 0 7px 5px white;
+	outline: 2px solid var(--accent-3);
+	color: var(--background);
+}
+.logo {
+  -webkit-box-ordinal-group: 2;
+  order: 2;
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 4px double var(--accent-2);
+  background-color: var(--text);
+  outline: 2px solid var(--accent-3);
+  height: 5.5rem;
+  line-height: 5.5rem;
+  font-size: 0;
+  overflow: hidden;
+  text-align: center;
+}
+.logo img {
+  height: 5.5rem;
+  margin: 0 auto;
+}
+.logo:hover {
+  background-color: var(--text);
+}
+
+.nav-links {
+  width: 7rem;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  padding: 1rem 0;
+  border-radius: 1rem;
+  border: 4px double var(--accent-2);
+  background-color: var(--text);
+  outline: 2px solid var(--accent-3);
+}
+.nav-links:hover {
+  background-color: white;
+  color: var(--accent-4);
+  outline: 2px solid var(--accent-3);
+  box-shadow: 0 0 7px 5px white;
+}
+.nav-links:hover::before,
+.nav-links:hover::after {
+  margin: 0 0;
+}
+.nav-links:hover::before {
+  content: url("/assets/tiny-hearts-pink.png");
+}
+.nav-links:hover::after {
+  content: url("/assets/tiny-hearts-peach.png");
+}
+.nav-links:nth-of-type(n + 4) {
+  -webkit-box-ordinal-group: 2;
+  order: 2;
+}
+
+/* Hide the hamburger and checkbox by default on wider screens */
+.hamburger {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media all and (max-width: 576px) {
+  .canopy {
+    top: 0;
+    margin: 0;
+  }
+  .navbar {
+    flex-direction: column;
+    position: fixed; /* Ensure relative for absolute positioning of links */
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 1rem 1rem;
+    background: none;
+  }
+
+  .logo {
+    -webkit-box-ordinal-group: 1;
+    order: 0;
+    text-align: center;
+    position: absolute;
+    top: 0.6rem;
+    left: 0;
+    height: 5rem;
+  }
+  .logo img {
+    height: 5rem;
+  }
+
+  .nav-links {
+    position: relative;
+    top: 1rem;
+    display: none; /* Initially hide the links on small screens */
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 0.25rem;
+    padding: 1.5rem 1rem;
+  }
+  .nav-links:hover {
+    outline: 3px solid white;
+  }
+
+  /* Show the hamburger */
+  .hamburger {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 4px double var(--accent-2);
+  background-color: var(--text);
+  outline: 2px solid var(--accent-3);
+  }
+
+  .hamburger div {
+    background-color: white;
+    height: 3px;
+    width: 100%;
+  }
+
+  /* Show the nav links when the checkbox is checked */
+  .menu-toggle:checked ~ .nav-links {
+    display: block;
+  }
+}

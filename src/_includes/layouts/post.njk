@@ -1,0 +1,115 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+{# This is the template for individual blog posts–it builds the front matter properties into the page #}
+
+<div class="wrapper post">
+  <div class="content">
+    
+    <div class="post-background">
+      
+      <div class="post-content-container">
+        <div class="control-buttons-top dongle">
+          <div>
+            {% if nextPost.url %}
+              <a class="top-next" href="{{ nextPost.url }}">
+                <i class="fa-solid fa-caret-left"></i> 
+                <span>Previous</span></a>
+            {% else %}
+              <a class="disabled">
+                <i class="fa-solid fa-caret-left"></i> 
+                <span>Previous</span></a>
+            {% endif %}
+            {% if prevPost.url %}
+              <a class="top-prev" href="{{ prevPost.url }}">
+                <span>Next</span>
+                <i class="fa-solid fa-caret-right"></i></a>
+            {% else %}
+              <a class="disabled">
+                <span>Next</span>
+                <i class="fa-solid fa-caret-right"></i></a>
+            {% endif %}
+          </div>
+          <div>
+            <a class="post-home" href="/archive">
+              <i class="fa-solid fa-newspaper"></i>
+              <span>Archive</span></a>
+          </div>
+        </div>
+        
+		<div class="post-content">
+		{% if featuredImage %}
+		<div class="post-featuredImage">
+			<div class="post-title">
+				{% if date %}
+				<div class="dongle date">{{date | myDateFormat}}</div>
+				{% endif %}
+				<h1 class="postTitle">{{title}}</h1>
+			</div>
+				<div class="post-feature-img">
+					<div class="post-feature-img-container">
+						<img src="{{featuredImage}}" />
+					</div>
+				</div>
+				<div class="post-write-up">
+					<div>
+					{{ content | safe }}
+					</div>
+				</div>
+		</div>
+		{% else %}
+			<div class="post-title">
+				{% if date %}
+				<div class="dongle date">{{date | myDateFormat}}</div>
+				{% endif %}
+				<h1 class="postTitle">{{title}}</h1>
+			</div>
+			<div class="post-write-up">
+				<div>
+					{{ content | safe }}
+				</div>
+			</div>
+		{% endif %}
+		</div>
+	
+        
+        
+        <div class="control-buttons-bottom dongle">
+            {# The previous and next post data is added in .eleventy.js #}
+            {% if nextPost.url %}
+          <div class="bottom-prev">
+            <a href="{{ nextPost.url }}">
+              <i class="fa-solid fa-caret-left"></i>
+              {{ nextPost.data.title }} 
+            </a>
+          </div>
+            {% else %}
+          <div class="bottom-prev disabled">
+            <a>
+              <i class="fa-solid fa-caret-left"></i>
+              {{ nextPost.data.title }}</a>
+          </div>
+            {% endif %}
+          {% if prevPost.url %}
+          <div class="bottom-next">
+            <a href="{{ prevPost.url }}">
+              {{ prevPost.data.title }}
+              <i class="fa-solid fa-caret-right"></i></a>
+          </div>
+            {% else %}
+          <div class="bottom-next disabled">
+            <a>
+              {{ prevPost.data.title }}
+              <i class="fa-solid fa-caret-right"></i></a>
+          </div>
+            {% endif %}
+        </div>
+        <div class="canopy-top"></div>
+      </div>
+
+  </div>
+    
+  </div>
+</div>

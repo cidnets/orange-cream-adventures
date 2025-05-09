@@ -1,0 +1,70 @@
+ul.homepage {
+  display: grid;
+  grid-template-columns: repeat(4, calc(25% - 1rem));
+  gap: 1rem;
+  justify-content: center;
+}
+ul.posts-grid {
+  margin-bottom: 1rem;
+  padding: 0;
+}
+.posts-grid li {
+  padding: 0;
+  list-style-type: none;
+}
+.posts-grid li a {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  background-clip: padding-box;
+  overflow: hidden;
+}
+ul.homepage li a {
+  height: 100%;
+  text-align: center;
+  aspect-ratio: 1/1;
+}
+.posts-grid li a:hover {
+  border-image: url("/assets/Border-blue.png") 33% round !important;
+  background-color: #b6f5ff !important;
+}
+
+.posts-grid h1 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.archive-button {
+  display: block;
+  width: 10rem;
+  margin: 0 1rem 0 auto;
+  padding: 0.5rem 0;
+  text-align: center;
+  border-radius: 1rem;
+  border: 2px dashed var(--accent-4);
+  background-color: white;
+  outline: 3px solid white;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--text);
+}
+.archive-button:hover {
+  background-color: white;
+  color: var(--accent-4);
+}
+.archive-button:hover::before {
+  content: url("/assets/tiny-hearts-peach.png");
+}
+.archive-button:hover::after {
+  content: url("/assets/tiny-hearts-pink.png");
+}
+
+@media all and (max-width: 768px) {
+  ul.posts-grid {
+    grid-template-columns: repeat(2, calc(50% - 1rem));
+  } 
+}
+@media all and (max-width: 576px) {
+  ul.posts-grid {
+    grid-template-columns: auto;
+  } 
+}

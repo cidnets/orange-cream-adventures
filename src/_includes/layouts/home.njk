@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+title: Hello!
+description: This is the homepage
+---
+
+{# The Home page uses this template–it extends the base template #}
+
+<div class="wrapper home">
+  <div class="content">
+    {{ content | safe }}
+    
+    {# After the the content defined in index.md, list the blog posts in the collection #}
+    <ul class="homepage posts-grid">
+      {%- for post in collections.posts.slice(0,4) -%}
+      <li {% if page.url == post.url %} aria-current="page"{% endif %}>
+         <a href="{{ post.url }}">
+           <div class="dongle date">
+             {{ post.data.page.date | myDateFormat }}
+           </div> 
+           <h1 class="jua">
+             {{ post.data.title }}
+           </h1>
+         </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    <div>
+      <a href="/archive" class="archive-button">View all posts</a>
+    </div>
+  </div>
+</div>

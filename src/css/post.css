@@ -1,0 +1,255 @@
+.post-background {
+  position: relative;
+  height: 75vh;
+  padding: 1rem;
+  border-radius: 2rem;
+  border: 2px dotted var(--accent-1);
+  background-image: url("/assets/g51.png");
+}
+.post-content-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  border: 2px solid var(--accent-1);
+  background-color: var(--background);
+  overflow: hidden;
+}
+
+.post-content {
+    width: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.post-featuredImage {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-rows: auto auto;    /* Auto height for both rows */
+	height: fit-content;
+}
+
+.post-featuredImage > .post-title {
+    grid-column: 1 / 3; /* Make the title span both columns */
+    grid-row: 1;
+}
+
+.post-featuredImage > .post-feature-img {
+    grid-column: 1;
+    grid-row: 2;
+    position: sticky;
+    top: calc(70px + 1rem);
+    width: 100%;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    border-radius: 1rem;
+	align-self: start;
+}
+
+.post-featuredImage > .post-write-up {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.post-content .post-title {
+  background: var(--accent-5);
+  background-clip: padding-box;
+  border-bottom: 30px solid transparent;
+  border-image: url("/assets/Large-border-purple.png") 30% round;
+  padding: 5rem 1rem 0;
+}
+.post-title .postTitle {
+  color: var(--text);
+  font-family: var(--font-family-header-2);
+  text-align: center;
+  margin: 1rem 0 0;
+}
+.post-title .date {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 0 1rem;
+	text-align: center;
+	color: var(--text);
+	border-bottom: 2px dotted var(--accent-2);
+}
+.post-feature-img {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	margin: 1rem 0;
+	padding: 0 1rem;
+	border-radius: 1rem;
+}
+.post-feature-img-container {
+	padding: 0.25rem;
+	background-color: white;
+	border: 7px solid transparent;
+	border-image: url("/assets/Border-base.png") 33% round;
+}
+.post-feature-img img {
+	width: 100%;
+	border-radius: 0.5rem;
+	border: 2px dashed var(--accent-4);
+}
+.post-content .post-write-up,
+.post-content .post-write-up-feature {
+  margin: 0.75rem 0 4rem;
+  padding: 0 1rem;
+}
+
+.post-write-up h1,
+.post-write-up h2,
+.post-write-up h3,
+.post-write-up h4,
+.post-write-up h5,
+.post-write-up ol,
+.post-write-up ul,
+.post-write-up p {
+  margin-bottom: 0.5rem;
+}
+.post-write-up ul,
+.post-write-up ol,
+.post-write-up pre {
+  margin-left: 1rem;
+}
+
+
+/* Post Control Buttons */
+.post-content-container .control-buttons-top,
+.post-content-container .control-buttons-bottom {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  z-index: 1;
+}
+.post-content-container .control-buttons-top {
+  position: absolute;
+  top: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+.post-content-container .control-buttons-top div {
+  width: 50%;
+  display: flex;
+}
+.post-content-container .control-buttons-top a {
+  display: inline-block;
+  border: 2px dashed var(--accent-4);
+  border-radius: 1rem;
+  background-color: white;
+  outline: 2px solid white;
+  max-width: 120px;
+  width: 50%;
+  height: 2.5rem;
+  padding-top: 2px;
+  overflow: hidden;
+}
+.post-content-container .control-buttons-top a:not(:last-child) {
+  margin-right: 1rem;
+}
+.post-home {
+  margin-left: auto;
+}
+.post-home:hover::before,
+.post-home:hover::after {
+  content: url("/assets/tiny-hearts-peach.png");
+}
+.control-buttons-top a:hover {
+  color: var(--accent-4);
+}
+
+.control-buttons-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.25rem;
+  border-top: 7px solid transparent;
+  border-image: url("/assets/Border-peach.png") 33% round;
+  background-color: #ffd5bd;
+  background-clip: padding-box;
+}
+.control-buttons-bottom div {
+    width: 50%;
+}
+.control-buttons-bottom a {
+  display: flex;
+  height: 2rem;
+  overflow: hidden;
+  border: none;
+}
+.control-buttons-bottom .bottom-prev a {
+  text-align: left;
+  justify-content: left;
+}
+.control-buttons-bottom .bottom-next a {
+  text-align: right;
+  justify-content: right;
+}
+.control-buttons-bottom a:hover {
+  background: transparent;
+  color: var(--accent-4);
+}
+.control-buttons-bottom i {
+  margin: 0 0.5rem;
+  padding-top: 0.45rem;
+}
+
+a.top-next:hover::before,
+a.top-prev:hover::after,
+.bottom-next a:hover::before,
+.bottom-prev a:hover::after {
+  content: url("/assets/tiny-hearts-peach.png");
+}
+a.top-next:hover::after,
+a.top-prev:hover::before {
+  content: url("/assets/tiny-hearts-pink.png");
+}
+
+a.disabled:hover::before,
+a.disabled:hover::after,
+.disabled a:hover::before,
+.disabled a:hover::after {
+  content: none;
+}
+.control-buttons-top a.disabled,
+.control-buttons-top a.disabled:hover,
+.control-buttons-bottom .disabled a,
+.control-buttons-bottom .disabled a:hover{
+  opacity: 0.6;
+  cursor: default;
+  color: var(--text);
+}
+
+/* Canopy */
+.canopy-top {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 70px;
+  background-image: url("/assets/orange-mini-canopy.png");
+  background-size: 100px;
+  background-position: 50% 100%;
+}
+
+@media screen and (max-width: 576px) {
+  .control-buttons-top a span {
+    display: none;
+  }
+  .post-featuredImage {
+    display: block;
+	height: fit-content;
+	}
+	.post-featuredImage > .post-feature-img {
+		background-color: var(--background);
+		margin: 0;
+		padding: calc(70px + 1rem) 1rem 1rem;
+		top: 0;
+		
+	}
+}
