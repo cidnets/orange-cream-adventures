@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: About this site
+title: About
 ---
 
 ## About this site

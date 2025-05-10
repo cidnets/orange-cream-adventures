@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: "Contact Page"
+title: "Contact"
 description: "Hey this is the contact page"
 ---
 

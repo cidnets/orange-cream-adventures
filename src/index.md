@@ -1,6 +1,6 @@
 ---
 layout: layouts/home.njk
-title: "Eleventy Index"
+title: "Homepage"
 ---
 
 # Hello world!
