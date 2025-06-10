@@ -1,8 +1,8 @@
 .post-background {
   position: relative;
-  height: 75vh;
-  padding: 1rem;
-  border-radius: 2rem;
+  height: 82vh;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
   border: 2px dotted var(--accent-1);
   background-image: url("/assets/g51.png");
 }
@@ -238,6 +238,19 @@ a.disabled:hover::after,
 }
 
 @media screen and (max-width: 576px) {
+	.canopy-top {
+		height: 3rem;
+	}
+	.post-content-container .control-buttons-top {
+		height: 2rem;
+	}
+	.post-content-container .control-buttons-top a {
+		width: 33%;
+		height: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
   .control-buttons-top a span {
     display: none;
   }
