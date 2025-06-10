@@ -15,6 +15,11 @@ description: This is the homepage
       {%- for post in collections.posts.slice(0,4) -%}
       <li {% if page.url == post.url %} aria-current="page"{% endif %}>
          <a href="{{ post.url }}">
+			{% if loop.first and post.data.featuredImage %}
+			<div class="postsgrid-img-container">
+				<img src="{{post.data.featuredImage}}" />
+			</div>
+			{% endif %}
            <div class="dongle date">
              {{ post.data.page.date | myDateFormat }}
            </div> 
