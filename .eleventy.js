@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon");
 const { format } = require("date-fns");
+const markdownIt = require("markdown-it");
 
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/assets/");
@@ -18,6 +19,14 @@ module.exports = function(eleventyConfig) {
   
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+  });
+	 // Markdownify Filter using Markdown-it
+  const md = new markdownIt({
+    html: true, // This allows HTML tags in your Markdown
+  });
+
+  eleventyConfig.addFilter("markdownify", (content) => {
+    return md.render(content);
   });
   
   /* Creating the posts collection */

@@ -34,23 +34,7 @@
   padding-top: 0.5rem;
   z-index: 100;
 }
-.navbar a.active {
-	background-color: var(--accent-4);
-	border-color: var(--background);
-	box-shadow: 0 0 7px 5px white;
-}
-.navbar a.active::before {
-  content: url("/assets/tiny-hearts-pink.png");
-}
-.navbar a.active::after {
-  content: url("/assets/tiny-hearts-peach.png");
-}
-.navbar a.active:hover {
-	cursor: default;
-	box-shadow: 0 0 7px 5px white;
-	outline: 2px solid var(--accent-3);
-	color: var(--background);
-}
+
 .logo {
   -webkit-box-ordinal-group: 2;
   order: 2;
@@ -78,6 +62,7 @@
 }
 
 .nav-links {
+	position: relative;
   width: 25%;
   max-width: 7rem;
   text-align: center;
@@ -95,19 +80,42 @@
   outline: 2px solid var(--accent-3);
   box-shadow: 0 0 7px 5px white;
 }
+.nav-links::before,
+.nav-links::after {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0;
+}
 .nav-links:hover::before,
 .nav-links:hover::after {
-  margin: 0 0;
+	opacity: 1;
 }
+
 .nav-links:hover::before {
   content: url("/assets/tiny-hearts-pink.png");
+  left: 0.33rem;
 }
+
 .nav-links:hover::after {
   content: url("/assets/tiny-hearts-peach.png");
+  right: 0.33rem;
 }
 .nav-links:nth-of-type(n + 4) {
   -webkit-box-ordinal-group: 2;
   order: 2;
+}
+.nav-links a.active {
+	background-color: var(--accent-4);
+	border-color: var(--background);
+	box-shadow: 0 0 7px 5px white;
+}
+
+.nav-links a.active:hover {
+	cursor: default;
+	box-shadow: 0 0 7px 5px white;
+	outline: 2px solid var(--accent-3);
+	color: var(--background);
 }
 
 /* Hide the hamburger and checkbox by default on wider screens */
@@ -146,7 +154,9 @@
 	font-size: larger;
 }
 #back-to-top-bttn:hover {
-	color: var(--accent-4);
+	border-image: url("/assets/Border-green.png") round 33%;
+	background-color: var(--accent-4);
+	color: white;
 	opacity: 1;
 }
 

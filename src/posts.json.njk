@@ -1,0 +1,13 @@
+---
+permalink: /posts.json
+eleventyExcludeFromCollections: true
+---
+[
+  {%- for post in collections.posts -%}
+  {
+    "url": "{{ post.url | url }}",
+    "title": "{{ post.data.title | safe }}"
+  }
+  {%- if not loop.last -%},{%- endif -%}
+  {%- endfor -%}
+]

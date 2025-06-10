@@ -1,8 +1,10 @@
+.post-background, .page-content-background {
+	position: relative;
+	height: 82vh;
+	padding: 0.5rem;
+	border-radius: 1.5rem;
+}
 .post-background {
-  position: relative;
-  height: 82vh;
-  padding: 0.5rem;
-  border-radius: 1.5rem;
   border: 2px dotted var(--accent-1);
   background-image: url("/assets/g51.png");
 }

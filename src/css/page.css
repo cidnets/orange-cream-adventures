@@ -1,8 +1,4 @@
 .page-content-background {
-  position: relative;
-  height: 75vh;
-  padding: 1rem;
-  border-radius: 2rem;
   border: 2px dotted var(--text);
   background-image: url("/assets/g51.png");
 }

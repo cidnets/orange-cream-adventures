@@ -94,3 +94,28 @@ function backToTop() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
+//RANDOM POST BUTTON 
+  const randomPostButton = document.getElementById('random-post-button');
+
+  randomPostButton.addEventListener('click', async () => {
+    try {
+      // Fetch the list of posts
+      const response = await fetch('/posts.json');
+      const data = await response.json();
+      const allPosts = data;
+
+      if (allPosts && allPosts.length > 0) {
+        // Pick a random post
+        const randomIndex = Math.floor(Math.random() * allPosts.length);
+        const randomPost = allPosts[randomIndex];
+
+        // Go to the random post's URL
+        window.location.href = randomPost.url;
+      } else {
+        console.error('Oops, no posts were found!');
+      }
+    } catch (error) {
+      console.error('Oh no, something went wrong!', error);
+    }
+  });

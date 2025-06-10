@@ -10,7 +10,7 @@ description: This is the homepage
 <div class="wrapper home">
   <div class="content">
     {# After the the content defined in index.md, list the blog posts in the collection #}
-	<h2>Featured Posts</h2>
+	<h1>Featured Posts</h1>
     <ul class="homepage posts-grid">
       {%- for post in collections.posts.slice(0,4) -%}
       <li {% if page.url == post.url %} aria-current="page"{% endif %}>
@@ -28,6 +28,19 @@ description: This is the homepage
     <div>
       <a href="/archive" class="archive-button">View all posts</a>
     </div>
+</div>
+<div id="about" class="section">
+		<div class="content">
+		{% set my_content %}{% include "about.md" %}{% endset %}
+			{{ my_content | markdownify | safe }}
+		</div>
+</div>
+<div class="content random-post">
+	<h1>Don't know where to start?</h1>
+	<h2>Let me surprise you!</h2>
+	<button id="random-post-button" class="random-post-button">Take Me to a Random Post!</button>
+</div>
+<div class="content">
 	{{ content | safe }}
   </div>
 </div>

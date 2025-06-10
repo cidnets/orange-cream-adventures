@@ -34,11 +34,13 @@ ul.homepage li a {
   margin: 1rem 0;
 }
 
-.archive-button {
+.archive-button,
+.random-post-button {
   display: block;
-  width: 10rem;
-  margin: 0 1rem 0 auto;
-  padding: 0.5rem 0;
+  position: relative;
+  width: 20%;
+  max-width: 160px;
+  padding: 0.5rem 1rem;
   text-align: center;
   border-radius: 1rem;
   border: 2px dashed var(--accent-4);
@@ -47,15 +49,41 @@ ul.homepage li a {
   outline-offset: 0;
   box-shadow: 0 0 0 4px var(--text);
 }
-.archive-button:hover {
+.archive-button {
+	margin: 0 1rem 0 auto;
+}
+.random-post-button {
+	margin: 1.5rem auto;
+}
+.archive-button:hover,
+.random-post-button:hover {
   background-color: white;
   color: var(--accent-4);
 }
-.archive-button:hover::before {
-  content: url("/assets/tiny-hearts-peach.png");
+.archive-button::before,
+.random-post-button::before,
+.archive-button::after,
+.random-post-button::after {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0;
 }
-.archive-button:hover::after {
+.archive-button:hover::before,
+.random-post-button:hover::before,
+.archive-button:hover::after,
+.random-post-button:hover::after {
+	opacity: 1;
+}
+.archive-button:hover::before,
+.random-post-button:hover::before {
+  content: url("/assets/tiny-hearts-peach.png");
+  left: 0.5rem;
+}
+.archive-button:hover::after,
+.random-post-button:hover::after {
   content: url("/assets/tiny-hearts-pink.png");
+  right: 0.5rem;
 }
 
 @media all and (max-width: 768px) {

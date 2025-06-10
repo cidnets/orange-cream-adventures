@@ -1,5 +1,6 @@
 :root {
   --text: #7c3e68;
+  --text-header: #7c3e68;
   --background: #fff9f1;
   --primary: #ff981a;
   --secondary: #E2A7D9;
@@ -10,4 +11,17 @@
   --accent-5: #FFDBF9;
   
   --background-image: url("/assets/Heart-dot-bg.png");
+  
+  /* COLORS */
+  --blue: #99dfeb;
+  --cream: #fff9f1;
+  --green: #9cd6aa;
+  --orange: #ff981a;
+  --orange-2: #ffb347;
+  --orange-3: #ffc97d;
+  --peach: #ffd5bd;
+  --pink: #ffd0de;
+  --purple: #e2a7d9;
+  --lpurple: #faceff;
+  --yellow: #fff6bd;
 }
