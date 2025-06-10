@@ -7,4 +7,7 @@
 <title>{{title}} - Orange Cream Adventures</title>
 <link rel="icon" type="image/x-icon" href="/assets/g201.png">
 <link rel="stylesheet" href="/css/style.css"/>
+	{% if pageStyles %}
+        <link rel="stylesheet" href="{{ pageStyles }}">
+    {% endif %}
 <script src="/js/script.js" defer></script>
