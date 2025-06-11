@@ -40,26 +40,6 @@ templateClass: tmpl-home
         </div>
         
 		<div class="post-content">
-		{% if featuredImage %}
-		<div class="post-featuredImage">
-			<div class="post-title">
-				{% if date %}
-				<div class="dongle date">{{date | myDateFormat}}</div>
-				{% endif %}
-				<h1 class="postTitle">{{title}}</h1>
-			</div>
-				<div class="post-feature-img">
-					<div class="post-feature-img-container">
-						<img src="{{featuredImage}}" />
-					</div>
-				</div>
-				<div class="post-write-up">
-					<div>
-					{{ content | safe }}
-					</div>
-				</div>
-		</div>
-		{% else %}
 			<div class="post-title">
 				{% if date %}
 				<div class="dongle date">{{date | myDateFormat}}</div>
@@ -67,11 +47,13 @@ templateClass: tmpl-home
 				<h1 class="postTitle">{{title}}</h1>
 			</div>
 			<div class="post-write-up">
-				<div>
-					{{ content | safe }}
-				</div>
+				{% if featuredImage %}
+				<p>
+					<img src="{{featuredImage}}"/>
+				</p>
+				{% endif %}
+				{{ content | safe }}
 			</div>
-		{% endif %}
 		</div>
 	
         

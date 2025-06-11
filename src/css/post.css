@@ -28,33 +28,19 @@
     position: relative;
 }
 
-.post-featuredImage {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    grid-template-rows: auto auto;    /* Auto height for both rows */
-	height: fit-content;
+.post-write-up p:has(img) {
+	width: 40%;
+	margin: 1rem 1rem 1rem 0;
+	float: left;
+	padding: 0.25rem;
+	background-color: white;
+	border: 7px solid transparent;
+	border-image: url("/assets/Border-base.png") 33% round;
+	top: 100px;
 }
-
-.post-featuredImage > .post-title {
-    grid-column: 1 / 3; /* Make the title span both columns */
-    grid-row: 1;
-}
-
-.post-featuredImage > .post-feature-img {
-    grid-column: 1;
-    grid-row: 2;
-    position: sticky;
-    top: calc(70px + 1rem);
-    width: 100%;
-    margin: 1rem 0;
-    padding: 0 1rem;
-    border-radius: 1rem;
-	align-self: start;
-}
-
-.post-featuredImage > .post-write-up {
-    grid-column: 2;
-    grid-row: 2;
+.post-write-up img {
+	border: 2px dashed var(--accent-4);
+	border-radius: 0.5rem;
 }
 
 .post-content .post-title {
@@ -78,40 +64,25 @@
 	color: var(--text);
 	border-bottom: 2px dotted var(--accent-2);
 }
-.post-feature-img {
-	position: sticky;
-	top: 0;
-	width: 100%;
-	margin: 1rem 0;
-	padding: 0 1rem;
-	border-radius: 1rem;
-}
-.post-feature-img-container {
-	padding: 0.25rem;
-	background-color: white;
-	border: 7px solid transparent;
-	border-image: url("/assets/Border-base.png") 33% round;
-}
-.post-feature-img img {
-	width: 100%;
-	border-radius: 0.5rem;
-	border: 2px dashed var(--accent-4);
-}
-.post-content .post-write-up,
-.post-content .post-write-up-feature {
-  margin: 0.75rem 0 4rem;
-  padding: 0 1rem;
+
+.post-content .post-write-up {
+  margin: 0.75rem 1.5rem 4rem;
 }
 
 .post-write-up h1,
 .post-write-up h2,
 .post-write-up h3,
 .post-write-up h4,
-.post-write-up h5,
+.post-write-up h5 {
+	margin: 2rem 0;
+	text-align: center;
+	text-wrap: balance;
+}
 .post-write-up ol,
 .post-write-up ul,
 .post-write-up p {
-  margin-bottom: 0.5rem;
+	text-wrap: wrap;
+	margin-bottom: 0.5rem;
 }
 .post-write-up ul,
 .post-write-up ol,
@@ -156,11 +127,31 @@
   margin-right: 1rem;
 }
 .post-home {
+	position: relative;
   margin-left: auto;
+}
+.post-home::before,
+.post-home::after,
+.post-home:hover::before,
+.post-home:hover::after {
+	content: url("/assets/tiny-hearts-peach.png");
+	position: absolute;
+	top: 50%;
+	transform: translateY(-40%);
+}
+.post-home::before {
+	left: 3px;
+}
+.post-home::after {
+	right: 3px;
+}
+.post-home::before,
+.post-home::after {
+	opacity: 0;
 }
 .post-home:hover::before,
 .post-home:hover::after {
-  content: url("/assets/tiny-hearts-peach.png");
+	opacity: 1;
 }
 .control-buttons-top a:hover {
   color: var(--accent-4);
@@ -195,21 +186,52 @@
 .control-buttons-bottom a:hover {
   background: transparent;
   color: var(--accent-4);
+  text-shadow: 0 0 3px white;
 }
 .control-buttons-bottom i {
   margin: 0 0.5rem;
   padding-top: 0.45rem;
 }
-
-a.top-next:hover::before,
-a.top-prev:hover::after,
-.bottom-next a:hover::before,
-.bottom-prev a:hover::after {
-  content: url("/assets/tiny-hearts-peach.png");
+a.top-next,
+a.top-prev {
+	position: relative;
 }
+a.top-next::before,
+a.top-next::after,
+a.top-prev::before,
+a.top-prev::after,
+a.top-next:hover::before,
 a.top-next:hover::after,
+a.top-prev:hover::before,
+a.top-prev:hover::after {
+	content: url("/assets/tiny-hearts-peach.png");
+	position: absolute;
+	top: 50%;
+	transform: translateY(-40%);
+}
+a.top-next::before,
+a.top-next::after,
+a.top-prev::before,
+a.top-prev::after {
+	opacity: 0;
+}
+a.top-next:hover::before,
+a.top-next:hover::after,
+a.top-prev:hover::before,
+a.top-prev:hover::after {
+	opacity: 1;
+}
+a.top-next::before,
+a.top-next:hover::before,
+a.top-prev::before,
 a.top-prev:hover::before {
-  content: url("/assets/tiny-hearts-pink.png");
+	left: 3px;
+}
+a.top-prev::after,
+a.top-prev:hover::after,
+a.top-next::after,
+a.top-next:hover::after {
+	right: 3px;
 }
 
 a.disabled:hover::before,
@@ -256,16 +278,7 @@ a.disabled:hover::after,
   .control-buttons-top a span {
     display: none;
   }
-  .post-featuredImage {
-    display: block;
-	height: fit-content;
-	}
-	.post-featuredImage > .post-feature-img {
-		position: relative;
-		background-color: var(--background);
-		margin: 0;
-		padding: 1rem;
-		top: 0;
-		
-	}
+  .post-content p:has(img) {
+	  width: 100%;
+  }
 }

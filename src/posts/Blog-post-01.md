@@ -18,6 +18,8 @@ Read on if travel has been on your mind lately but maybe you don't have the time
 
 ### 1. Be prepared with a travel kit that includes necessities such as medications
 
+![](/assets/Blog-featured-images/blog-1.jpg)
+
 Make sure to carry a travel kit with you when going on vacation. This will make it easy for you to stay healthy while away from home by including things like medicine and other items that are essential for your health.
 
 Whether you're going for a week or two on vacation, or on a business trip, make sure to travel prepared. My travel kit always includes tons of medicine. I don't want to catch something while out on the road, so I'm prepared for anything!
