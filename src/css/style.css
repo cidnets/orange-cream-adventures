@@ -167,6 +167,7 @@ a:hover {
 }
 button {
 	color: var(--text);
+	cursor: pointer;
 }
 
 /* Title style adjustments */
