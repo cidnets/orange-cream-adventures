@@ -1,13 +1,3 @@
-/******************************************************************************
-START Glitch hello-app default styles
-
-The styles in this section do some minimal CSS resets, set default fonts and 
-colors, and handle the layout for our footer and "Remix on Glitch" button. If
-you're new to CSS they may seem a little complicated, but you can scroll down
-to this section's matching END comment to see page-specific styles.
-******************************************************************************/
-/* Our default values set as CSS variables */
-
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Dongle&family=Fredoka:wght@300..700&family=Jua&family=Sniglet:wght@400;800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 @import "reset.css";
 @import "archive.css";
@@ -167,6 +157,7 @@ a:hover {
 }
 button {
 	color: var(--text);
+	cursor: pointer;
 }
 
 /* Title style adjustments */
@@ -215,6 +206,10 @@ button {
 	}
   .wrapper {
     margin: 2.75rem 1rem 0;
+  }
+  .wrapper.home {
+	  margin-left: 0;
+	  margin-right: 0;
   }
   h1, h2, h3, h4, h5 {
 	  text-align: center;

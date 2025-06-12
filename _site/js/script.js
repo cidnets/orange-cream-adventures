@@ -8,6 +8,11 @@ console.log("hello, world!");
 //  });
 // });
 
+//COPYRIGHT
+    const copyrightYearSpan = document.getElementById('copyright-year');
+    const currentYear = new Date().getFullYear();
+    copyrightYearSpan.textContent = currentYear;
+
 // Random Border Images
 document.addEventListener('DOMContentLoaded', function() {
   const postGrids = document.querySelectorAll('.posts-grid');

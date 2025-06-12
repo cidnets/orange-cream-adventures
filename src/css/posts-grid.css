@@ -136,4 +136,11 @@ ul.homepage li a {
   text-align: center;
   aspect-ratio: 1/0;
 }
+.postsgrid-img-container {
+	display: none;
+}
+.archive-button,
+.random-post-button {
+	width: 50%;
+}
 }

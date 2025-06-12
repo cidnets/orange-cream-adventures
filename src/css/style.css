@@ -207,6 +207,10 @@ button {
   .wrapper {
     margin: 2.75rem 1rem 0;
   }
+  .wrapper.home {
+	  margin-left: 0;
+	  margin-right: 0;
+  }
   h1, h2, h3, h4, h5 {
 	  text-align: center;
   }
