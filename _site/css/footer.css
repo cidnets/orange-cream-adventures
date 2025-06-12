@@ -30,7 +30,6 @@ footer .footer-content {
 .footer-content .links {
   margin: 0 auto;
   padding: 0.5rem;
-  white-space: nowrap;
   background-color: var(--text);
   border: 4px double var(--accent-2);
   outline: 2px solid var(--accent-3);
@@ -89,4 +88,17 @@ footer .wooden-slats {
 .footer-content .footer-logo img {
 	max-width: 100px;
 	margin: 0 auto;
+}
+
+@media screen and (max-width: 576px) {
+	.footer-content .links {
+		display: flex;
+		flex-direction: column;
+	}
+	.footer-content .links a:not(:last-child) {
+		border-bottom: 2px dotted var(--lpurple);	
+	}
+	.footer-content .divider {
+		display: none;
+	}
 }

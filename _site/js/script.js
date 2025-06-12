@@ -12,6 +12,24 @@ console.log("hello, world!");
     const copyrightYearSpan = document.getElementById('copyright-year');
     const currentYear = new Date().getFullYear();
     copyrightYearSpan.textContent = currentYear;
+	
+// CLOSE NAVBAR AFTER CLICKING
+  // Find the checkbox element by its ID
+  const menuToggle = document.getElementById('menu-toggle');
+
+  // Find all the navigation links within your menu
+  const navLinks = document.querySelectorAll('a.nav-links');
+
+  // Loop through each of the navigation links
+  navLinks.forEach(link => {
+    // Add a 'click' event listener to each one
+    link.addEventListener('click', () => {
+      // When a link is clicked, set the checkbox to 'unchecked'
+      // This will trigger your CSS to hide the menu again! ✨
+      menuToggle.checked = false;
+    });
+  });
+
 
 // Random Border Images
 document.addEventListener('DOMContentLoaded', function() {
