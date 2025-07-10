@@ -11,6 +11,7 @@
   --accent-5: #FFDBF9;
   
   --background-image: url("/assets/Heart-dot-bg.png");
+  --border: 8px solid transparent;
   
   /* COLORS */
   --blue: #99dfeb;

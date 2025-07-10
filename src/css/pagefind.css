@@ -1,0 +1,111 @@
+.fixed-overlay-base {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 0;
+  z-index: 1000;
+  background-color: #fff;
+  border: var(--border);
+  border-image: url("/assets/Border-base.png") round 33%;
+  background-clip: padding-box;
+}
+
+#collapsible-search-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  transition: width 0.3s ease-out, padding 0.3s ease-out;
+}
+
+#search-container {
+	font-family: var(--font-family);
+}
+
+#search-container .pagefind-ui .pagefind-ui__form::before {
+	display: none;
+}
+#search-container .pagefind-ui .pagefind-ui__search-input {
+	height: auto;
+	padding: 0 0.5rem;
+	border: none;
+	border-radius: none;
+	font-family: var(--font-family);
+	font-weight: normal;
+	color: var(--text);
+}
+#search-container .pagefind-ui .pagefind-ui__search-clear {
+	top: 0;
+	right: 0;
+	height: 100%;
+	padding: 0 0.5rem;
+	font-family: "Dongle";
+	font-size: 1.25em;
+}
+
+#search-container .pagefind-ui .pagefind-ui__drawer .pagefind-ui__results-area {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  max-height: 50vh;
+  margin-top: 1rem;
+  padding: 0.3rem 1rem 1rem;
+  background-color: white;
+  border: 2px solid var(--text);
+  border-radius: 0px;
+  box-shadow: none;
+  color: var(--text);
+  overflow-y: auto;
+}
+#search-container .pagefind-ui .pagefind-ui__drawer .pagefind-ui__result-title .pagefind-ui__result-link {
+	color: var(--text);
+}
+#search-container .pagefind-ui .pagefind-ui__drawer .pagefind-ui__results-area .pagefind-ui__result {
+	border-top: 2px dashed var(--secondary);
+}
+#search-container .pagefind-ui .pagefind-ui__drawer .pagefind-ui__results-area .pagefind-ui__button {
+	color: var(--text);
+}
+#search-container .pagefind-ui .pagefind-ui__drawer .pagefind-ui__results-area .pagefind-ui__button:hover {
+	background-color: var(--primary);
+}
+
+#search-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  color: #333;
+  transition: color 0.2s ease-in-out;
+}
+
+#search-toggle:hover {
+  color: #007bff;
+}
+
+#search-container.collapsed {
+	display: none;
+  width: 0;
+  overflow: hidden;
+  padding: 0;
+  opacity: 0;
+  transition: width 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+}
+
+#search-container:not(.collapsed) {
+  width: auto;
+  padding: 0;
+  opacity: 1;
+  border: none;
+}
+
+#search-container:not(.collapsed) .pagefind-ui__search-input {
+  width: 200px;
+}
+
+#collapsible-search-wrapper:has(#search-container:not(.collapsed)) {
+}
+

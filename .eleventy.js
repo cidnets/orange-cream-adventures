@@ -1,6 +1,7 @@
 const { DateTime } = require("luxon");
 const { format } = require("date-fns");
 const markdownIt = require("markdown-it");
+const { execSync } = require('child_process');
 
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/assets/");
@@ -9,6 +10,14 @@ module.exports = function(eleventyConfig) {
 	
 	eleventyConfig.addWatchTarget("src/css/");
 	// Configure Eleventy
+
+	eleventyConfig.on('eleventy.after', () => {
+		console.log('[Pagefind] Building search index...');
+		// Make sure 'public' matches your Eleventy output directory (usually '_site' or 'dist')
+		// If your output is different, change `_site` to your output directory
+		execSync(`npx pagefind --site _site`, { encoding: 'utf-8' });
+		console.log('[Pagefind] Search index built!');
+	});
 	
 	//Filters
 	  eleventyConfig.addFilter("myDateFormat", (dateObj) => {

@@ -7,13 +7,15 @@
 <body>
     {% include "navbar.njk" %}
     
-  <main>
+  <main data-pagefind-body>
     {{ content | safe }}    
   </main>
     
   <footer class="footer">
 	{% include "footer.njk" %}    
   </footer>
+   
+   {% include "scripts.njk" %}
    
   </body>
 </html>

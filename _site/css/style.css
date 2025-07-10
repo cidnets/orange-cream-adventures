@@ -9,13 +9,13 @@
 @import "page.css";
 @import "post.css";
 @import "posts-grid.css";
+@import "pagefind.css";
 
 :root {
   --wrapper-height: 85vh;
   --image-max-width: 320px;
 }
 
-/* Basic page style resets */
 * {
   box-sizing: border-box;
   transition: 0s;
@@ -27,12 +27,12 @@
 /* Page structure */
 body {
 	display: grid;
-  font-family: var(--font-family);
-  background-color: var(--background);
-  background-image: var(--background-image);
-  background-size: 100px;
-  color: var(--text);
-  margin: 0;
+	font-family: var(--font-family);
+	background-color: var(--background);
+	background-image: var(--background-image);
+	background-size: 100px;
+	color: var(--text);
+	margin: 0;
 }
 
 .wrapper {
