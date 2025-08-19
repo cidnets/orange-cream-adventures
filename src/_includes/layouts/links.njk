@@ -1,0 +1,60 @@
+---
+templateClass: tmpl-links
+pageStyles: /css/linkspage.css
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% include "basehead.njk" %}
+</head>
+<body>
+	<base target="_blank">
+	<div class="wrapper">
+		<div id="links-page" class="content">
+			<section class="links-hero logo">
+				<img src="/assets/bngo-logo.png" alt="Brendon Ngo Logo"/>
+				<img src="/assets/typing-gif.png" alt="Brendon Ngo Typing Animation"/>
+			</section>
+			<section id="title" class="links-links">
+				<h1>
+					{{ links_page.pageTitle.title }}
+				</h1>
+				<h2>
+					{{ links_page.pageTitle.description }}
+				</h2>
+			</section>
+			<section id="contact" class="links-links">
+				<h1>Contact</h1>
+				<ul>
+					{% for item in links_page.contact %}
+					<li><a href="{{ item.href }}" {% if item.target %}target="{{ item.target }}"{% endif %} rel="noopener noreferrer">{{ item.icon | safe }}</a></li>
+					{% endfor %}
+				</ul>
+			</section>
+			<section id="links" class="links-links">
+				<h1>Links</h1>
+				<ul>
+					{% for item in links_page.mainLinks %}
+					<li><a href="{{ item.href }}" {% if item.target %}target="{{ item.target }}"{% endif %} rel="noopener noreferrer">
+						{% if item.icon %}{{ item.icon | safe }}{% endif %}
+						{{ item.text }}</a></li>
+					{% endfor %}
+				</ul>
+			</section>
+			<section id="socials" class="links-links">
+				<h1>Links</h1>
+				<ul>
+					{% for item in links_page.socials %}
+					<li><a href="{{ item.href }}" {% if item.target %}target="{{ item.target }}"{% endif %} rel="noopener noreferrer">{{ item.icon | safe }}</a></li>
+					{% endfor %}
+				</ul>
+			</section>
+		</div>
+	</div>
+
+	<footer id="footer" class="footer">
+		{% include "footer.njk" %}
+	</footer>
+</body>
+</html>

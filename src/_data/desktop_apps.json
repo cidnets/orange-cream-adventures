@@ -1,0 +1,26 @@
+[
+	{
+		"id": "about",
+		"title": "About Me",
+		"url": "/about/",
+		"icon": "🪪"
+	},
+	{
+		"id": "archive",
+		"title": "Archive",
+		"icon": "🗨️",
+		"url": "/archive/"
+	},
+	{
+		"id": "contact",
+		"title": "Contact",
+		"url": "/contact/",
+		"icon": "✉️"
+	},
+	{
+		"id": "search",
+		"title": "Search",
+		"url": "/search/",
+		"icon": "🔍"
+	}
+]

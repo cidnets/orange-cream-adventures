@@ -1,62 +1,140 @@
-.page-content-background {
-  border: 2px dotted var(--text);
-  background-image: url("/assets/g51.png");
-}
-.page-content-container {
-  position: relative;
-  height: 100%;
-  border-radius: 1rem;
-  border: 2px solid var(--text);
-  background-color: var(--background);
-  overflow: hidden;
-}
-.page-content {
-  height: 100%;
-  width: 100%;
-  overflow-y: auto;
-}
-.page-title {
-  width: 100%;
-  background: #ffd0de;
-  background-clip: padding-box;
-  border-bottom: 30px solid transparent;
-  border-image: url("/assets/Large-border-pink.png") 30% round;
-  padding: 2rem 1rem 0;
-}
-.pageTitle {
-  color: var(--text);
-  font-family: var(--font-family-header);
-  text-align: center;
-  margin: 0;
-}
-.page-write-up {
-  margin: 0.75rem 0 4rem;
-  padding: 0 1rem;
-}
-.page-write-up h1,
-.page-write-up h2,
-.page-write-up h3,
-.page-write-up h4,
-.page-write-up h5,
-.page-write-up ol,
-.page-write-up ul,
-.page-write-up p {
-  margin-bottom: 0.5rem;
-}
-.page-write-up ul,
-.page-write-up ol,
-.page-write-up pre {
-  margin-left: 1rem;
+.content.page h1,
+.content.page h2,
+.content.page h3,
+.content.page h4,
+.content.page h5 {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	text-wrap: balance;
 }
 
-.page-write-up img {
-	max-width: 50%;
+/* ARCHIVE PAGE */
+.archive ul {
+	padding: 0;
+	list-style-type: none;
+	border-top: var(--border);
+	border-bottom: var(--border);
+}
+.archive li:not(:last-child) {
+	border-bottom: var(--border);
+}
+.archive li a {
+	display: block;
 	padding: 1rem;
-	float: left;
+}
+.archive li a h1,
+.archive li a h2,
+.archive li a h3,
+.archive li a h4,
+.archive li a h5 {
+	margin-top: 0.5em;
+	margin-bottom: auto;
+	text-align: left;
+}
+.archive h1,
+.archive h2,
+.archive h3,
+.archive h4,
+.archive h5 {
+	text-align: center;
+	margin: auto;
+}
+.archive h1 {
+	margin-top: 1em;
+	margin-bottom: 1rem;
+}
+.archive h2 {
+	margin-bottom: 1em;
 }
 
-@media all and (max-width: 768px) {
-	.page-write-up img {
-		max-width: 100%;
-	}
+/* CONTACT PAGE */
+#window-contact #page-content {
+	text-align: center;
+	text-wrap: balance;
+}
+#window-contact a:not(:first-of-type) {
+	margin-top: 1rem;
+}
+#window-contact a {
+	display: block;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.5rem 1rem;
+	border: var(--border);
+	border-radius: 1rem;
+	text-align: center;
+}
+/* RESUME PAGE */
+#window-resume {
+    container-type: inline-size;
+}
+#window-resume .content.page h2:not(:first-of-type),
+#window-resume .content.page h3,
+#window-resume .content.page h4,
+#window-resume .content.page h5 {
+	margin: 1rem 0 0;
+	text-align: left;
+}
+#window-resume .content.page ul {
+	margin-top: 0;
+}
+#window-resume .content.page hr:first-of-type {
+	border: none;
+}
+#window-resume .content.page hr:not(:first-of-type) {
+	width: 100%;
+	margin: 1.5rem 0;
+	border-top: none;
+	border-bottom: 1px solid var(--text);
+}
+#window-resume .content.page table {
+	margin-top: 1rem;
+}
+#window-resume .resume-header > * {
+	margin: 0;
+}
+
+#window-resume .resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    margin-top: 1em;
+}
+
+#window-resume .resume-header-left,
+#window-resume .resume-header-center,
+#window-resume .resume-header-right {
+	width: 33.33%;
+}
+
+#window-resume .resume-header-left {
+    flex-grow: 1;
+    text-align: left;
+}
+
+#window-resume .resume-header-center {
+    flex-grow: 1; 
+    text-align: center;
+}
+
+#window-resume .resume-header-right {
+    flex-grow: 1;
+    text-align: right;
+}
+
+@container (max-width: 576px) {
+    #window-resume .resume-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #window-resume .resume-header-left,
+    #window-resume .resume-header-center,
+    #window-resume .resume-header-right {
+        text-align: left;
+        flex-grow: 0;
+        width: 100%;
+    }
 }

@@ -1,255 +1,191 @@
 :root {
-	--back-to-top-bttn: 3.5rem;
-}
-
-.canopy-filler {
-  background-color: var(--text);
-  width: 100%;
-  height: 2.75rem;
-  position: absolute;
-  top: 0;
-  border-top: 2px solid var(--accent-2);
-  z-index: 99;
-}
-.canopy {
-  background-image: url("/assets/Wooden-slats.png"), url("/assets/canopy-ends.png");
-  background-size: 150px;
-  background-position: 0 0, 50% 100%;
-  background-repeat: repeat-x;
-  width: 100%;
-  height: 100px;
-  position: absolute;
-  top: 2.5rem;
-  z-index: 99;
+	--navbar-height: 48px;
 }
 
 .navbar {
-  display: -webkit-box;
-  display: flex;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-  position: relative;
-  color: var(--background);
-  padding-top: 0.5rem;
-  z-index: 100;
+	position: fixed;
+	bottom: 0;
+	height: var(--navbar-height);
+	width: 100%;
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--orange-3);
+	border-top: var(--border) var(--yellow);
+	color: var(--text);
+	font-family: "DotGothic16";
+	font-size: 1rem;
+	z-index: 9999;
+}
+.mobile-navbar {
+	display: none;
 }
 
-.logo {
-  -webkit-box-ordinal-group: 2;
-  order: 2;
-  font-size: 1.5rem;
-  margin: 0 0.5rem;
-  aspect-ratio: 1/1;
-  flex-shrink: 0;
-  cursor: pointer;
-  border-radius: 50%;
-  border: 4px double var(--accent-2);
-  background-color: var(--text);
-  outline: 2px solid var(--accent-3);
-  height: 5.5rem;
-  line-height: 5.5rem;
-  font-size: 0;
-  overflow: hidden;
-  text-align: center;
+.logo a {
+	color: #007bff;
+	text-decoration: none;
 }
-.logo img {
-  height: 5.5rem;
-  margin: 0 auto;
+
+/* Hide the checkbox and hamburger on wider screens */
+.navbar-toggle {
+	display: none;
 }
-.logo:hover {
-  background-color: var(--text);
+.hamburger {
+	display: flex;
+	align-items: middle;
+	justify-content: center;
+	align-content: center;
+	width: fit-content;
+	margin-right: 2rem;
+	flex-shrink: 0;
+	gap: 3px;
+}
+.hamburger, .date-time, .navbar-button {
+	cursor: pointer;
+	border: var(--border);
+	padding: 0.3rem 0.5rem;
+}
+.hamburger, .navbar-button {
+	border-color: var(--border-outset);
 }
 
 .nav-links {
-	position: relative;
-  width: 25%;
-  max-width: 7rem;
-  text-align: center;
-  text-decoration: none;
-  margin: 0 0.5rem;
-  padding: 1rem 0;
-  border-radius: 1rem;
-  border: 4px double var(--accent-2);
-  background-color: var(--text);
-  outline: 2px solid var(--accent-3);
-}
-.nav-links:hover {
-  background-color: white;
-  color: var(--accent-4);
-  outline: 2px solid var(--accent-3);
-  box-shadow: 0 0 7px 5px white;
-}
-.nav-links::before,
-.nav-links::after {
+	display: none; /* Hide the links by default */
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	opacity: 0;
+	width: 100%;
+	max-width: 300px;
+	bottom: calc(var(--navbar-height) + 1rem);
+	left: 1rem;
 }
-.nav-links:hover::before,
-.nav-links:hover::after {
-	opacity: 1;
+.navbar-toggle:checked ~ .hamburger{
+	background-color: var(--primary-2);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-inset);
 }
-
-.nav-links:hover::before {
-  content: url("/assets/tiny-hearts-pink.png");
-  left: 0.33rem;
-}
-
-.nav-links:hover::after {
-  content: url("/assets/tiny-hearts-peach.png");
-  right: 0.33rem;
-}
-.nav-links:nth-of-type(n + 4) {
-  -webkit-box-ordinal-group: 2;
-  order: 2;
-}
-.nav-links a.active {
-	background-color: var(--accent-4);
-	border-color: var(--background);
-	box-shadow: 0 0 7px 5px white;
-}
-
-.nav-links a.active:hover {
-	cursor: default;
-	box-shadow: 0 0 7px 5px white;
-	outline: 2px solid var(--accent-3);
-	color: var(--background);
-}
-
-/* Hide the hamburger and checkbox by default on wider screens */
-.hamburger {
-  display: none;
-}
-
-.menu-toggle {
-  display: none;
-}
-
-.small-screen-logo img {
-  height: 5rem;
-  margin: 0 auto;
-}
-
-#back-to-top-bttn {
-	position: fixed;
-	width: var(--back-to-top-bttn);
-	height: var(--back-to-top-bttn);
-	bottom: 1rem;
-	right: 1rem;
-	padding-top: 0.25rem;
-	font-family: "Dongle";
-	text-align: center;
-	border: 8px solid transparent;
-	background-color: #fff;
-	border-image: url("/assets/Border-base.png") round 33%;
-	color: var(--text);
-	background-clip: padding-box;
-	z-index: 102;
-	opacity: 0.6;
-}
-#back-to-top-bttn p {
-	margin-top: -0.75rem;
-	font-size: larger;
-}
-#back-to-top-bttn:hover {
-	border-image: url("/assets/Border-green.png") round 33%;
-	background-color: var(--accent-4);
-	color: white;
-	opacity: 1;
-}
-
-@media all and (max-width: 576px) {
-	.canopy-filler {
-		display: none;
-	}
-  .canopy {
-	  background-image: url("/assets/canopy-ends.png");
-	background-position: 50% 100%;
-	height: 1.75rem;
-    top: 0;
-    margin: 0;
-  }
-  .navbar {
-    flex-direction: column-reverse;
-    position: fixed; /* Ensure relative for absolute positioning of links */
-    left: 0;
-    bottom: 0;
-    padding: 1rem 1rem;
-    background: none;
-  }
-
-  .logo {
-	  display: none;
-    -webkit-box-ordinal-group: 1;
-    order: 0;
-    text-align: center;
-    position: absolute;
-    top: 0.6rem;
-    left: 0;
-    height: 5rem;
-  }
-  .logo img {
-    height: 5rem;
-  }
-
-  .nav-links {
-	  max-width: none;
-    position: relative;
-    bottom: 0.5rem;
-	width: 90vw;
-    display: none; /* Initially hide the links on small screens */
-    flex-direction: column;
-    text-align: center;
-    margin: 0 0 0.5rem;
-    padding: 1.5rem 1rem;
-  }
-  
-  .nav-links:hover {
-    outline: 3px solid white;
-  }
-
-  /* Show the hamburger */
-  .hamburger {
-    display: block;
-    position: relative;
-    margin-right: auto;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border-radius: 50%;
-    border: 4px double var(--accent-2);
-	background-color: var(--text);
-	outline: 2px solid var(--accent-3);
-	aspect-ratio: 1/1;
-    height: 5rem;
-	line-height: 5rem;
-	font-size: 0;
+.navbar-toggle:checked ~ .nav-links {
+	display: block;
+ }
+ 
+ .nav-links .nav-links-container {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--primary-2);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-outset);
 	overflow: hidden;
+ }
+
+.nav-links a,
+.nav-links button {
 	text-align: center;
-  }
+	text-decoration: none;
+	color: var(--text);
+}
+.nav-links button {
+	margin-bottom: 1rem;
+	padding: 0.5rem 1rem;
+	color: var(--text);
+	background-color: var(--primary-2);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-outset);
+	font-size: 0.9rem;
+}
+.nav-links button span {
+	font-weight: bold;
+}
+.nav-links a {
+	padding: 1.5rem 1rem;
+	background-color: transparent;
+	border: 2px solid transparent;
+}
+.nav-links a:not(:first-child):not(:last-child) {
+	border-color: var(--orange) transparent var(--orange) transparent;
+}
 
-  .hamburger div {
-    background-color: white;
-    height: 3px;
-    width: 100%;
-  }
-  
-   .menu-toggle {
-    position: absolute; /* Position it at the bottom */
-    bottom: 1rem;
-    transform: translateX(-50%);
-    z-index: 102; /* Ensure it's above everything */
-    opacity: 0; /* Hide the actual checkbox */
-    width: 5.5rem; /* Match hamburger size for easier interaction */
-    height: 5.5rem;
-    cursor: pointer;
-  }
+.navbar a:hover,
+.nav-links a:not(:first-child):not(:last-child):hover,
+.navbar label:hover,
+.nav-links a:hover,
+.nav-links button:hover {
+	background-color: var(--accent-1);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-inset);
+}
+.navbar a:last-child:hover {
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent var(--yellow) var(--yellow) var(--orange);
+}
 
-  /* Show the nav links when the checkbox is checked */
-  .menu-toggle:checked ~ .nav-links {
-    display: block;
-  }
+.date-time {
+	margin-left: auto;
+	flex-shrink: 0;
+	width: fit-content;
+	background: var(--fill);
+	overflow: hidden;
+	user-select: none;
+	border-color: var(--border-inset);
+}
+.date-time:hover,
+.date-time:hover #clock {
+	background-color: var(--accent-1);
+}
+#date {
+	display: inline-block;
+}
+#clock {
+	display: inline-block;
+}
+
+/* Calendar */
+#calendar-container {
+	position: absolute;
+	bottom: var(--navbar-height);
+	right: 0;
+	width: 300px;
+	margin: 1rem;
+	padding: 0.75rem;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 5px;
+	background-color: var(--fill);
+	border: var(--border);
+	box-shadow: 3px 3px var(--text);
+}
+.calendar-hidden {
+	display: none !important;
+}
+.calendar-header {
+	grid-column: 1 / -1; 
+	text-align: center;
+	font-size: 1.1rem;
+	font-weight: bold;
+	padding-bottom: 0.75rem;
+}
+.day-name {
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.9rem;
+}
+.day-cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 2rem;
+	text-align: center;
+	border-radius: 50%;
+	font-family: var(--font-family);
+}
+.current-day {
+	background-color: var(--accent-1);
+	font-weight: bold;
+}
+
+@media screen and (max-width: 576px) {
+	
 }

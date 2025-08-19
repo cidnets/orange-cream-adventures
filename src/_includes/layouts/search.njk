@@ -1,0 +1,25 @@
+---
+layout: layouts/page.njk
+templateClass: tmpl-search
+---
+
+	<div id="page-content" class="content page">
+		{% if pageTitle%}
+		<h1>{{ pageTitle }}</h1>
+		{% endif %}
+		{{ content | safe }}
+
+		<div id="search"></div>
+
+		<script src="/pagefind/pagefind-ui.js"></script>
+
+		<script>
+			window.addEventListener('DOMContentLoaded', (event) => {
+				new PagefindUI({
+				element: "#search",
+				// Optional, but recommended to match your style
+				showSubResults: true
+				});
+			});
+		</script>
+	</div>

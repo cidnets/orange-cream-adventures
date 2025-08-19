@@ -1,61 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Geo:ital@0;1&family=Jersey+10&family=Jersey+20&family=Silkscreen:wght@400;700&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&family=Walter+Turncoat&display=swap');
+
 :root {
-  --font-family: "Fredoka";
-  --font-family-header: "Cherry Bomb One";
-  --font-family-header-2: "Jua";
+	--font-family: "DotGothic16";
+	--header: "Jersey 20";
 }
 
-.sour-gummy {
-  font-family: "Sour Gummy", sans-serif;
+h1, h2, h3, h4, h5 {
+	font-family: var(--header);
+	font-weight: normal;
+	text-wrap: auto;
+}
+h1, h2, h3, h4, h5, button, input, label, #clock {
+	line-height: 1.1em;
+}
+p {
+	line-height: 1.5em;
+}
+
+a {
+	text-decoration: none;
+}
+a:hover {
+	background-color: var(--primary-2);
+}
+
+button {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+	background-color: var(--primary);
+	border: var(--border);
+	cursor: pointer;
+}
+button:hover {
+	background-color: var(--primary-2);
+}
+
+pre {
+	overflow: auto;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+/* FONT CLASSES*/
+
+.dotgothic16-regular {
+  font-family: "DotGothic16", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.geo-regular {
+  font-family: "Geo", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.geo-regular-italic {
+  font-family: "Geo", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.jersey-10-regular {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.jersey-20-regular {
+  font-family: "Jersey 20", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.silkscreen-bold {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.sora-<bngo> {
+  font-family: "Sora", sans-serif;
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
 }
-.cherry-bomb {
-  font-family: "Cherry Bomb One", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-.dongle {
-  font-family: "Dongle", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.5rem;
-}
-.dongle i,
-.dongle span {
-  display: inline-block;
-}
-.dongle span {
-  vertical-align: bottom;
-}
-.dongle i {
-  font-size: 1rem;
-}
-
-.fredoka {
-  font-family: "Fredoka", sans-serif;
+.space-grotesk-<bngo> {
+  font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
 }
-.sniglet-regular {
-  font-family: "Sniglet", system-ui;
+.walter-turncoat-regular {
+  font-family: "Walter Turncoat", cursive;
   font-weight: 400;
   font-style: normal;
 }
-
-.sniglet-extrabold {
-  font-family: "Sniglet", system-ui;
-  font-weight: 800;
-  font-style: normal;
-}
-.jua {
-  font-family: "Jua", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-

@@ -5,17 +5,29 @@
   </head>
   
 <body>
-    {% include "navbar.njk" %}
-    
-  <main data-pagefind-body>
+	{% include "sitebg.njk" %}
+  <main id="desktop">
+
+	<div class="app-drawer">
+		{% for app in desktop_apps %}
+		<a href="#" class="app-launcher app-icon" data-title="{{ app.title }}" data-url="{{ app.url }}" data-id="{{ app.id }}" data-window-target="new">
+			<div class="icon-visual">{{ app.icon }}</div>
+			<span>{{ app.title }}</span>
+		</a>
+		{% endfor %}
+	</div>
+	
     {{ content | safe }}    
   </main>
-    
-  <footer class="footer">
-	{% include "footer.njk" %}    
+    {% include "navbar.njk" %}
+  <footer id='footer' class="footer">  
   </footer>
    
-   {% include "scripts.njk" %}
-   
+	<div id="context-menu">
+		<div class="context-menu-item" id="context-menu-minimize">Minimize</div>
+		<div class="context-menu-item" id="context-menu-close">Close</div>
+		<div class="context-menu-item" id="context-menu-close-all">Close All Windows</div>
+	</div>
+	{% include "scripts.njk" %}
   </body>
 </html>

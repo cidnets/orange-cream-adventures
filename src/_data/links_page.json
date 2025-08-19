@@ -1,0 +1,161 @@
+{
+  "pageTitle": {
+    "title": "Brendon Ngo",
+    "description": "Senior Data Scientist // AI Developer"
+  },
+  "contact": [
+    {
+      "type": "email",
+      "text": "Email Me",
+      "href": "mailto:your.email@example.com",
+      "icon": "<i class='fa-solid fa-envelope'></i>"
+    }
+  ],
+  "mainLinks": [
+    {
+      "text": "My Blog",
+      "href": "/blog/",
+      "description": "Read my latest thoughts and articles.",
+      "icon": "<i>0</i>"
+    },
+    {
+      "text": "Portfolio",
+      "href": "/portfolio/",
+      "description": "Check out my design and development projects.",
+      "icon": "<span>0</span>"
+    },
+    {
+      "text": "GitHub Profile",
+      "href": "https://github.com/yourusername",
+      "description": "See my code repositories and contributions.",
+      "icon": ""
+    }
+  ],
+  "socials": [
+    {
+      "text": "Amazon",
+      "href": "",
+      "icon": "<i class='fa-brands fa-amazon'></i>"
+    },
+    {
+      "text": "Artstation",
+      "href": "",
+      "icon": "<i class='fa-brands fa-artstation'></i>"
+    },
+    {
+      "text": "Bandcamp",
+      "href": "",
+      "icon": "<i class='fa-brands fa-bandcamp'></i>"
+    },
+	{
+      "text": "Blogger",
+      "href": "",
+      "icon": "<i class='fa-brands fa-blogger-b'></i>"
+    },
+	{
+      "text": "Bluesky",
+      "href": "",
+      "icon": "<i class='fa-brands fa-bluesky'></i>"
+    },
+	{
+      "text": "Deviantart",
+      "href": "",
+      "icon": "<i class='fa-brands fa-deviantart'></i>"
+    },
+	{
+      "text": "Discord",
+      "href": "",
+      "icon": "<i class='fa-brands fa-discord'></i>"
+    },
+	{
+      "text": "Ebay",
+      "href": "",
+      "icon": "<i class='fa-brands fa-ebay'></i>"
+    },
+	{
+      "text": "Facebook",
+      "href": "",
+      "icon": "<i class='fa-brands fa-facebook'></i>"
+    },
+	{
+      "text": "Flickr",
+      "href": "",
+      "icon": "<i class='fa-brands fa-flickr'></i>"
+    },
+	{
+      "text": "Github",
+      "href": "",
+      "icon": "<i class='fa-brands fa-github'></i>"
+    },
+	{
+      "text": "Goodreads",
+      "href": "",
+      "icon": "<i class='fa-brands fa-goodreads-g'></i>"
+    },
+	{
+      "text": "Google+",
+      "href": "",
+      "icon": "<i class='fa-brands fa-google-plus-g'></i>"
+    },
+	{
+      "text": "Instagram",
+      "href": "",
+      "icon": "<i class='fa-brands fa-instagram'></i>"
+    },
+	{
+      "text": "Threads",
+      "href": "",
+      "icon": "<i class='fa-brands fa-threads'></i>"
+    },
+	{
+      "text": "LinkedIn",
+      "href": "https://www.linkedin.com/in/brendon-ngo/",
+      "icon": "<i class='fa-brands fa-linkedin-in'></i>"
+    },
+	{
+      "text": "Letterboxd",
+      "href": "",
+      "icon": "<i class='fa-brands fa-letterboxd'></i>"
+    },
+	{
+      "text": "Paypal",
+      "href": "",
+      "icon": "<i class='fa-brands fa-paypal'></i>"
+    },
+	{
+      "text": "Reddit",
+      "href": "",
+      "icon": "<i class='fa-brands fa-reddit-alien'></i>"
+    },
+	{
+      "text": "Snapchat",
+      "href": "",
+      "icon": "<i class='fa-brands fa-snapchat'></i>"
+    },
+	{
+      "text": "Soundcloud",
+      "href": "",
+      "icon": "<i class='fa-brands fa-soundcloud'></i>"
+    },
+	{
+      "text": "Spotify",
+      "href": "",
+      "icon": "<i class='fa-brands fa-spotify'></i>"
+    },
+	{
+      "text": "Steam",
+      "href": "",
+      "icon": "<i class='fa-brands fa-steam-symbol'></i>"
+    },
+	{
+      "text": "Tumblr",
+      "href": "",
+      "icon": "<i class='fa-brands fa-tumblr'></i>"
+    },
+	{
+      "text": "Youtube",
+      "href": "",
+      "icon": "<i class='fa-brands fa-youtube'></i>"
+    }
+  ]
+}
