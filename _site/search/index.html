@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<script src="https://kit.fontawesome.com/ca052c1b0a.js" crossorigin="anonymous"></script>
+
+<title>Search - Orenchii</title>
+<link rel="icon" type="image/x-icon" href="">
+<link rel="stylesheet" href="/css/style.css"/>
+	
+  </head>
+  
+<body>
+	<div class="site-bg">
+	<div class="site-bg-img-container">
+		<img src="/assets/logo-colored.png" class="desktop-bg">
+	</div>
+	
+	<div class="site-credit">
+		<div class="credit">
+			<p>
+			&copy; <span id="copyright-year"></span> Orange Cream Adventures @Cidnets. All Rights Reserved.
+			</p>
+		</div>
+	</div>
+</div>
+  <main id="desktop">
+
+	<div class="app-drawer">
+		
+		<a href="#" class="app-launcher app-icon" data-title="About Me" data-url="/about/" data-id="about" data-window-target="new">
+			<div class="icon-visual">🪪</div>
+			<span>About Me</span>
+		</a>
+		
+		<a href="#" class="app-launcher app-icon" data-title="Archive" data-url="/archive/" data-id="archive" data-window-target="new">
+			<div class="icon-visual">🗨️</div>
+			<span>Archive</span>
+		</a>
+		
+		<a href="#" class="app-launcher app-icon" data-title="Contact" data-url="/contact/" data-id="contact" data-window-target="new">
+			<div class="icon-visual">✉️</div>
+			<span>Contact</span>
+		</a>
+		
+		<a href="#" class="app-launcher app-icon" data-title="Search" data-url="/search/" data-id="search" data-window-target="new">
+			<div class="icon-visual">🔍</div>
+			<span>Search</span>
+		</a>
+		
+	</div>
+	
+    
+	<div id="page-content" class="content page" data-pagefind-body>
+		
+		
+	<div id="page-content" class="content page">
+		
+		<h2>Need to find something?</h2>
+<p>You can't until I figure out how to get this to work.</p>
+<h1>File Finder</h1>
+<p>Search for files and documents on your desktop.</p>
+
+		<div id="search"></div>
+
+		<script src="/pagefind/pagefind-ui.js"></script>
+
+		<script>
+			window.addEventListener('DOMContentLoaded', (event) => {
+				new PagefindUI({
+				element: "#search",
+				// Optional, but recommended to match your style
+				showSubResults: true
+				});
+			});
+		</script>
+	</div>
+
+	</div>
+    
+  </main>
+    <div id="navbar" class="navbar">
+	<input type="checkbox" id="navbar-toggle" class="navbar-toggle">
+	<label for="navbar-toggle" class="hamburger">
+		<img src="/assets/heart-start.png">Start
+	</label>
+  
+	<div class="nav-links">
+		<button id="close-all-windows"><span>×</span> Close All Windows</button>
+		<div class="nav-links-container">
+			
+			<a href="#" class="app-launcher" data-title="About Me" data-url="/about/" data-id="about" About Me data-window-target="new">About Me</a>
+			
+			<a href="#" class="app-launcher" data-title="Archive" data-url="/archive/" data-id="archive" Archive data-window-target="new">Archive</a>
+			
+			<a href="#" class="app-launcher" data-title="Contact" data-url="/contact/" data-id="contact" Contact data-window-target="new">Contact</a>
+			
+		</div>
+	</div>
+	
+	<div id="date-time" class="date-time">
+		<div id="date"></div> 
+		<span>|</span>
+		<div id="clock">8:10:45</div>
+	</div>
+	
+	<div id="calendar-container" class="calendar-hidden"></div>
+	
+</div>
+
+
+  <footer id='footer' class="footer">  
+  </footer>
+   
+	<div id="context-menu">
+		<div class="context-menu-item" id="context-menu-minimize">Minimize</div>
+		<div class="context-menu-item" id="context-menu-close">Close</div>
+		<div class="context-menu-item" id="context-menu-close-all">Close All Windows</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/themes/base/jquery-ui.css">
+
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@latest/dist/markdown-it.min.js"></script>
+
+<script src="/js/script.js" defer></script>
+<script src="/js/windows.js" defer></script>
+  </body>
+</html>

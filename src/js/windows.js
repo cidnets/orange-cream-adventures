@@ -3,6 +3,8 @@ $(document).ready(function() {
     let zIndexCounter = 1000;
     const breakpoint = 576; // Mobile breakpoint
     let resizeTimer; // Declared globally as discussed!
+    let lastSelectedText = ''; // New global variable to store selected text
+    let contextMenuTarget = null;
 
     // --- Helper Functions ---
     function isMobileDevice() {
@@ -43,6 +45,17 @@ $(document).ready(function() {
         }
     }
 
+    // --- NEW: Welcome Window Function ---
+    function createWelcomeWindow() {
+        const windowId = 'window-welcome';
+        const title = 'Welcome!';
+        const url = '/welcome/'; // Create this HTML file with your welcome content
+        createWindow(windowId, title, url);
+    }
+	createWelcomeWindow();
+    
+    // --- Initial Page Load Logic ---
+    // This code will run every time the page is loaded or reloaded.
     function setDesktopHeight() {
         const navbarHeightValue = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height');
         const navbarHeight = parseFloat(navbarHeightValue) || 0;
@@ -57,6 +70,32 @@ $(document).ready(function() {
             }
             const finalDesktopHeight = availableHeight - navbarHeight;
             desktopElement.style.setProperty('--desktop-height', `${finalDesktopHeight}px`);
+        }
+    }
+
+    // --- New Clipboard Helper Functions ---
+    function copySelection(textToCopy) {
+        if (textToCopy.length > 0) {
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    console.log('Text successfully copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+        } else {
+            console.warn('No text is currently selected to copy.');
+        }
+    }
+
+    async function pasteFromClipboard() {
+        try {
+            const text = await navigator.clipboard.readText();
+            console.log('Text successfully pasted from clipboard:', text);
+            return text;
+        } catch (err) {
+            console.error('Could not paste text: ', err);
+            return null;
         }
     }
 
@@ -151,7 +190,11 @@ $(document).ready(function() {
                     console.error('Failed to load Pagefind script:', e);
                 }
             }
-
+            
+            if (status === "success") {
+                // Remove the redundant script loading logic for the gallery.
+                // The Eleventy templates handle this now.
+            }
             $window[0].offsetHeight;
             if (isInitialLoad && !isSmallScreen()) {
                 const desktopWidth = $('#desktop').width();
@@ -190,9 +233,13 @@ $(document).ready(function() {
             }
             $window.css('opacity', 1);
             setActiveWindow($window);
+			
+			 // --- NEW: Apply container query class after sizing is complete ---
+			$window.find('.container').addClass('has-container-query');
         });
     }
 
+    // --- NEW: Function to set the active window ---
     function setActiveWindow($window) {
         const newWindowId = $window.attr('id');
         const $currentActiveWindow = $('.window.active');
@@ -286,23 +333,25 @@ $(document).ready(function() {
         }
     });
 
-    // --- Window Creation ---
-    console.log("window loading!");
-    function createWindow(windowId, title, url, type = 'general') {
-        const windowHtml = `
-            <div class="window ${type}-window" id="${windowId}" data-window-state="open" data-maximized="false">
-                <div class="window-header">
-                    <span class="window-title">${title}</span>
-                    <div class="window-controls">
-                        <button class="window-minimize" title="Minimize">_</button>
-                        <button class="window-maximize" title="Maximize">◻</button>
-                        <button class="window-close" title="Close">&times;</button>
-                    </div>
-                </div>
-                <div class="window-content"><p>Loading...</p></div>
-            </div>`;
+    // --- NEW: Window Creation Function ---
+	function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
+		const sanitizedTitle = title.toLowerCase().replace(/\s/g, '-');
+		const windowClass = `window-${sanitizedTitle}`;
+		const windowHtml = `
+			<div class="window ${type}-window ${windowClass}" id="${windowId}" data-window-state="open" data-maximized="false">
+				<div class="window-header">
+					<img src="${windowIcon}" class="window-icon">
+					<span class="window-title">${title}</span>
+					<div class="window-controls">
+						<button class="window-minimize" title="Minimize">_</button>
+						<button class="window-maximize" title="Maximize">◻</button>
+						<button class="window-close" title="Close">&times;</button>
+					</div>
+				</div>
+				<div class="window-content"><p>Loading...</p></div>
+			</div>`;
 
-        const $newWindow = $(windowHtml);
+		const $newWindow = $(windowHtml);
 
         if (!isSmallScreen()) {
             $newWindow.css({ 'opacity': 0, 'position': 'absolute', 'width': 'auto', 'height': 'auto' });
@@ -328,9 +377,9 @@ $(document).ready(function() {
         $newWindow.appendTo('#desktop');
         loadContentAndPositionWindow($newWindow, url, title, true);
 
-        const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}">${title}</button>`;
-        $(navbarButtonHtml).insertAfter('#navbar .hamburger');
-        
+        const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
+		$(navbarButtonHtml).insertAfter('#navbar .start-divider');
+		
         $newWindow.on('mousedown', function() { setActiveWindow($(this)); });
     }
     
@@ -454,14 +503,14 @@ $(document).ready(function() {
         const menuHeight = menu.outerHeight();
         let finalX = x;
         let finalY = y;
-    
+        
         if (x + menuWidth > winWidth) {
             finalX = winWidth - menuWidth;
         }
         if (y + menuHeight > winHeight) {
             finalY = winHeight - menuHeight;
         }
-    
+        
         menu.css({
             top: finalY + 'px',
             left: finalX + 'px'
@@ -473,26 +522,50 @@ $(document).ready(function() {
         e.preventDefault();
         const $target = $(e.target);
         const menu = $('#context-menu');
-    
-        const isWindowHeader = $target.closest('.window-header').length > 0;
+
+        // Default to hiding all options first
+        $('#context-menu-copy, #context-menu-paste, #copy-paste-divider, #context-menu-minimize, #context-menu-maximize, #min-max-divider, #context-menu-close').hide();
+
+        const isInsideWindow = $target.closest('.window').length > 0;
         const isDesktopBackground = $target.closest('#desktop').length > 0;
-    
-        if (isWindowHeader) {
-            const windowId = $target.closest('.window').attr('id');
+        const hasSelection = window.getSelection().toString().length > 0;
+        const isEditable = $target.is('input, textarea') || $target.is('[contenteditable="true"]');
+
+        let windowId = null;
+
+        // First, determine if the right-click is inside a window or on the desktop background
+        if (isInsideWindow) {
+            windowId = $target.closest('.window').attr('id');
             menu.data('targetWindowId', windowId);
-            $('#context-menu-close').show();
-            $('#context-menu-minimize').show();
-            $('#context-menu-maximize').show(); // Show maximize option
+            $('#context-menu-close, #context-menu-minimize, #context-menu-maximize, #min-max-divider').show();
             positionMenu(e, menu);
+			// Update the Maximize/Restore text
+			const $window = $('#' + windowId);
+			if ($window.length && $window.data('maximized') === true) {
+				$('#context-menu-maximize').text('Minimize');
+			} else {
+				$('#context-menu-maximize').text('Maximize');
+			}
         } else if (isDesktopBackground) {
             menu.data('targetWindowId', null);
-            $('#context-menu-close').hide();
-            $('#context-menu-minimize').hide();
-            $('#context-menu-maximize').hide(); // Hide maximize option
+            $('#context-menu-close-all').show();
             positionMenu(e, menu);
         } else {
+            // Hide the menu if the click is not on a window or the desktop
             menu.hide();
+            return;
         }
+
+        // Independently check for copy/paste conditions and their divider
+		if (hasSelection) {
+			lastSelectedText = window.getSelection().toString();
+			$('#context-menu-copy, #copy-paste-divider').show();
+		}
+		
+		if (isEditable) {
+			contextMenuTarget = e.target;
+			$('#context-menu-paste, #copy-paste-divider').show();
+		}
     });
 
     // Handle clicks on the context menu items
@@ -511,6 +584,37 @@ $(document).ready(function() {
         const windowId = $('#context-menu').data('targetWindowId');
         if (windowId) { minimizeWindowById(windowId); }
         $('#context-menu').hide();
+    });
+    
+    // --- New Copy/Paste Handlers ---
+    $('#context-menu-copy').on('click', function() {
+        copySelection(lastSelectedText);
+        $('#context-menu').hide();
+        lastSelectedText = ''; // Clear the variable
+    });
+
+    // --- New Copy/Paste Handlers ---
+    $('#context-menu-paste').on('click', async function() {
+        const pastedText = await pasteFromClipboard();
+        if (pastedText) {
+            // Use the captured element as the target for pasting
+            const $activeInput = $(contextMenuTarget);
+            
+            if ($activeInput.is('input, textarea')) {
+                // Logic for input and textarea fields
+                const currentText = $activeInput.val();
+                const caretPos = $activeInput[0].selectionStart;
+                const textBefore = currentText.substring(0, caretPos);
+                const textAfter = currentText.substring(caretPos, currentText.length);
+                $activeInput.val(textBefore + pastedText + textAfter);
+                $activeInput[0].selectionStart = $activeInput[0].selectionEnd = caretPos + pastedText.length;
+            } else if ($activeInput.is('[contenteditable="true"]')) {
+                // Logic for content-editable divs
+                $activeInput.append(pastedText);
+            }
+        }
+        $('#context-menu').hide();
+        contextMenuTarget = null; // Clear the variable after use
     });
     
     // New context menu handler for maximize
@@ -533,7 +637,7 @@ $(document).ready(function() {
             }
         }
     });
-    
+	
     // Additional event listener for the "Close All Windows" button in the navbar
     $('#navbar-close-all').on('click', function() {
         closeAllWindows();

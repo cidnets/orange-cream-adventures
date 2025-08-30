@@ -1,0 +1,140 @@
+.content.page h1,
+.content.page h2,
+.content.page h3,
+.content.page h4,
+.content.page h5 {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	text-wrap: balance;
+}
+
+/* ARCHIVE PAGE */
+.archive ul {
+	padding: 0;
+	list-style-type: none;
+	border-top: var(--border);
+	border-bottom: var(--border);
+}
+.archive li:not(:last-child) {
+	border-bottom: var(--border);
+}
+.archive li a {
+	display: block;
+	padding: 1rem;
+}
+.archive li a h1,
+.archive li a h2,
+.archive li a h3,
+.archive li a h4,
+.archive li a h5 {
+	margin-top: 0.5em;
+	margin-bottom: auto;
+	text-align: left;
+}
+.archive h1,
+.archive h2,
+.archive h3,
+.archive h4,
+.archive h5 {
+	text-align: center;
+	margin: auto;
+}
+.archive h1 {
+	margin-top: 1em;
+	margin-bottom: 1rem;
+}
+.archive h2 {
+	margin-bottom: 1em;
+}
+
+/* CONTACT PAGE */
+#window-contact #page-content {
+	text-align: center;
+	text-wrap: balance;
+}
+#window-contact a:not(:first-of-type) {
+	margin-top: 1rem;
+}
+#window-contact a {
+	display: block;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.5rem 1rem;
+	border: var(--border);
+	border-radius: 1rem;
+	text-align: center;
+}
+/* RESUME PAGE */
+#window-resume {
+    container-type: inline-size;
+}
+#window-resume .content.page h2:not(:first-of-type),
+#window-resume .content.page h3,
+#window-resume .content.page h4,
+#window-resume .content.page h5 {
+	margin: 1rem 0 0;
+	text-align: left;
+}
+#window-resume .content.page ul {
+	margin-top: 0;
+}
+#window-resume .content.page hr:first-of-type {
+	border: none;
+}
+#window-resume .content.page hr:not(:first-of-type) {
+	width: 100%;
+	margin: 1.5rem 0;
+	border-top: none;
+	border-bottom: 1px solid var(--text);
+}
+#window-resume .content.page table {
+	margin-top: 1rem;
+}
+#window-resume .resume-header > * {
+	margin: 0;
+}
+
+#window-resume .resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    margin-top: 1em;
+}
+
+#window-resume .resume-header-left,
+#window-resume .resume-header-center,
+#window-resume .resume-header-right {
+	width: 33.33%;
+}
+
+#window-resume .resume-header-left {
+    flex-grow: 1;
+    text-align: left;
+}
+
+#window-resume .resume-header-center {
+    flex-grow: 1; 
+    text-align: center;
+}
+
+#window-resume .resume-header-right {
+    flex-grow: 1;
+    text-align: right;
+}
+
+@container (max-width: 576px) {
+    #window-resume .resume-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #window-resume .resume-header-left,
+    #window-resume .resume-header-center,
+    #window-resume .resume-header-right {
+        text-align: left;
+        flex-grow: 0;
+        width: 100%;
+    }
+}

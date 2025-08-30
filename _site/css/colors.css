@@ -1,0 +1,66 @@
+:root {
+	/* COLORS */
+	--blue: #99dfeb;
+	
+	--cream: #fff9f1;
+	
+	--green: #9cd6aa;
+	
+	--orange: #ff981a;
+	--orange-2: #ffb347;
+	--orange-3: #ffc97d;
+	--peach: #ffd5bd;
+	
+	--pink: #ffd0de;
+	--lpink: #ffe8f1;
+	--mauve: #E2A7D9;
+	
+	--purple: #e2a7d9;
+	--lpurple: #faceff;
+	--darkpurple: #7c3e68;
+	
+	--yellow: #fff6bd;
+	
+	--white: #fff;
+	--black: #49243c;
+	--blacktrue: #000;
+	/*--- END COLORS ---*/
+	
+	--window-active: var(--cream);
+	--window-active-headers: var(--orange-3);
+	--window-active-navbar: var(--yellow);
+	--window-active-scrollbar: var(--text);
+	--border-inset-active: var(--orange) var(--yellow) var(--yellow) var(--orange);
+	--border-outset-active: var(--yellow) var(--orange) var(--orange) var(--yellow);
+	--primary-active: var(--orange);
+	--primary-2-active: var(--yellow);
+	--primary-3-active: var(--cream);
+	--secondary-active: var(--peach);
+	--accent-1-active: var(--orange-2);
+	--accent-2-active: var(--orange-3);
+	--accent-3-active: var(--black);
+	--accent-4-active: var(--green);
+	--accent-5-active: var(--pink);
+	
+	--border: 2px solid;
+	--border-inset: var(--orange) var(--yellow) var(--yellow) var(--orange);
+	--border-outset: var(--yellow) var(--orange) var(--orange) var(--yellow);
+	
+	--site-bg: var(--cream);
+	
+	--text: var(--darkpurple);
+	--text-header: var(--darkpurple);
+
+	--primary: var(--orange);
+	--primary-2: var(--yellow);
+	--primary-3: var(--lpurple);
+	--secondary: var(--mauve);
+	--accent-1: var(--peach);
+	--accent-2: var(--mauve);
+	--accent-3: var(--black);
+	--accent-4: var(--green);
+	--accent-5: var(--pink);
+	
+	--background: var(--cream);
+	--fill: var(--cream);
+}

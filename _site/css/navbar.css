@@ -1,0 +1,191 @@
+:root {
+	--navbar-height: 48px;
+}
+
+.navbar {
+	position: fixed;
+	bottom: 0;
+	height: var(--navbar-height);
+	width: 100%;
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--orange-3);
+	border-top: var(--border) var(--yellow);
+	color: var(--text);
+	font-family: "DotGothic16";
+	font-size: 1rem;
+	z-index: 9999;
+}
+.mobile-navbar {
+	display: none;
+}
+
+.logo a {
+	color: #007bff;
+	text-decoration: none;
+}
+
+/* Hide the checkbox and hamburger on wider screens */
+.navbar-toggle {
+	display: none;
+}
+.hamburger {
+	display: flex;
+	align-items: middle;
+	justify-content: center;
+	align-content: center;
+	width: fit-content;
+	margin-right: 2rem;
+	flex-shrink: 0;
+	gap: 3px;
+}
+.hamburger, .date-time, .navbar-button {
+	cursor: pointer;
+	border: var(--border);
+	padding: 0.3rem 0.5rem;
+}
+.hamburger, .navbar-button {
+	border-color: var(--border-outset);
+}
+
+.nav-links {
+	display: none; /* Hide the links by default */
+	position: absolute;
+	width: 100%;
+	max-width: 300px;
+	bottom: calc(var(--navbar-height) + 1rem);
+	left: 1rem;
+}
+.navbar-toggle:checked ~ .hamburger{
+	background-color: var(--primary-2);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-inset);
+}
+.navbar-toggle:checked ~ .nav-links {
+	display: block;
+ }
+ 
+ .nav-links .nav-links-container {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--primary-2);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-outset);
+	overflow: hidden;
+ }
+
+.nav-links a,
+.nav-links button {
+	text-align: center;
+	text-decoration: none;
+	color: var(--text);
+}
+.nav-links button {
+	margin-bottom: 1rem;
+	padding: 0.5rem 1rem;
+	color: var(--text);
+	background-color: var(--primary-2);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-outset);
+	font-size: 0.9rem;
+}
+.nav-links button span {
+	font-weight: bold;
+}
+.nav-links a {
+	padding: 1.5rem 1rem;
+	background-color: transparent;
+	border: 2px solid transparent;
+}
+.nav-links a:not(:first-child):not(:last-child) {
+	border-color: var(--orange) transparent var(--orange) transparent;
+}
+
+.navbar a:hover,
+.nav-links a:not(:first-child):not(:last-child):hover,
+.navbar label:hover,
+.nav-links a:hover,
+.nav-links button:hover {
+	background-color: var(--accent-1);
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-inset);
+}
+.navbar a:last-child:hover {
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent var(--yellow) var(--yellow) var(--orange);
+}
+
+.date-time {
+	margin-left: auto;
+	flex-shrink: 0;
+	width: fit-content;
+	background: var(--fill);
+	overflow: hidden;
+	user-select: none;
+	border-color: var(--border-inset);
+}
+.date-time:hover,
+.date-time:hover #clock {
+	background-color: var(--accent-1);
+}
+#date {
+	display: inline-block;
+}
+#clock {
+	display: inline-block;
+}
+
+/* Calendar */
+#calendar-container {
+	position: absolute;
+	bottom: var(--navbar-height);
+	right: 0;
+	width: 300px;
+	margin: 1rem;
+	padding: 0.75rem;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 5px;
+	background-color: var(--fill);
+	border: var(--border);
+	box-shadow: 3px 3px var(--text);
+}
+.calendar-hidden {
+	display: none !important;
+}
+.calendar-header {
+	grid-column: 1 / -1; 
+	text-align: center;
+	font-size: 1.1rem;
+	font-weight: bold;
+	padding-bottom: 0.75rem;
+}
+.day-name {
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.9rem;
+}
+.day-cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 2rem;
+	text-align: center;
+	border-radius: 50%;
+	font-family: var(--font-family);
+}
+.current-day {
+	background-color: var(--accent-1);
+	font-weight: bold;
+}
+
+@media screen and (max-width: 576px) {
+	
+}

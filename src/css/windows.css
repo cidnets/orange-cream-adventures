@@ -2,7 +2,7 @@
     position: absolute;
 	min-width: 250px;
     min-height: 200px;
-    background-color: var(--fill);
+    background-color: var(--accent-1);
     display: flex;
     flex-direction: column;
 	border-width: 2px;
@@ -23,13 +23,14 @@
 	font-family: var(--header);
     cursor: grab;
 }
-.window-header .window-title {
+.window-title {
 	padding-left: 0.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     flex-grow: 1;
     min-width: 0;
+	text-align: left;
 }
 
 .window .window-header a:hover,
@@ -66,6 +67,7 @@
 
 .window-content {
 	height: 100%;
+	margin: 0px 3px 3px;
     flex-grow: 1;
     background-color: var(--fill);
     overflow: auto;
@@ -73,15 +75,12 @@
 	border-style: solid;
 	border-color: var(--border-inset);
 }
-
-.navbar-button.active {
-	background-color: var(--primary-2);
-}
 .window.active {
 	box-shadow: 6px 6px var(--text);
 	border-width: 2px;
 	border-style: solid;
     border-color: var(--border-outset-active);
+	background-color: var(--window-active-headers);
 }
 .window.active .window-content {
 	background-color: var(--window-active);
@@ -147,13 +146,19 @@
 .window.minimized {
     z-index: auto !important;
 }
+.window-icon {
+	display: inline-block;
+	vertical-align: bottom;
+}
 
 /* NAVBAR TEMP BUTTONS */
 .navbar-button {
-	display: block;
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
 	width: fit-content;
-	margin-left: 1rem;
-    max-width: 150px;
+	margin: 0 1rem 0 0;
+    max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -164,7 +169,6 @@
 	border-color: var(--border-outset);
 	color: var(--text);
 }
-
 .navbar-button.active,
 .navbar-button:hover {
     background-color: var(--primary-2);
@@ -172,6 +176,7 @@
 	border-style: solid;
 	border-color: var(--border-inset);
 }
+
 
 /* DESKTOP ICONS */
 .app-drawer {
@@ -213,23 +218,30 @@
 #context-menu {
   display: none; 
   position: absolute;
-  background-color: var(--white);
-  border: 1px solid var(--text);
+  background-color: var(--background);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--border-outset);
   box-shadow: 2px 2px var(--text);
   z-index: 99999;
   min-width: 160px;
   padding: 5px 0;
 }
-
 .context-menu-item {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.8rem;
 }
-
 .context-menu-item:hover {
   background-color: var(--primary-2);
   color: var(--text);
+}
+.context-menu-divider {
+	width: 90%;
+	margin: auto;
+	border-top: 1px solid var(--yellow);
+	border-bottom: 1px solid var(--peach);
+	
 }
 
 @media screen and (max-width: 576px) {

@@ -1,0 +1,145 @@
+@import "reset.css";
+@import "page.css";
+@import "pagefind.css";
+@import "post.css";
+@import "colors.css";
+@import "fonts.css";
+@import "navbar.css";
+@import "footer.css";
+@import "windows.css";
+@import "zeta.css";
+
+
+:root {
+	--wrapper-height: 85vh;
+	--image-max-width: 320px;
+	--content-max-width: 900px;
+}
+
+* {
+	box-sizing: border-box;
+}
+*::before, *::after {
+	display: inline-block;
+	background-size: contain;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+	text-align: center;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+body {
+	background-color: var(--site-bg);
+	font-family: var(--font-family);
+	color: var(--text);
+}
+
+#desktop {
+	position: relative;
+    height: var(--desktop-height);
+}
+
+.site-bg {
+	position: fixed;
+	width: 100%;
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	z-index: -100;	
+}
+.site-bg-img-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-image: url('/assets/Heart-dot-bg.png');
+	background-position: 50% 1%;
+	background-size: 100px;
+}
+.desktop-bg {
+	width: 33%;
+	min-width: 400px;
+	max-width: 500px;
+}
+.site-credit {
+	position: absolute;
+	bottom: 0;
+	margin: 1rem;
+	font-size: 0.8rem;
+	color: var(--text);
+}
+.site-credit * {
+	margin-top: 0;
+}
+.site-credit .credit-logo > * {
+	margin-bottom: 1rem;
+}
+.site-credit .credit-logo img {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+}
+
+.wrapper {
+	min-height: var(--wrapper-height);
+	place-items: center;
+	margin: 3rem auto 0;
+}
+.content {
+	display: block;
+	overflow: hidden;
+	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 1rem;
+}
+.content > * {
+    flex-shrink: 1; 
+    flex-basis: auto; 
+    width: 100%; /* For block-level children, make them take full width of container */
+    /* For inline content that needs to wrap naturally, white-space: normal should be the default */
+    white-space: normal; /* Ensure this is the default for general text */
+}
+
+/* MISC STYLING */
+.error-content {
+	padding: 1rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 1rem;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-2);
+}
+
+@media screen and (max-width: 576px) {
+	.site-credit {
+		margin-top: 1rem;
+	}
+}
