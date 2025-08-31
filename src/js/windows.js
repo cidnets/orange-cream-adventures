@@ -152,70 +152,69 @@ $(document).ready(function() {
     }
     window.addEventListener('orientationchange', setDesktopHeight);
 
-    // --- Window Content Loading ---
     async function loadContentAndPositionWindow($window, url, title, isInitialLoad = true) {
 		const $windowContent = $window.find('.window-content');
 		const $windowBody = $window.find('.window-body');
 
-        $windowContent.html('<p>Loading...</p>');
+		$windowContent.html('<p>Loading...</p>');
 		if (title) {
 			$window.find('.window-title').text(title);
 			const windowId = $window.attr('id');
 			$(`.navbar-button[data-window-id="${windowId}"]`).text(title);
 		}
 
-       if (!isSmallScreen()) {
+		if (!isSmallScreen() && isInitialLoad) {
 			// Set a wide width to allow the browser to calculate the content's natural width
 			$window.css({ 'opacity': 0, 'position': 'absolute', 'width': '10000px', 'height': 'auto' });
 		}
 
-        $windowContent.load(url + ' #page-content', async function(response, status, xhr) {
-            if (status === "error") {
-                $(this).html(`
-                    <div class="error-content">
-                        <p>Sorry, an error occurred loading this content: ${xhr.status} ${xhr.statusText}.</p>
-                        <button class="reload-content-button" data-url="${url}" data-title="${title}">Try Again</button>
-                    </div>
-                `);
-                $(this).find('.reload-content-button').on('click', function() {
-                    const reloadUrl = $(this).data('url');
-                    const reloadTitle = $(this).data('title');
-                    loadContentAndPositionWindow($window, reloadUrl, reloadTitle, false);
-                });
-            }
+		$windowContent.load(url + ' #page-content', async function(response, status, xhr) {
+			if (status === "error") {
+				$(this).html(`
+					<div class="error-content">
+						<p>Sorry, an error occurred loading this content: ${xhr.status} ${xhr.statusText}.</p>
+						<button class="reload-content-button" data-url="${url}" data-title="${title}">Try Again</button>
+					</div>
+				`);
+				$(this).find('.reload-content-button').on('click', function() {
+					const reloadUrl = $(this).data('url');
+					const reloadTitle = $(this).data('title');
+					loadContentAndPositionWindow($window, reloadUrl, reloadTitle, false);
+				});
+			}
 
-            if (url.includes('/gemini/zeta/')) {
-                const geminiAppContainer = $(this).find('.gemini-app-container')[0];
-                if (geminiAppContainer && typeof window.initializeGeminiChat === 'function') {
-                    console.log("Found Gemini app container. Initializing chat...");
-                    window.initializeGeminiChat(geminiAppContainer);
-                } else {
-                    console.warn("Gemini app container not found or initializeGeminiChat function missing.", geminiAppContainer, typeof window.initializeGeminiChat);
-                }
-            }
+			if (url.includes('/gemini/zeta/')) {
+				const geminiAppContainer = $(this).find('.gemini-app-container')[0];
+				if (geminiAppContainer && typeof window.initializeGeminiChat === 'function') {
+					console.log("Found Gemini app container. Initializing chat...");
+					window.initializeGeminiChat(geminiAppContainer);
+				} else {
+					console.warn("Gemini app container not found or initializeGeminiChat function missing.", geminiAppContainer, typeof window.initializeGeminiChat);
+				}
+			}
 
-            if (url === '/search/') {
-                try {
-                    await loadPagefindScript();
-                    initializePagefindUI();
-                } catch (e) {
-                    console.error('Failed to load Pagefind script:', e);
-                }
-            }
-            
-            if (status === "success") {
-                if ($(this).find('.gallery-container').length) {
-                    if (typeof window.initializeGalleryGrid === 'function') {
-                        initializeGalleryGrid();
-                    }
-                    if (typeof window.initializeLightbox === 'function') {
-                        initializeLightbox();
-                    }
-                    console.log("Gallery and Lightbox initialized!");
-                }
-            }
-            
-            // After content is loaded and any images are loaded, call the sizing function.
+			if (url === '/search/') {
+				try {
+					await loadPagefindScript();
+					initializePagefindUI();
+				} catch (e) {
+					console.error('Failed to load Pagefind script:', e);
+				}
+			}
+			
+			if (status === "success") {
+				if ($(this).find('.gallery-container').length) {
+					if (typeof window.initializeGalleryGrid === 'function') {
+						initializeGalleryGrid();
+					}
+					if (typeof window.initializeLightbox === 'function') {
+						initializeLightbox();
+					}
+					console.log("Gallery and Lightbox initialized!");
+				}
+			}
+			
+			// After content is loaded and any images are loaded, call the sizing function.
 			const contentImages = $window.find('img');
 			if (contentImages.length) {
 				let imagesLoaded = 0;
@@ -223,22 +222,29 @@ $(document).ready(function() {
 					$(this).on('load', function() {
 						imagesLoaded++;
 						if (imagesLoaded === contentImages.length) {
-							applyDynamicSizingAndPositioning($window); // Pass the window element
+							applyDynamicSizingAndPositioning($window, isInitialLoad);
 						}
 					});
 					if (this.complete) {
 						imagesLoaded++;
 						if (imagesLoaded === contentImages.length) {
-							applyDynamicSizingAndPositioning($window);
+							applyDynamicSizingAndPositioning($window, isInitialLoad);
 						}
 					}
 				});
 			} else {
 				// If there are no images, just apply the sizing immediately.
-				applyDynamicSizingAndPositioning($window); // Pass the window element
+				applyDynamicSizingAndPositioning($window, isInitialLoad);
 			}
+			
+			function applyDynamicSizingAndPositioning($window, isInitialLoad) {
+				// Only apply sizing and positioning for initial loads
+				if (!isInitialLoad) {
+					$window.css('opacity', 1);
+					setActiveWindow($window);
+					return;
+				}
 
-			function applyDynamicSizingAndPositioning($window) {
 				// These min and max values are important for the window's behavior
 				const minDynamicWidth = 250; 
 				const minDynamicHeight = 150;
@@ -295,9 +301,8 @@ $(document).ready(function() {
 				$window.css({ 'top': centerY + 'px', 'left': centerX + 'px', 'opacity': 1 });
 				setActiveWindow($window);
 			}
-        });
-        
-    }
+		});
+	}
     
     // --- Link Click Handling ---
     // Universal ID generation function
