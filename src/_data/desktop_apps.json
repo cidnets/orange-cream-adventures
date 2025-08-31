@@ -22,5 +22,11 @@
 		"title": "Search",
 		"url": "/search/",
 		"icon": "🔍"
+	},
+	{
+		"id": "portfolio",
+		"title": "Portfolio",
+		"url": "/portfolio/",
+		"icon": "🎨"
 	}
 ]

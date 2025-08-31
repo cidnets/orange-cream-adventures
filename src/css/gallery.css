@@ -1,0 +1,295 @@
+.window .content:has(.gallery-container) {
+	max-width: 100%;
+	padding: 1rem 2rem;
+}
+.window .content:has(.gallery-container) h1,
+.window .content:has(.gallery-container) h2,
+.window .content:has(.gallery-container) h3,
+.window .content:has(.gallery-container) h4,
+.window .content:has(.gallery-container) h5,
+.window .content:has(.gallery-container) p {
+	max-width: 75ch;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* --- The Main Gallery Container --- */
+.content:has(.gallery-container) {
+	max-width: 90vw;
+}
+.gallery-container {
+	margin-top: 1rem;
+    display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 10px; 
+    gap: 8px;
+}
+
+/* --- The Link Tag (Our Grid Item) --- */
+/* We target it by the class we set up for our custom lightbox */
+a.custom-lightbox-trigger {
+    display: flex; /* This is a key! Makes the link a flex container. */
+	flex-direction: column;
+    overflow: hidden; /* Safety measure to clip anything that peeks out. */
+    border-radius: 8px; /* Give the link itself the border-radius. */
+}
+
+/* --- The Figure Element --- */
+.gallery-item {
+    flex: 1;
+    margin: 0;
+    display: flex;
+    position: relative;
+}
+
+/* --- The Image (The Big Finale!) --- */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+	object-fit: cover; 
+    display: block;
+}
+
+/* --- The Caption --- */
+.gallery-caption {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 1.5rem 1rem 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 0 0 8px 8px;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
+
+
+/* --- Making it Responsive! --- */
+
+/* For tablets */
+@container (min-width: 1200px) {
+	.gallery-container {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+@container (max-width: 800px) {
+    .gallery-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* For mobile phones */
+@container (max-width: 400px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* The main container for the modal */
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The class we'll add with JavaScript to show the modal */
+.modal-container.modal-active {
+    display: flex;
+	flex-direction: column;
+}
+
+/* The dark background overlay */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    cursor: pointer; /* So it looks clickable to close */
+}
+
+/* The box that holds the image */
+.modal-content {
+    position: relative; /* So we can position the close button inside it */
+    z-index: 1001; /* Appears above the overlay */
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 99%;
+    max-height: 99%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* The image inside the modal */
+.modal-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.modal-img-info {
+	position: relative;
+	display: none;
+	padding: 1.5rem 1rem;
+	text-align: center;
+	border: var(--border);
+	border-image: var(--border-white);
+	background-color: white;
+	z-index: 1002;
+}
+.modal-img-info h1,
+.modal-img-info h2,
+.modal-img-info h3,
+.modal-img-info h4,
+.modal-img-info h5 {
+	font-family: "Josefin Sans";
+	margin-bottom: 0.5rem;
+}
+.modal-img-info p:not(:last-child) {
+	margin-bottom: 0;
+}
+.modal-img-info.is-visible {
+	display: block;
+}
+.modal-buttons {
+	display: flex;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 1rem;
+}
+.modal-buttons > *:not(:last-child) {
+	margin-right: 1rem;
+}
+.modal-info-trigger,
+.modal-close-btn {
+	position: relative;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    border-width: 2px;
+	border-style: solid;
+	border-color: var(--border-outset);
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+	vertical-align: bottom;
+    z-index: 1002;
+	background-color: var(--accent-5);
+	color: white;
+}
+.modal-info-trigger:hover,
+.modal-close-btn:hover {
+	background-color: white;
+}
+.modal-info-trigger {
+	padding: 0 1rem;
+}
+.modal-close-btn {
+    aspect-ratio: 1/1;
+}
+/* Styling for the carousel navigation buttons */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 1002;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/*
+@container (max-width: 576px) {
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-buttons {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 1rem;
+        font-size: 2rem;
+    }
+
+    .prev-btn {
+        left: 0;
+    }
+    
+    .next-btn {
+        right: 0;
+    }
+    
+    .modal-buttons, 
+    .modal-nav-btn {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+    }
+
+    .modal-container.controls-visible .modal-buttons,
+    .modal-container.controls-visible .modal-nav-btn {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s ease-in-out;
+    }
+}
+*/

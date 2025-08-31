@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-gallery
+---
+
+	<div id="page-content" class="content page" data-pagefind-body>
+		{% if pageTitle%}
+		<h1>{{ pageTitle }}</h1>
+		{% endif %}
+		{{ content | safe }}
+		<div class="gallery-container">
+			{% for art in digital %}
+			{% include "portfolio/gallery.njk" %}
+			{% endfor %}
+		</div>
+		{% include "portfolio/gallery-modal.njk" %}
+	</div>
+	

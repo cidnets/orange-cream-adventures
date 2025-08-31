@@ -1,0 +1,11 @@
+    <a href="{{ art.fullsize_url }}" class="custom-lightbox-trigger" data-group="art-gallery"
+	data-title="{{ art.title }}"
+    data-date="{{ art.date }}"
+    data-medium="{{ art.medium }}"
+    data-size="{{ art.size }}"
+	   >
+        <figure class="gallery-item">
+            <img src="{{ art.thumbnail_url }}" alt="{{ art.alt_text }}" loading="lazy">
+            <figcaption class="gallery-caption">{{ art.title }}</figcaption>
+        </figure>
+    </a>

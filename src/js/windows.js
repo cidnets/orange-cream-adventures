@@ -2,8 +2,8 @@ $(document).ready(function() {
     // --- Global Variables ---
     let zIndexCounter = 1000;
     const breakpoint = 576; // Mobile breakpoint
-    let resizeTimer; // Declared globally as discussed!
-    let lastSelectedText = ''; // New global variable to store selected text
+    let resizeTimer;
+    let lastSelectedText = '';
     let contextMenuTarget = null;
 
     // --- Helper Functions ---
@@ -17,7 +17,7 @@ $(document).ready(function() {
         return $(window).width() <= breakpoint;
     }
 
-    // Pagefind Helper Functions
+    // --- Pagefind Helper Functions ---
     function loadPagefindScript() {
         if (!document.querySelector('script[src="/pagefind/pagefind-ui.js"]')) {
             const script = document.createElement('script');
@@ -45,17 +45,30 @@ $(document).ready(function() {
         }
     }
 
-    // --- NEW: Welcome Window Function ---
+    // --- NEW: Function to set the active window (MOVED HERE) ---
+    function setActiveWindow($window) {
+        const newWindowId = $window.attr('id');
+        const $currentActiveWindow = $('.window.active');
+        if ($currentActiveWindow.length && $currentActiveWindow.attr('id') !== newWindowId) {
+            $currentActiveWindow.removeClass('active');
+            $(`.navbar-button[data-window-id="${$currentActiveWindow.attr('id')}"]`).removeClass('active');
+        }
+        $window.removeClass('minimized');
+        $window.attr('data-window-state', 'open');
+        $window.addClass('active').css('z-index', ++zIndexCounter);
+        $(`.navbar-button[data-window-id="${newWindowId}"]`).addClass('active').removeClass('minimized');
+    }
+
+    // --- Welcome Window Function ---
     function createWelcomeWindow() {
         const windowId = 'window-welcome';
         const title = 'Welcome!';
-        const url = '/welcome/'; // Create this HTML file with your welcome content
+        const url = '/welcome/';
         createWindow(windowId, title, url);
     }
-	createWelcomeWindow();
+    createWelcomeWindow();
     
     // --- Initial Page Load Logic ---
-    // This code will run every time the page is loaded or reloaded.
     function setDesktopHeight() {
         const navbarHeightValue = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height');
         const navbarHeight = parseFloat(navbarHeightValue) || 0;
@@ -141,22 +154,22 @@ $(document).ready(function() {
 
     // --- Window Content Loading ---
     async function loadContentAndPositionWindow($window, url, title, isInitialLoad = true) {
-        $window.find('.window-content').html('<p>Loading...</p>');
-        if (title) {
-            $window.find('.window-title').text(title);
-            const windowId = $window.attr('id');
-            $(`.navbar-button[data-window-id="${windowId}"]`).text(title);
-        }
+		const $windowContent = $window.find('.window-content');
+		const $windowBody = $window.find('.window-body');
 
-        if (!isInitialLoad && !isSmallScreen()) {
-            let currentWindowWidth = $window.outerWidth();
-            let currentWindowHeight = $window.outerHeight();
-            $window.css({ 'width': currentWindowWidth + 'px', 'height': currentWindowHeight + 'px' });
-        } else if (isInitialLoad && !isSmallScreen()) {
-            $window.css({ 'width': 'auto', 'height': 'auto' });
-        }
+        $windowContent.html('<p>Loading...</p>');
+		if (title) {
+			$window.find('.window-title').text(title);
+			const windowId = $window.attr('id');
+			$(`.navbar-button[data-window-id="${windowId}"]`).text(title);
+		}
 
-        $window.find('.window-content').load(url + ' #page-content', async function(response, status, xhr) {
+       if (!isSmallScreen()) {
+			// Set a wide width to allow the browser to calculate the content's natural width
+			$window.css({ 'opacity': 0, 'position': 'absolute', 'width': '10000px', 'height': 'auto' });
+		}
+
+        $windowContent.load(url + ' #page-content', async function(response, status, xhr) {
             if (status === "error") {
                 $(this).html(`
                     <div class="error-content">
@@ -181,7 +194,6 @@ $(document).ready(function() {
                 }
             }
 
-            // Check if the loaded content is the search page and initialize Pagefind.
             if (url === '/search/') {
                 try {
                     await loadPagefindScript();
@@ -192,67 +204,101 @@ $(document).ready(function() {
             }
             
             if (status === "success") {
-                // Remove the redundant script loading logic for the gallery.
-                // The Eleventy templates handle this now.
-            }
-            $window[0].offsetHeight;
-            if (isInitialLoad && !isSmallScreen()) {
-                const desktopWidth = $('#desktop').width();
-                const desktopHeight = $('#desktop').height();
-                const padding = 20;
-                const maxDesktopFitWidth = desktopWidth - (padding * 2);
-                const maxDesktopFitHeight = desktopHeight - (padding * 2);
-                const preferredInitialMaxWidth = 900;
-                const preferredInitialMaxHeight = 1920;
-                const initialDesiredMinChatWidth = 400;
-                const initialDesiredMinChatHeight = 600;
-
-                let naturalWindowWidth = $window.outerWidth();
-                let naturalWindowHeight = $window.outerHeight();
-
-                let baseCalculatedWidth = Math.max(naturalWindowWidth, initialDesiredMinChatWidth);
-                let baseCalculatedHeight = Math.max(naturalWindowHeight, initialDesiredMinChatHeight);
-
-                let finalCalculatedWidth = Math.min(baseCalculatedWidth, preferredInitialMaxWidth, maxDesktopFitWidth);
-                let finalCalculatedHeight = Math.min(baseCalculatedHeight, preferredInitialMaxHeight, maxDesktopFitHeight);
-                
-                if ($window.data('ui-resizable')) {
-                    const minHeight = $window.resizable("option", "minHeight");
-                    const minWidth = $window.resizable("option", "minWidth");
-                    finalCalculatedWidth = Math.max(finalCalculatedWidth, minWidth);
-                    finalCalculatedHeight = Math.max(finalCalculatedHeight, minHeight);
+                if ($(this).find('.gallery-container').length) {
+                    if (typeof window.initializeGalleryGrid === 'function') {
+                        initializeGalleryGrid();
+                    }
+                    if (typeof window.initializeLightbox === 'function') {
+                        initializeLightbox();
+                    }
+                    console.log("Gallery and Lightbox initialized!");
                 }
-
-                $window.css('width', finalCalculatedWidth + 'px');
-                $window.css('height', finalCalculatedHeight + 'px');
-
-                const centerX = (desktopWidth / 2) - (finalCalculatedWidth / 2);
-                const centerY = (desktopHeight / 2) - (finalCalculatedHeight / 2);
-
-                $window.css({ 'top': centerY + 'px', 'left': centerX + 'px' });
             }
-            $window.css('opacity', 1);
-            setActiveWindow($window);
-			
-			 // --- NEW: Apply container query class after sizing is complete ---
-			$window.find('.container').addClass('has-container-query');
+            
+            // After content is loaded and any images are loaded, call the sizing function.
+			const contentImages = $window.find('img');
+			if (contentImages.length) {
+				let imagesLoaded = 0;
+				contentImages.each(function() {
+					$(this).on('load', function() {
+						imagesLoaded++;
+						if (imagesLoaded === contentImages.length) {
+							applyDynamicSizingAndPositioning($window); // Pass the window element
+						}
+					});
+					if (this.complete) {
+						imagesLoaded++;
+						if (imagesLoaded === contentImages.length) {
+							applyDynamicSizingAndPositioning($window);
+						}
+					}
+				});
+			} else {
+				// If there are no images, just apply the sizing immediately.
+				applyDynamicSizingAndPositioning($window); // Pass the window element
+			}
+
+			function applyDynamicSizingAndPositioning($window) {
+				// These min and max values are important for the window's behavior
+				const minDynamicWidth = 250; 
+				const minDynamicHeight = 150;
+				
+				// Get desktop dimensions to set the max size
+				const desktopWidth = $('#desktop').width();
+				const desktopHeight = $('#desktop').height();
+				const padding = 20;
+				const maxDesktopFitWidth = desktopWidth - (padding * 2);
+				const maxDesktopFitHeight = desktopHeight - (padding * 2);
+
+				// Create a temporary, invisible container
+				const $tempContainer = $('<div></div>')
+					.css({
+						'position': 'absolute',
+						'visibility': 'hidden',
+						'height': 'auto'
+					})
+					.appendTo('body');
+				
+				// Clone the content and append it to the temp container
+				const $clonedContent = $window.find('.window-content').clone();
+				$clonedContent.appendTo($tempContainer);
+				
+				// Ensure the content wraps naturally by giving the temp container a width
+				// This is the key to fixing the scrollWidth issue
+				$tempContainer.css('width', Math.min(desktopWidth / 2, 700) + 'px');
+
+				const naturalContentWidth = $tempContainer.outerWidth();
+				const naturalContentHeight = $tempContainer.outerHeight();
+				
+				$tempContainer.remove();
+
+				// The rest of the logic remains the same
+				let baseCalculatedWidth = Math.max(naturalContentWidth, minDynamicWidth);
+				let baseCalculatedHeight = Math.max(naturalContentHeight, minDynamicHeight);
+				
+				let finalCalculatedWidth = Math.min(baseCalculatedWidth, maxDesktopFitWidth);
+				let finalCalculatedHeight = Math.min(baseCalculatedHeight, maxDesktopFitHeight);
+				
+				if ($window.data('ui-resizable')) {
+					const resizableMinHeight = $window.resizable("option", "minHeight");
+					const resizableMinWidth = $window.resizable("option", "minWidth");
+					finalCalculatedWidth = Math.max(finalCalculatedWidth, resizableMinWidth);
+					finalCalculatedHeight = Math.max(finalCalculatedHeight, resizableMinHeight);
+				}
+
+				$window.css('width', finalCalculatedWidth + 'px');
+				$window.css('height', finalCalculatedHeight + 'px');
+
+				const centerX = (desktopWidth / 2) - (finalCalculatedWidth / 2);
+				const centerY = (desktopHeight / 2) - (finalCalculatedHeight / 2);
+
+				$window.css({ 'top': centerY + 'px', 'left': centerX + 'px', 'opacity': 1 });
+				setActiveWindow($window);
+			}
         });
+        
     }
-
-    // --- NEW: Function to set the active window ---
-    function setActiveWindow($window) {
-        const newWindowId = $window.attr('id');
-        const $currentActiveWindow = $('.window.active');
-        if ($currentActiveWindow.length && $currentActiveWindow.attr('id') !== newWindowId) {
-            $currentActiveWindow.removeClass('active');
-            $(`.navbar-button[data-window-id="${$currentActiveWindow.attr('id')}"]`).removeClass('active');
-        }
-        $window.removeClass('minimized');
-        $window.attr('data-window-state', 'open');
-        $window.addClass('active').css('z-index', ++zIndexCounter);
-        $(`.navbar-button[data-window-id="${newWindowId}"]`).addClass('active').removeClass('minimized');
-    }
-
+    
     // --- Link Click Handling ---
     // Universal ID generation function
     function getUrlId(url) {
@@ -286,15 +332,17 @@ $(document).ready(function() {
         
         if (!href) { return true; }
 
-        const shouldBypassWindowSystem = $this.attr('target') === '_blank' ||
+        // Combine all conditions into a single check
+        const shouldBeHandledByWindowSystem = !($this.attr('target') === '_blank' ||
             $this.data('open-new-tab') === true ||
             href.startsWith('#') ||
             href.startsWith('mailto:') ||
             href.startsWith('tel:') ||
             href.startsWith('javascript:') ||
-            $this.data('no-window');
+            $this.data('no-window') ||
+            $this.hasClass('custom-lightbox-trigger'));
 
-        if (shouldBypassWindowSystem) {
+        if (!shouldBeHandledByWindowSystem) {
             return true;
         }
 
@@ -334,29 +382,32 @@ $(document).ready(function() {
     });
 
     // --- NEW: Window Creation Function ---
-	function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
-		const sanitizedTitle = title.toLowerCase().replace(/\s/g, '-');
-		const windowClass = `window-${sanitizedTitle}`;
-		const windowHtml = `
-			<div class="window ${type}-window ${windowClass}" id="${windowId}" data-window-state="open" data-maximized="false">
-				<div class="window-header">
-					<img src="${windowIcon}" class="window-icon">
-					<span class="window-title">${title}</span>
-					<div class="window-controls">
-						<button class="window-minimize" title="Minimize">_</button>
-						<button class="window-maximize" title="Maximize">◻</button>
-						<button class="window-close" title="Close">&times;</button>
-					</div>
-				</div>
-				<div class="window-content"><p>Loading...</p></div>
-			</div>`;
+    function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
+        const sanitizedTitle = title.toLowerCase().replace(/\s/g, '-');
+        const windowClass = `window-${sanitizedTitle}`;
+        const minWidthValue = 100; // Define a flexible minimum width here
 
-		const $newWindow = $(windowHtml);
+        const windowHtml = `
+            <div class="window ${type}-window ${windowClass}" id="${windowId}" data-window-state="open" data-maximized="false">
+                <div class="window-header">
+                    <img src="${windowIcon}" class="window-icon">
+                    <span class="window-title">${title}</span>
+                    <div class="window-controls">
+                        <button class="window-minimize" title="Minimize">_</button>
+                        <button class="window-maximize" title="Maximize">◻</button>
+                        <button class="window-close" title="Close">&times;</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="window-content"><p>Loading...</p></div>
+                </div>
+            </div>`;
+
+        const $newWindow = $(windowHtml);
 
         if (!isSmallScreen()) {
             $newWindow.css({ 'opacity': 0, 'position': 'absolute', 'width': 'auto', 'height': 'auto' });
             
-            // Initialize draggable and resizable immediately for desktop view
             $newWindow.draggable({
                 handle: ".window-header",
                 containment: "#desktop",
@@ -364,12 +415,11 @@ $(document).ready(function() {
             });
             $newWindow.resizable({
                 minHeight: 150,
-                minWidth: 250,
+                // minWidth: minWidthValue, // Use the new variable here
                 handles: "n, e, s, w, ne, se, sw, nw",
                 containment: "#desktop",
                 start: function() { setActiveWindow($(this)); }
             });
-
         } else {
             $newWindow.css({ 'opacity': 0, 'position': 'absolute' });
         }
@@ -378,8 +428,8 @@ $(document).ready(function() {
         loadContentAndPositionWindow($newWindow, url, title, true);
 
         const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
-		$(navbarButtonHtml).insertAfter('#navbar .start-divider');
-		
+        $(navbarButtonHtml).insertAfter('#navbar .start-divider');
+        
         $newWindow.on('mousedown', function() { setActiveWindow($(this)); });
     }
     
@@ -539,13 +589,13 @@ $(document).ready(function() {
             menu.data('targetWindowId', windowId);
             $('#context-menu-close, #context-menu-minimize, #context-menu-maximize, #min-max-divider').show();
             positionMenu(e, menu);
-			// Update the Maximize/Restore text
-			const $window = $('#' + windowId);
-			if ($window.length && $window.data('maximized') === true) {
-				$('#context-menu-maximize').text('Minimize');
-			} else {
-				$('#context-menu-maximize').text('Maximize');
-			}
+            // Update the Maximize/Restore text
+            const $window = $('#' + windowId);
+            if ($window.length && $window.data('maximized') === true) {
+                $('#context-menu-maximize').text('Minimize');
+            } else {
+                $('#context-menu-maximize').text('Maximize');
+            }
         } else if (isDesktopBackground) {
             menu.data('targetWindowId', null);
             $('#context-menu-close-all').show();
@@ -557,15 +607,15 @@ $(document).ready(function() {
         }
 
         // Independently check for copy/paste conditions and their divider
-		if (hasSelection) {
-			lastSelectedText = window.getSelection().toString();
-			$('#context-menu-copy, #copy-paste-divider').show();
-		}
-		
-		if (isEditable) {
-			contextMenuTarget = e.target;
-			$('#context-menu-paste, #copy-paste-divider').show();
-		}
+        if (hasSelection) {
+            lastSelectedText = window.getSelection().toString();
+            $('#context-menu-copy, #copy-paste-divider').show();
+        }
+        
+        if (isEditable) {
+            contextMenuTarget = e.target;
+            $('#context-menu-paste, #copy-paste-divider').show();
+        }
     });
 
     // Handle clicks on the context menu items
@@ -637,7 +687,7 @@ $(document).ready(function() {
             }
         }
     });
-	
+    
     // Additional event listener for the "Close All Windows" button in the navbar
     $('#navbar-close-all').on('click', function() {
         closeAllWindows();
