@@ -36,7 +36,7 @@ function initializeGalleryGrid() {
         if (!image) return;
 
         // NEW: Use the image's natural height for an accurate calculation.
-        const itemHeight = image.naturalHeight; 
+        const itemHeight = image.naturalHeight;
         const rowSpan = Math.ceil((itemHeight + rowGap) / (rowHeight + rowGap));
         item.style.gridRowEnd = 'span ' + rowSpan;
     }
@@ -79,33 +79,11 @@ function initializeLightbox() {
     const modalDate = document.querySelector('#modal-date');
     const modalMedium = document.querySelector('#modal-medium');
     const modalSize = document.querySelector('#modal-size');
-    
+
     const prevButton = modal.querySelector('.prev-btn');
     const nextButton = modal.querySelector('.next-btn');
     let currentImageIndex = 0;
     let allGalleryItems = [];
-
-	const modalContent = modal.querySelector('.modal-content');
-    const modalButtons = modal.querySelector('.modal-buttons');
-    const navButtons = modal.querySelectorAll('.modal-nav-btn');
-	
-	// NEW: Tap/click listener to toggle controls
-	modalContent.addEventListener('click', () => {
-		// This function will toggle a CSS class on the main modal container
-		modal.classList.toggle('controls-visible');
-	});
-
-	// A small improvement: prevent tap on controls from hiding them
-	if (modalButtons) {
-		modalButtons.addEventListener('click', (event) => {
-			event.stopPropagation(); // Prevents the click from bubbling up to the modal-content
-		});
-	}
-	navButtons.forEach(button => {
-		button.addEventListener('click', (event) => {
-			event.stopPropagation();
-		});
-	});
 
     function updateModalContent(index) {
         const item = allGalleryItems[index];
@@ -122,13 +100,13 @@ function initializeLightbox() {
         modalDate.textContent = date;
         modalMedium.textContent = medium;
         modalSize.textContent = size;
-        
+
         currentImageIndex = index;
     }
 
     triggerLinks.forEach((link, index) => {
         allGalleryItems.push(link);
-        
+
         link.addEventListener('click', function(event) {
             event.preventDefault();
             updateModalContent(index);
@@ -146,10 +124,10 @@ function initializeLightbox() {
         updateModalContent(newIndex);
     });
 
-    if(closeButton) closeButton.addEventListener('click', closeModal);
-    if(overlay) overlay.addEventListener('click', closeModal);
+    if (closeButton) closeButton.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
 
-    if(infoTrigger && infoPanel) {
+    if (infoTrigger && infoPanel) {
         infoTrigger.addEventListener('click', () => {
             infoPanel.classList.toggle('is-visible');
         });
@@ -160,4 +138,36 @@ function initializeLightbox() {
             closeModal();
         }
     });
+
+    // --- NEW: Use ResizeObserver to handle container size changes ---
+    const galleryContainer = document.querySelector('.gallery-container');
+    const containerBreakpoint = 576; // Match your CSS breakpoint
+
+    const containerObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            const containerWidth = entry.contentRect.width;
+            if (containerWidth <= containerBreakpoint) {
+                // Attach the click handler for small container sizes
+                modal.addEventListener('click', toggleMobileControls);
+            } else {
+                // Remove the click handler for large container sizes
+                modal.removeEventListener('click', toggleMobileControls);
+                // Ensure controls are visible on large containers
+                modal.classList.remove('controls-visible');
+            }
+        }
+    });
+
+    // This observer will automatically start watching for resizes
+    if (galleryContainer) {
+        containerObserver.observe(galleryContainer);
+    }
+    
+    // The event handler for toggling controls on a click
+    function toggleMobileControls(event) {
+        // Only toggle if the target is NOT a button or a navigation element
+        if (!event.target.closest('.modal-buttons, .modal-nav-btn, .modal-img-info')) {
+            modal.classList.toggle('controls-visible');
+        }
+    }
 }

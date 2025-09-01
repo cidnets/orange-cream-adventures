@@ -225,7 +225,6 @@ a.custom-lightbox-trigger {
     right: 10px;
 }
 
-/*
 @container (max-width: 576px) {
     .modal-overlay {
         position: absolute;
@@ -234,7 +233,14 @@ a.custom-lightbox-trigger {
         width: 100%;
         height: 100%;
     }
-
+    .modal-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+    }
     .modal-buttons {
         position: absolute;
         top: 0;
@@ -243,42 +249,21 @@ a.custom-lightbox-trigger {
         display: flex;
         justify-content: flex-end;
         padding: 1rem;
-        z-index: 10;
+        z-index: 10; 
         background-color: rgba(0, 0, 0, 0.5);
     }
-
-    .modal-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
     .modal-nav-btn {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 10;
+        z-index: 10; 
         background: rgba(0, 0, 0, 0.5);
         color: white;
         border: none;
         padding: 1rem;
         font-size: 2rem;
     }
-
-    .prev-btn {
-        left: 0;
-    }
-    
-    .next-btn {
-        right: 0;
-    }
-    
-    .modal-buttons, 
+    .modal-buttons,
     .modal-nav-btn {
         opacity: 0;
         visibility: hidden;
@@ -292,4 +277,3 @@ a.custom-lightbox-trigger {
         transition: opacity 0.3s ease-in-out;
     }
 }
-*/
