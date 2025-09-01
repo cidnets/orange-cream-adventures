@@ -152,6 +152,7 @@ $(document).ready(function() {
     }
     window.addEventListener('orientationchange', setDesktopHeight);
 
+	// loadContentAndPositionWindow
     async function loadContentAndPositionWindow($window, url, title, isInitialLoad = true) {
 		const $windowContent = $window.find('.window-content');
 		const $windowBody = $window.find('.window-body');
@@ -161,11 +162,6 @@ $(document).ready(function() {
 			$window.find('.window-title').text(title);
 			const windowId = $window.attr('id');
 			$(`.navbar-button[data-window-id="${windowId}"]`).text(title);
-		}
-
-		if (!isSmallScreen() && isInitialLoad) {
-			// Set a wide width to allow the browser to calculate the content's natural width
-			$window.css({ 'opacity': 0, 'position': 'absolute', 'width': '10000px', 'height': 'auto' });
 		}
 
 		$windowContent.load(url + ' #page-content', async function(response, status, xhr) {
@@ -201,7 +197,7 @@ $(document).ready(function() {
 					console.error('Failed to load Pagefind script:', e);
 				}
 			}
-			
+
 			if (status === "success") {
 				if ($(this).find('.gallery-container').length) {
 					if (typeof window.initializeGalleryGrid === 'function') {
@@ -213,30 +209,37 @@ $(document).ready(function() {
 					console.log("Gallery and Lightbox initialized!");
 				}
 			}
-			
-			// After content is loaded and any images are loaded, call the sizing function.
-			const contentImages = $window.find('img');
-			if (contentImages.length) {
-				let imagesLoaded = 0;
-				contentImages.each(function() {
-					$(this).on('load', function() {
-						imagesLoaded++;
-						if (imagesLoaded === contentImages.length) {
-							applyDynamicSizingAndPositioning($window, isInitialLoad);
+
+			// Only apply dynamic sizing and positioning for desktop screens.
+			if (!isSmallScreen()) {
+				const contentImages = $window.find('img');
+				if (contentImages.length) {
+					let imagesLoaded = 0;
+					contentImages.each(function() {
+						$(this).on('load', function() {
+							imagesLoaded++;
+							if (imagesLoaded === contentImages.length) {
+								applyDynamicSizingAndPositioning($window, isInitialLoad);
+							}
+						});
+						if (this.complete) {
+							imagesLoaded++;
+							if (imagesLoaded === contentImages.length) {
+								applyDynamicSizingAndPositioning($window, isInitialLoad);
+							}
 						}
 					});
-					if (this.complete) {
-						imagesLoaded++;
-						if (imagesLoaded === contentImages.length) {
-							applyDynamicSizingAndPositioning($window, isInitialLoad);
-						}
-					}
-				});
+				} else {
+					// If there are no images, just apply the sizing immediately.
+					applyDynamicSizingAndPositioning($window, isInitialLoad);
+				}
 			} else {
-				// If there are no images, just apply the sizing immediately.
-				applyDynamicSizingAndPositioning($window, isInitialLoad);
+				// If it's a small screen, the CSS handles the size, so just set opacity and active state.
+				$window.css('opacity', 1);
+				setActiveWindow($window);
 			}
-			
+
+			// The helper function for dynamic sizing and positioning remains unchanged.
 			function applyDynamicSizingAndPositioning($window, isInitialLoad) {
 				// Only apply sizing and positioning for initial loads
 				if (!isInitialLoad) {
@@ -246,9 +249,9 @@ $(document).ready(function() {
 				}
 
 				// These min and max values are important for the window's behavior
-				const minDynamicWidth = 250; 
+				const minDynamicWidth = 250;
 				const minDynamicHeight = 150;
-				
+
 				// Get desktop dimensions to set the max size
 				const desktopWidth = $('#desktop').width();
 				const desktopHeight = $('#desktop').height();
@@ -264,27 +267,27 @@ $(document).ready(function() {
 						'height': 'auto'
 					})
 					.appendTo('body');
-				
+
 				// Clone the content and append it to the temp container
 				const $clonedContent = $window.find('.window-content').clone();
 				$clonedContent.appendTo($tempContainer);
-				
+
 				// Ensure the content wraps naturally by giving the temp container a width
 				// This is the key to fixing the scrollWidth issue
 				$tempContainer.css('width', Math.min(desktopWidth / 2, 700) + 'px');
 
 				const naturalContentWidth = $tempContainer.outerWidth();
 				const naturalContentHeight = $tempContainer.outerHeight();
-				
+
 				$tempContainer.remove();
 
 				// The rest of the logic remains the same
 				let baseCalculatedWidth = Math.max(naturalContentWidth, minDynamicWidth);
 				let baseCalculatedHeight = Math.max(naturalContentHeight, minDynamicHeight);
-				
+
 				let finalCalculatedWidth = Math.min(baseCalculatedWidth, maxDesktopFitWidth);
 				let finalCalculatedHeight = Math.min(baseCalculatedHeight, maxDesktopFitHeight);
-				
+
 				if ($window.data('ui-resizable')) {
 					const resizableMinHeight = $window.resizable("option", "minHeight");
 					const resizableMinWidth = $window.resizable("option", "minWidth");
@@ -387,56 +390,58 @@ $(document).ready(function() {
     });
 
     // --- NEW: Window Creation Function ---
-    function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
-        const sanitizedTitle = title.toLowerCase().replace(/\s/g, '-');
-        const windowClass = `window-${sanitizedTitle}`;
-        const minWidthValue = 100; // Define a flexible minimum width here
+	function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
+		const sanitizedTitle = title.toLowerCase().replace(/\s/g, '-');
+		const windowClass = `window-${sanitizedTitle}`;
+		const minWidthValue = 100;
 
-        const windowHtml = `
-            <div class="window ${type}-window ${windowClass}" id="${windowId}" data-window-state="open" data-maximized="false">
-                <div class="window-header">
-                    <img src="${windowIcon}" class="window-icon">
-                    <span class="window-title">${title}</span>
-                    <div class="window-controls">
-                        <button class="window-minimize" title="Minimize">_</button>
-                        <button class="window-maximize" title="Maximize">◻</button>
-                        <button class="window-close" title="Close">&times;</button>
-                    </div>
-                </div>
-                <div class="window-body">
-                    <div class="window-content"><p>Loading...</p></div>
-                </div>
-            </div>`;
+		const windowHtml = `
+			<div class="window ${type}-window ${windowClass}" id="${windowId}" data-window-state="open" data-maximized="false">
+				<div class="window-header">
+					<img src="${windowIcon}" class="window-icon">
+					<span class="window-title">${title}</span>
+					<div class="window-controls">
+						<button class="window-minimize" title="Minimize">_</button>
+						<button class="window-maximize" title="Maximize">◻</button>
+						<button class="window-close" title="Close">&times;</button>
+					</div>
+				</div>
+				<div class="window-body">
+					<div class="window-content"><p>Loading...</p></div>
+				</div>
+			</div>`;
 
-        const $newWindow = $(windowHtml);
+		const $newWindow = $(windowHtml);
 
-        if (!isSmallScreen()) {
-            $newWindow.css({ 'opacity': 0, 'position': 'absolute', 'width': 'auto', 'height': 'auto' });
-            
-            $newWindow.draggable({
-                handle: ".window-header",
-                containment: "#desktop",
-                start: function() { setActiveWindow($(this)); }
-            });
-            $newWindow.resizable({
-                minHeight: 150,
-                // minWidth: minWidthValue, // Use the new variable here
-                handles: "n, e, s, w, ne, se, sw, nw",
-                containment: "#desktop",
-                start: function() { setActiveWindow($(this)); }
-            });
-        } else {
-            $newWindow.css({ 'opacity': 0, 'position': 'absolute' });
-        }
+		if (!isSmallScreen()) {
+			// This is the key change! Position and size are now only set for large screens.
+			$newWindow.css({ 'opacity': 0, 'position': 'absolute', 'width': 'auto', 'height': 'auto' });
 
-        $newWindow.appendTo('#desktop');
-        loadContentAndPositionWindow($newWindow, url, title, true);
+			$newWindow.draggable({
+				handle: ".window-header",
+				containment: "#desktop",
+				start: function() { setActiveWindow($(this)); }
+			});
+			$newWindow.resizable({
+				minHeight: 150,
+				handles: "n, e, s, w, ne, se, sw, nw",
+				containment: "#desktop",
+				start: function() { setActiveWindow($(this)); }
+			});
+		} else {
+			// On small screens, the CSS will handle positioning and size.
+			// We still need to set the opacity for a clean transition.
+			$newWindow.css({ 'opacity': 0, 'position': 'absolute' });
+		}
 
-        const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
-        $(navbarButtonHtml).insertAfter('#navbar .start-divider');
-        
-        $newWindow.on('mousedown', function() { setActiveWindow($(this)); });
-    }
+		$newWindow.appendTo('#desktop');
+		loadContentAndPositionWindow($newWindow, url, title, true);
+
+		const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
+		$(navbarButtonHtml).insertAfter('#navbar .start-divider');
+
+		$newWindow.on('mousedown', function() { setActiveWindow($(this)); });
+	}
     
     // --- Window Controls ---
     $('body').on('click', '.window-close', function() {
