@@ -178,12 +178,7 @@ $(document).ready(function() {
             }
 
             // Handle special app initializations.
-            if (url.includes('/gemini/zeta/')) {
-                const geminiAppContainer = $(this).find('.gemini-app-container')[0];
-                if (geminiAppContainer && typeof window.initializeGeminiChat === 'function') {
-                    window.initializeGeminiChat(geminiAppContainer);
-                }
-            } else if (url === '/search/') {
+            if (url === '/search/') {
                 if (typeof window.loadPagefindScript === 'function' && typeof window.initializePagefindUI === 'function') {
                     await window.loadPagefindScript();
                     window.initializePagefindUI();
