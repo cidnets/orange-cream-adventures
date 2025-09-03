@@ -1,173 +1,150 @@
-console.log("The gallery.js has loaded");
+console.log("gallery.js has loaded");
 
-// --- Modal Functions: Moved to a higher scope to avoid ReferenceError ---
-function openModal() {
-    const modal = document.querySelector('#my-modal');
-    if (modal) {
-        modal.classList.add('modal-active');
-    }
-}
-
-function closeModal() {
-    const modal = document.querySelector('#my-modal');
-    const infoPanel = document.querySelector('.modal-img-info');
-    if (modal) {
-        modal.classList.remove('modal-active');
-    }
-    if (infoPanel) {
-        infoPanel.classList.remove('is-visible');
-    }
-}
-
-// --- Gallery Grid Initialization Function ---
+// A function to initialize the gallery grid.
 function initializeGalleryGrid() {
-    const galleryContainer = document.querySelector('.gallery-container');
-    if (!galleryContainer) {
-        return;
-    }
+    const galleryContainer = document.querySelector('.window.active .gallery-container, .mobile-app.active .gallery-container');
+    if (!galleryContainer) {
+        return;
+    }
 
-    // This is our new and improved function that reads the gap size from your CSS!
-    function resizeGridItem(item) {
-        const grid = document.querySelector('.gallery-container');
-        const rowHeight = parseInt(getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-        const rowGap = parseInt(getComputedStyle(grid).getPropertyValue('gap'));
+    // Function to resize a single grid item.
+    function resizeGridItem(item) {
+        const grid = galleryContainer;
+        const rowHeight = parseInt(getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+        const rowGap = parseInt(getComputedStyle(grid).getPropertyValue('gap'));
 
-        const image = item.querySelector('img');
-        if (!image) return;
+        const image = item.querySelector('img');
+        if (!image) return;
 
-        // NEW: Use the image's natural height for an accurate calculation.
-        const itemHeight = image.naturalHeight;
-        const rowSpan = Math.ceil((itemHeight + rowGap) / (rowHeight + rowGap));
-        item.style.gridRowEnd = 'span ' + rowSpan;
-    }
+        // Create a temporary, hidden image element to get the dimensions
+        const tempImage = document.createElement('img');
+        tempImage.style.visibility = 'hidden';
+        tempImage.style.position = 'absolute';
+        tempImage.src = image.src;
+        document.body.appendChild(tempImage);
 
-    // This is the part that correctly loops through all gallery items.
-    const allItems = document.querySelectorAll('.custom-lightbox-trigger');
-    allItems.forEach(item => {
-        const image = item.querySelector('img');
-        if (image) {
-            const applyResize = () => {
-                resizeGridItem(item);
-            };
-            image.addEventListener('load', applyResize);
-            if (image.complete) {
-                applyResize();
-            }
-        }
-    });
+        // This event listener will fire only when the image is fully loaded
+        tempImage.onload = function() {
+            const imageAspectRatio = tempImage.naturalHeight / tempImage.naturalWidth;
+            const columnWidth = item.getBoundingClientRect().width;
+            const calculatedHeight = columnWidth * imageAspectRatio;
+            
+            const rowSpan = Math.ceil((calculatedHeight + rowGap) / (rowHeight + rowGap));
+            
+            // Set the grid-row-end style on the item
+            item.style.gridRowEnd = 'span ' + rowSpan;
+            
+            // Clean up the temporary image element
+            document.body.removeChild(tempImage);
+        };
+        // If the image is already in the browser cache, onload might not fire,
+        // so we check and run the function immediately.
+        if (tempImage.complete) {
+            tempImage.onload();
+        }
+    }
+    
+    const allItems = galleryContainer.querySelectorAll('.custom-lightbox-trigger');
+    allItems.forEach(item => {
+        resizeGridItem(item); // Call the function directly
+    });
 
-    window.addEventListener('resize', () => {
-        allItems.forEach(resizeGridItem);
-    });
+    window.addEventListener('resize', () => {
+        allItems.forEach(resizeGridItem);
+    });
 }
 
-// --- Modal Lightbox Initialization Function ---
+
+// A function to initialize the lightbox modal.
 function initializeLightbox() {
     const modal = document.querySelector('#my-modal');
     if (!modal) {
         return;
     }
 
-    const modalImage = modal.querySelector('.modal-image');
-    const closeButton = modal.querySelector('.modal-close-btn');
-    const overlay = modal.querySelector('.modal-overlay');
-    const triggerLinks = document.querySelectorAll('.custom-lightbox-trigger');
+    // ✨ NEW: Global variables to store gallery state
+    let allGalleryItems;
+    let currentItemIndex;
 
-    const infoTrigger = document.querySelector('.modal-info-trigger');
-    const infoPanel = document.querySelector('.modal-img-info');
-    const modalTitle = document.querySelector('#modal-title');
-    const modalDate = document.querySelector('#modal-date');
-    const modalMedium = document.querySelector('#modal-medium');
-    const modalSize = document.querySelector('#modal-size');
-
-    const prevButton = modal.querySelector('.prev-btn');
-    const nextButton = modal.querySelector('.next-btn');
-    let currentImageIndex = 0;
-    let allGalleryItems = [];
-
-    function updateModalContent(index) {
-        const item = allGalleryItems[index];
-        if (!item) return;
-
+    // ✨ NEW: Function to update the modal with a new image and data
+    function updateModalContent(item) {
         const title = item.dataset.title;
         const date = item.dataset.date;
         const medium = item.dataset.medium;
         const size = item.dataset.size;
         const imageUrl = item.getAttribute('href');
 
-        modalImage.setAttribute('src', imageUrl);
-        modalTitle.textContent = title;
-        modalDate.textContent = date;
-        modalMedium.textContent = medium;
-        modalSize.textContent = size;
-
-        currentImageIndex = index;
+        $('#my-modal .modal-image').attr('src', imageUrl);
+        $('#modal-title').text(title);
+        $('#modal-date').text(date);
+        $('#modal-medium').text(medium);
+        $('#modal-size').text(size);
     }
 
-    triggerLinks.forEach((link, index) => {
-        allGalleryItems.push(link);
+    // Now, we must attach our event listeners to the body, not to the document.
+    // This is because new .custom-lightbox-trigger elements are added dynamically.
+    $('body').on('click', '.custom-lightbox-trigger', function(event) {
+        event.preventDefault();
 
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            updateModalContent(index);
-            openModal();
-        });
+        // Get all gallery items and the index of the clicked item
+        const galleryContainer = document.querySelector('.window.active .gallery-container, .mobile-app.active .gallery-container');
+        if (galleryContainer) {
+            allGalleryItems = Array.from(galleryContainer.querySelectorAll('.custom-lightbox-trigger'));
+            currentItemIndex = allGalleryItems.indexOf(this);
+        } else {
+            console.error("Gallery container not found.");
+            return;
+        }
+
+        updateModalContent(this);
+        $('#my-modal').addClass('modal-active');
     });
 
-    prevButton.addEventListener('click', () => {
-        const newIndex = (currentImageIndex - 1 + allGalleryItems.length) % allGalleryItems.length;
-        updateModalContent(newIndex);
+    // ✨ NEW: Click handler for the 'next' button
+    $('body').on('click', '.modal-nav-btn.next-btn', function() {
+        if (allGalleryItems && allGalleryItems.length > 0) {
+            currentItemIndex = (currentItemIndex + 1) % allGalleryItems.length;
+            const nextItem = allGalleryItems[currentItemIndex];
+            updateModalContent(nextItem);
+        }
     });
 
-    nextButton.addEventListener('click', () => {
-        const newIndex = (currentImageIndex + 1) % allGalleryItems.length;
-        updateModalContent(newIndex);
+    // ✨ NEW: Click handler for the 'previous' button
+    $('body').on('click', '.modal-nav-btn.prev-btn', function() {
+        if (allGalleryItems && allGalleryItems.length > 0) {
+            currentItemIndex = (currentItemIndex - 1 + allGalleryItems.length) % allGalleryItems.length;
+            const prevItem = allGalleryItems[currentItemIndex];
+            updateModalContent(prevItem);
+        }
     });
 
-    if (closeButton) closeButton.addEventListener('click', closeModal);
-    if (overlay) overlay.addEventListener('click', closeModal);
+    // The rest of the modal logic is now a standalone block.
+    // The close and info buttons should be added to the document once.
+    const modalImage = modal.querySelector('.modal-image');
+    const closeButton = modal.querySelector('.modal-close-btn');
+    const overlay = modal.querySelector('.modal-overlay');
+    const infoTrigger = document.querySelector('.modal-info-trigger');
+    const infoPanel = document.querySelector('.modal-img-info');
 
-    if (infoTrigger && infoPanel) {
-        infoTrigger.addEventListener('click', () => {
-            infoPanel.classList.toggle('is-visible');
+    function closeModal() {
+        modal.classList.remove('modal-active');
+        if (infoPanel) {
+            infoPanel.classList.remove('is-visible');
+        }
+    }
+
+    $(closeButton).on('click', closeModal);
+    $(overlay).on('click', closeModal);
+
+    if (infoTrigger) {
+        $(infoTrigger).on('click', () => {
+            $(infoPanel).toggleClass('is-visible');
         });
     }
 
     document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
+        if (event.key === 'Escape' && modal.classList.contains('modal-active')) {
             closeModal();
         }
     });
-
-    // --- NEW: Use ResizeObserver to handle container size changes ---
-    const galleryContainer = document.querySelector('.gallery-container');
-    const containerBreakpoint = 576; // Match your CSS breakpoint
-
-    const containerObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            const containerWidth = entry.contentRect.width;
-            if (containerWidth <= containerBreakpoint) {
-                // Attach the click handler for small container sizes
-                modal.addEventListener('click', toggleMobileControls);
-            } else {
-                // Remove the click handler for large container sizes
-                modal.removeEventListener('click', toggleMobileControls);
-                // Ensure controls are visible on large containers
-                modal.classList.remove('controls-visible');
-            }
-        }
-    });
-
-    // This observer will automatically start watching for resizes
-    if (galleryContainer) {
-        containerObserver.observe(galleryContainer);
-    }
-    
-    // The event handler for toggling controls on a click
-    function toggleMobileControls(event) {
-        // Only toggle if the target is NOT a button or a navigation element
-        if (!event.target.closest('.modal-buttons, .modal-nav-btn, .modal-img-info')) {
-            modal.classList.toggle('controls-visible');
-        }
-    }
 }
