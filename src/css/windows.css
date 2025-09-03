@@ -1,4 +1,4 @@
-.window {
+.window.general-window {
     position: absolute;
 	/* min-width: 250px; */
     min-height: 200px;
