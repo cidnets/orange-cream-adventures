@@ -1,3 +1,5 @@
+console.log("windows.js has loaded");
+
 $(document).ready(function() {
     // --- Global Variables ---
     let zIndexCounter = 1000;
@@ -27,7 +29,7 @@ $(document).ready(function() {
         return 'window-' + btoa(normalizedUrl).replace(/=/g, '');
     }
 
-    // 🌟 NEW: Helper function to sanitize a string for use as a CSS class name.
+    // Helper function to sanitize a string for use as a CSS class name.
     function sanitizeForClass(input) {
         if (!input) {
             return '';
@@ -66,99 +68,70 @@ $(document).ready(function() {
 
     // --- Core Window/App Creation and Content Loading Functions ---
 
-    // This is the main function that creates a new window or a mobile app view.
+    // This is the main function that creates a new window. The mobile-specific logic has been removed.
     function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
         const isMobile = isMobileDevice();
-        let windowHtml = '';
-        
-        // 🌟 NEW: Create a unique class name based on the window title.
         const uniqueClassName = `window-${sanitizeForClass(title)}`;
         
-        // Determine the HTML structure based on the device.
-        if (isMobile) {
-            windowHtml = `
-                <div class="mobile-app ${uniqueClassName}" id="${windowId}" data-window-state="open">
-                    <div class="mobile-header">
-                        <button class="mobile-back-button">Back</button>
-                        <span class="mobile-app-title">${title}</span>
+        // This is now the only HTML structure created.
+        const windowHtml = `
+            <div class="window ${type}-window ${uniqueClassName}" id="${windowId}" data-window-state="open" data-maximized="false">
+                <div class="window-header">
+                    <img src="${windowIcon}" class="window-icon">
+                    <span class="window-title">${title}</span>
+                    <div class="window-controls">
+                        <button class="window-minimize" title="Minimize">_</button>
+                        <button class="window-maximize" title="Maximize">◻</button>
+                        <button class="window-close" title="Close">&times;</button>
                     </div>
-                    <div class="mobile-app-content"><p>Loading...</p></div>
-                </div>`;
-        } else {
-            windowHtml = `
-                <div class="window ${type}-window ${uniqueClassName}" id="${windowId}" data-window-state="open" data-maximized="false">
-                    <div class="window-header">
-                        <img src="${windowIcon}" class="window-icon">
-                        <span class="window-title">${title}</span>
-                        <div class="window-controls">
-                            <button class="window-minimize" title="Minimize">_</button>
-                            <button class="window-maximize" title="Maximize">◻</button>
-                            <button class="window-close" title="Close">&times;</button>
-                        </div>
-                    </div>
-                    <div class="window-body">
-                        <div class="window-content"><p>Loading...</p></div>
-                    </div>
-                </div>`;
-        }
+                </div>
+                <div class="window-body">
+                    <div class="window-content"><p>Loading...</p></div>
+                </div>
+            </div>`;
 
         const $newWindow = $(windowHtml);
         
-        // Append the new window/app to the correct container.
-        if (isMobile) {
-            // Hide the current app if one exists before pushing a new one.
-            if (appStack.length > 0) {
-                $('#' + appStack[appStack.length - 1]).hide();
-            }
-            $newWindow.appendTo('#mobile-container');
-            appStack.push(windowId);
-            $newWindow.show(); // Ensure the newly created app is visible
-        } else {
-            $newWindow.appendTo('#desktop');
-        }
+        // Append the new window to the desktop container only.
+        $newWindow.appendTo('#desktop');
 
         // Initialize jQuery UI behaviors only for desktop windows.
-        if (!isMobile) {
-            $newWindow.draggable({
-                handle: ".window-header",
-                containment: "#desktop",
-                start: function() { setActiveWindow($(this)); }
-            });
-            $newWindow.resizable({
-                minHeight: 150,
-                minWidth: 250,
-                handles: "n, e, s, w, ne, se, sw, nw",
-                containment: "#desktop",
-                start: function() { setActiveWindow($(this)); }
-            });
-        }
+        $newWindow.draggable({
+            handle: ".window-header",
+            containment: "#desktop",
+            start: function() { setActiveWindow($(this)); }
+        });
+        $newWindow.resizable({
+            minHeight: 150,
+            minWidth: 250,
+            handles: "n, e, s, w, ne, se, sw, nw",
+            containment: "#desktop",
+            start: function() { setActiveWindow($(this)); }
+        });
         
         // This is where we ensure the taskbar button is created with the correct title.
-        if (!isMobile) {
-            const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
-            $(`.navbar-button[data-window-id="${windowId}"]`).remove(); // Prevent duplicates.
-            $(navbarButtonHtml).insertAfter('#navbar .start-divider');
-        }
+        const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
+        $(`.navbar-button[data-window-id="${windowId}"]`).remove(); // Prevent duplicates.
+        $(navbarButtonHtml).insertAfter('#navbar .start-divider');
         
         // Now, load the content and handle positioning.
         loadContentAndPositionWindow($newWindow, url, title, true);
 
         // Set the active window on mousedown.
         $newWindow.on('mousedown', function() {
-            if (!isMobile) {
-                setActiveWindow($(this));
-            }
+            setActiveWindow($(this));
         });
     }
     
     // Handles content loading and window positioning.
     async function loadContentAndPositionWindow($window, url, title, isInitialLoad = true) {
-        const $contentContainer = $window.hasClass('mobile-app') ? $window.find('.mobile-app-content') : $window.find('.window-content');
+        // The content container is always .window-content now.
+        const $contentContainer = $window.find('.window-content');
         
         $contentContainer.html('<p>Loading...</p>');
 
         if (title) {
-            $window.find('.window-title, .mobile-app-title').text(title);
+            $window.find('.window-title').text(title);
             const windowId = $window.attr('id');
             $(`.navbar-button[data-window-id="${windowId}"]`).find('.window-title').text(title);
         }
@@ -183,21 +156,15 @@ $(document).ready(function() {
                     await window.loadPagefindScript();
                     window.initializePagefindUI();
                 }
-            // From windows.js, inside the loadContentAndPositionWindow function
-			} else if ($(this).find('.gallery-container').length) {
-				if (typeof initializeGalleryGrid === 'function' && typeof initializeLightbox === 'function') {
-					initializeGalleryGrid();
-					initializeLightbox();
-				}
-			}
-
-            // Apply dynamic sizing and positioning for desktop windows only.
-            if (!isMobileDevice()) {
-                applyDynamicSizingAndPositioning($window, isInitialLoad);
-            } else {
-                // For mobile, just set the opacity and active state.
-                $window.css('opacity', 1);
+            } else if ($(this).find('.gallery-container').length) {
+                if (typeof initializeGalleryGrid === 'function' && typeof initializeLightbox === 'function') {
+                    initializeGalleryGrid();
+                    initializeLightbox();
+                }
             }
+
+            // Apply dynamic sizing and positioning for all windows, regardless of screen size.
+            applyDynamicSizingAndPositioning($window, isInitialLoad);
         });
     }
 
@@ -325,6 +292,7 @@ $(document).ready(function() {
     // --- Event Handlers ---
     // App launcher click handler.
     $('body').on('click', '.app-launcher', function(e) {
+        console.log("App launcher clicked!", this);
         e.preventDefault();
         const $this = $(this);
         const url = $this.data('url');
@@ -333,13 +301,12 @@ $(document).ready(function() {
         const $existingWindow = $('#' + windowId);
 
         if ($existingWindow.length) {
-            if (isMobileDevice()) {
-                $('#' + appStack[appStack.length - 1]).hide();
-                $existingWindow.show();
-            }
+            console.log("Window already exists, activating it.");
             setActiveWindow($existingWindow);
         } else {
+            console.log("Creating a new window...");
             createWindow(windowId, title, url);
+            console.log("Attempted to create window with ID:", windowId);
         }
     });
 
@@ -364,16 +331,14 @@ $(document).ready(function() {
         const isPostLink = href.startsWith('/posts/');
         const blogPostWindowId = 'window-blog-post';
         
-        // 🌟 UPDATED: Pass the window title to createWindow
+        // Pass the window title to createWindow
         const finalWindowTitle = $this.data('title') || $this.text() || 'New Window';
 
         if (isPostLink) {
             const $existingBlogPostWindow = $('#' + blogPostWindowId);
             if ($existingBlogPostWindow.length) {
                 loadContentAndPositionWindow($existingBlogPostWindow, href, "Blog Post", false);
-                if (!isMobileDevice()) {
-                    setActiveWindow($existingBlogPostWindow);
-                }
+                setActiveWindow($existingBlogPostWindow);
             } else {
                 createWindow(blogPostWindowId, "Blog Post", href, 'post');
             }
@@ -388,10 +353,6 @@ $(document).ready(function() {
         if (windowTarget === 'current' && isWindowActive) {
             loadContentAndPositionWindow($activeWindow, href, finalWindowTitle, false);
         } else if ($existingWindow.length) {
-            if (isMobileDevice()) {
-                $('#' + appStack[appStack.length - 1]).hide();
-                $existingWindow.show();
-            }
             setActiveWindow($existingWindow);
         } else {
             createWindow(windowId, finalWindowTitle, href);
@@ -399,99 +360,50 @@ $(document).ready(function() {
     });
 
     // Window control buttons and navbar button click handlers.
-	$('body').on('click', '.window-close, .window-minimize, .window-maximize, .mobile-back-button, .navbar-button', function() {
-		const $this = $(this);
-		if ($this.hasClass('window-close')) {
-			const $window = $(this).closest('.window');
-			const windowId = $window.attr('id');
-			$(`.navbar-button[data-window-id="${windowId}"]`).remove();
-			$window.remove();
-		} else if ($this.hasClass('window-minimize')) {
-			const $window = $(this).closest('.window');
-			const windowId = $window.attr('id');
-			$window.addClass('minimized');
-			$window.removeClass('active');
-			$window.attr('data-window-state', 'minimized');
-			$(`.navbar-button[data-window-id="${windowId}"]`).addClass('minimized').removeClass('active');
-		} else if ($this.hasClass('window-maximize')) {
-			const $window = $(this).closest('.window');
-			maximizeWindow($window.attr('id'));
-		} else if ($this.hasClass('mobile-back-button')) {
-			if (appStack.length > 1) {
-				const currentAppId = appStack.pop();
-				$('#' + currentAppId).remove();
-				const prevAppId = appStack[appStack.length - 1];
-				$('#' + prevAppId).show();
-			} else {
-				closeAllMobileApps();
-			}
-		} else if ($this.hasClass('navbar-button')) {
-			const windowId = $(this).data('window-id');
-			const $targetWindow = $('#' + windowId);
-			if ($targetWindow.length) {
-				if ($targetWindow.attr('data-window-state') === 'minimized') {
-					setActiveWindow($targetWindow);
-				} else if ($targetWindow.hasClass('active')) {
-					$targetWindow.addClass('minimized').removeClass('active').attr('data-window-state', 'minimized');
-					$(this).removeClass('active').addClass('minimized');
-				} else {
-					setActiveWindow($targetWindow);
-				}
-			}
-		}
-	});
-	
-	/*
-    $('body').on('click', '.window-close', function() {
-        const $window = $(this).closest('.window');
-        const windowId = $window.attr('id');
-        $(`.navbar-button[data-window-id="${windowId}"]`).remove();
-        $window.remove();
-    });
-
-    $('body').on('click', '.window-minimize', function() {
-        const $window = $(this).closest('.window');
-        const windowId = $window.attr('id');
-        $window.addClass('minimized');
-        $window.removeClass('active');
-        $window.attr('data-window-state', 'minimized');
-        $(`.navbar-button[data-window-id="${windowId}"]`).addClass('minimized').removeClass('active');
-    });
-
-    $('body').on('click', '.window-maximize', function() {
-        const $window = $(this).closest('.window');
-        maximizeWindow($window.attr('id'));
-    });
-    
-    // NEW: Mobile back button handler
-    $('body').on('click', '.mobile-back-button', function() {
-        if (appStack.length > 1) {
-            const currentAppId = appStack.pop();
-            $('#' + currentAppId).remove();
-            const prevAppId = appStack[appStack.length - 1];
-            $('#' + prevAppId).show();
-        } else {
-            closeAllMobileApps();
-        }
-    });
-
-    $('body').on('click', '.navbar-button', function() {
-        const windowId = $(this).data('window-id');
-        const $targetWindow = $('#' + windowId);
-        if ($targetWindow.length) {
-            if ($targetWindow.attr('data-window-state') === 'minimized') {
-                setActiveWindow($targetWindow);
-            } else if ($targetWindow.hasClass('active')) {
-                $targetWindow.addClass('minimized').removeClass('active').attr('data-window-state', 'minimized');
-                $(this).removeClass('active').addClass('minimized');
+    $('body').on('click', '.window-close, .window-minimize, .window-maximize, .mobile-back-button, .navbar-button', function() {
+        const $this = $(this);
+        if ($this.hasClass('window-close')) {
+            const $window = $(this).closest('.window');
+            const windowId = $window.attr('id');
+            $(`.navbar-button[data-window-id="${windowId}"]`).remove();
+            $window.remove();
+        } else if ($this.hasClass('window-minimize')) {
+            const $window = $(this).closest('.window');
+            const windowId = $window.attr('id');
+            $window.addClass('minimized');
+            $window.removeClass('active');
+            $window.attr('data-window-state', 'minimized');
+            $(`.navbar-button[data-window-id="${windowId}"]`).addClass('minimized').removeClass('active');
+        } else if ($this.hasClass('window-maximize')) {
+            const $window = $(this).closest('.window');
+            maximizeWindow($window.attr('id'));
+        } else if ($this.hasClass('mobile-back-button')) {
+            // This is no longer necessary as we are not using the appStack for mobile.
+            // This entire block can be removed.
+            if (appStack.length > 1) {
+                const currentAppId = appStack.pop();
+                $('#' + currentAppId).remove();
+                const prevAppId = appStack[appStack.length - 1];
+                $('#' + prevAppId).show();
             } else {
-                setActiveWindow($targetWindow);
+                closeAllMobileApps();
+            }
+        } else if ($this.hasClass('navbar-button')) {
+            const windowId = $(this).data('window-id');
+            const $targetWindow = $('#' + windowId);
+            if ($targetWindow.length) {
+                if ($targetWindow.attr('data-window-state') === 'minimized') {
+                    setActiveWindow($targetWindow);
+                } else if ($targetWindow.hasClass('active')) {
+                    $targetWindow.addClass('minimized').removeClass('active').attr('data-window-state', 'minimized');
+                    $(this).removeClass('active').addClass('minimized');
+                } else {
+                    setActiveWindow($targetWindow);
+                }
             }
         }
     });
-	
-	*/
-
+    
     // --- Context Menu and Close All Windows Functions ---
     // Your existing context menu logic is preserved here.
     function closeWindowById(windowId) {
@@ -650,7 +562,9 @@ $(document).ready(function() {
     // --- Initial Page Load & Dynamic Sizing/Positioning ---
     // Start by setting the desktop height and creating the welcome window.
     setDesktopHeight();
-    createWindow('window-welcome', 'Welcome!', '/welcome/');
+    if (!isMobileDevice()) {
+        createWindow('window-welcome', 'Welcome!', '/welcome/');
+    }
 
     // Event listeners for window resizing and orientation changes.
     $(window).on('resize', function() {
@@ -660,6 +574,7 @@ $(document).ready(function() {
             $('.window').each(function() {
                 const $window = $(this);
                 if (isMobileDevice()) {
+                    // This logic is no longer necessary as all windows are now appended to #desktop
                     if ($window.data('ui-draggable')) { $window.draggable('destroy'); }
                     if ($window.data('ui-resizable')) { $window.resizable('destroy'); }
                 } else {
