@@ -7,7 +7,7 @@
 	bottom: 0;
 	height: var(--navbar-height);
 	width: 100%;
-	padding: 0.5rem 1rem;
+	padding: 0.35rem 1rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -33,21 +33,28 @@
 }
 .hamburger {
 	display: flex;
-	align-items: middle;
 	justify-content: center;
 	align-content: center;
 	width: fit-content;
-	margin-right: 2rem;
 	flex-shrink: 0;
 	gap: 3px;
 }
 .hamburger, .date-time, .navbar-button {
+	height: 100%;
 	cursor: pointer;
 	border: var(--border);
 	padding: 0.3rem 0.5rem;
 }
 .hamburger, .navbar-button {
 	border-color: var(--border-outset);
+}
+
+.start-divider {
+	height: 70%;
+	margin: auto 1rem;
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--border-inset);
 }
 
 .nav-links {
@@ -107,14 +114,24 @@
 }
 
 .navbar a:hover,
-.nav-links a:not(:first-child):not(:last-child):hover,
 .navbar label:hover,
+.date-time:hover,
+.date-time:hover #clock {
+	background-color: var(--primary-2);
+}
+.navbar a:hover,
+.navbar label:hover,
+.nav-links a:not(:first-child):not(:last-child):hover,
 .nav-links a:hover,
 .nav-links button:hover {
-	background-color: var(--accent-1);
 	border-width: 2px;
 	border-style: solid;
 	border-color: var(--border-inset);
+}
+.nav-links a:not(:first-child):not(:last-child):hover,
+.nav-links a:hover,
+.nav-links button:hover {
+	background-color: var(--accent-1);
 }
 .navbar a:last-child:hover {
 	border-width: 2px;
@@ -126,15 +143,12 @@
 	margin-left: auto;
 	flex-shrink: 0;
 	width: fit-content;
-	background: var(--fill);
+	background: var(--background);
 	overflow: hidden;
 	user-select: none;
 	border-color: var(--border-inset);
 }
-.date-time:hover,
-.date-time:hover #clock {
-	background-color: var(--accent-1);
-}
+
 #date {
 	display: inline-block;
 }

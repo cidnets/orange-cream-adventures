@@ -1,0 +1,23 @@
+DIG
+{
+    "title": "",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/digital/thumb/",
+    "fullsize_url": "/assets/art/digital/"
+  },
+
+
+
+TRAD
+{
+    "title": "",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/",
+    "fullsize_url": "/assets/art/traditional/"
+  },
+
+
+
+
+
+*REMEMBER TO REMOVE COMMA FOR LAST ITEM IN ARRAY

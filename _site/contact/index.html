@@ -50,6 +50,11 @@
 			<span>Search</span>
 		</a>
 		
+		<a href="#" class="app-launcher app-icon" data-title="Portfolio" data-url="/portfolio/" data-id="portfolio" data-window-target="new">
+			<div class="icon-visual">🎨</div>
+			<span>Portfolio</span>
+		</a>
+		
 	</div>
 	
     
@@ -66,6 +71,8 @@
 	<label for="navbar-toggle" class="hamburger">
 		<img src="/assets/heart-start.png">Start
 	</label>
+	
+	<div class="start-divider"></div>
   
 	<div class="nav-links">
 		<button id="close-all-windows"><span>×</span> Close All Windows</button>
@@ -95,8 +102,13 @@
   </footer>
    
 	<div id="context-menu">
-		<div class="context-menu-item" id="context-menu-minimize">Minimize</div>
+		<div class="context-menu-item" id="context-menu-copy">Copy</div>
+		<div class="context-menu-item" id="context-menu-paste">Paste</div>
+		<div class="context-menu-divider" id="copy-paste-divider"></div>
+		<div class="context-menu-item" id="context-menu-minimize">Hide</div>
+		<div class="context-menu-item" id="context-menu-maximize">Maximize</div>
 		<div class="context-menu-item" id="context-menu-close">Close</div>
+		<div class="context-menu-divider" id="min-max-divider"></div>
 		<div class="context-menu-item" id="context-menu-close-all">Close All Windows</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -107,5 +119,7 @@
 
 <script src="/js/script.js" defer></script>
 <script src="/js/windows.js" defer></script>
+
+<script src="/js/gallery.js" defer></script>
   </body>
 </html>
