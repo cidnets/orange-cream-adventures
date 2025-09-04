@@ -7,7 +7,6 @@ $(document).ready(function() {
     let resizeTimer;
     let lastSelectedText = '';
     let contextMenuTarget = null;
-    let appStack = []; // A stack for managing mobile app navigation.
 
     // --- Helper Functions ---
     // A consolidated helper to check for mobile devices based on screen size.
@@ -15,14 +14,6 @@ $(document).ready(function() {
         return $(window).width() <= breakpoint;
     }
     
-    // Helper to close all mobile apps and reset to the home screen.
-    function closeAllMobileApps() {
-        $('.mobile-app').remove();
-        appStack = [];
-        // You can add logic here to show your mobile home screen or app launcher.
-        console.log("All mobile apps closed. Returning to home screen.");
-    }
-
     // A universal ID generation function for windows.
     function getUrlId(url) {
         const normalizedUrl = url.split('#')[0].replace(/\/$/, '');
@@ -39,7 +30,6 @@ $(document).ready(function() {
     }
 
     // --- Pagefind Helper Functions ---
-    // These functions were already in your code, they are just placed here for organization.
     function loadPagefindScript() {
         if (!document.querySelector('script[src="/pagefind/pagefind-ui.js"]')) {
             const script = document.createElement('script');
@@ -67,13 +57,10 @@ $(document).ready(function() {
     }
 
     // --- Core Window/App Creation and Content Loading Functions ---
-
-    // This is the main function that creates a new window. The mobile-specific logic has been removed.
+    // This is now the only function that creates a new window.
     function createWindow(windowId, title, url, type = 'general', windowIcon = '/assets/heart-basic.png') {
-        const isMobile = isMobileDevice();
         const uniqueClassName = `window-${sanitizeForClass(title)}`;
         
-        // This is now the only HTML structure created.
         const windowHtml = `
             <div class="window ${type}-window ${uniqueClassName}" id="${windowId}" data-window-state="open" data-maximized="false">
                 <div class="window-header">
@@ -92,10 +79,9 @@ $(document).ready(function() {
 
         const $newWindow = $(windowHtml);
         
-        // Append the new window to the desktop container only.
         $newWindow.appendTo('#desktop');
 
-        // Initialize jQuery UI behaviors only for desktop windows.
+        // Initialize jQuery UI behaviors.
         $newWindow.draggable({
             handle: ".window-header",
             containment: "#desktop",
@@ -109,15 +95,12 @@ $(document).ready(function() {
             start: function() { setActiveWindow($(this)); }
         });
         
-        // This is where we ensure the taskbar button is created with the correct title.
         const navbarButtonHtml = `<button class="navbar-button" data-window-id="${windowId}"><img src="${windowIcon}" class="window-icon"><span class="window-title">${title}</span></button>`;
-        $(`.navbar-button[data-window-id="${windowId}"]`).remove(); // Prevent duplicates.
+        $(`.navbar-button[data-window-id="${windowId}"]`).remove();
         $(navbarButtonHtml).insertAfter('#navbar .start-divider');
         
-        // Now, load the content and handle positioning.
         loadContentAndPositionWindow($newWindow, url, title, true);
 
-        // Set the active window on mousedown.
         $newWindow.on('mousedown', function() {
             setActiveWindow($(this));
         });
@@ -125,7 +108,6 @@ $(document).ready(function() {
     
     // Handles content loading and window positioning.
     async function loadContentAndPositionWindow($window, url, title, isInitialLoad = true) {
-        // The content container is always .window-content now.
         const $contentContainer = $window.find('.window-content');
         
         $contentContainer.html('<p>Loading...</p>');
@@ -136,7 +118,6 @@ $(document).ready(function() {
             $(`.navbar-button[data-window-id="${windowId}"]`).find('.window-title').text(title);
         }
         
-        // Load the content from the specified URL.
         $contentContainer.load(url + ' #page-content', async function(response, status, xhr) {
             if (status === "error") {
                 $(this).html(`<div class="error-content">
@@ -149,8 +130,6 @@ $(document).ready(function() {
                     loadContentAndPositionWindow($window, reloadUrl, reloadTitle, false);
                 });
             }
-
-            // Handle special app initializations.
             if (url === '/search/') {
                 if (typeof window.loadPagefindScript === 'function' && typeof window.initializePagefindUI === 'function') {
                     await window.loadPagefindScript();
@@ -162,20 +141,22 @@ $(document).ready(function() {
                     initializeLightbox();
                 }
             }
-
-            // Apply dynamic sizing and positioning for all windows, regardless of screen size.
             applyDynamicSizingAndPositioning($window, isInitialLoad);
         });
     }
 
     // Handles the dynamic sizing and positioning of windows on the desktop.
     function applyDynamicSizingAndPositioning($window, isInitialLoad) {
-        if (!isInitialLoad) {
+        if (isMobileDevice()) {
+			$window.css('opacity', 1);
+			setActiveWindow($window);
+			return;
+		}
+		if (!isInitialLoad) {
             $window.css('opacity', 1);
             setActiveWindow($window);
             return;
         }
-
         const minDynamicWidth = 250;
         const minDynamicHeight = 150;
         const desktopWidth = $('#desktop').width();
@@ -183,28 +164,22 @@ $(document).ready(function() {
         const padding = 20;
         const maxDesktopFitWidth = desktopWidth - (padding * 2);
         const maxDesktopFitHeight = desktopHeight - (padding * 2);
-
         const $tempContainer = $('<div></div>')
             .css({ 'position': 'absolute', 'visibility': 'hidden', 'height': 'auto' })
             .appendTo('body');
-        
         const $clonedContent = $window.find('.window-content').clone().appendTo($tempContainer);
         $tempContainer.css('width', Math.min(desktopWidth / 2, 700) + 'px');
-
         const naturalContentWidth = $tempContainer.outerWidth();
         const naturalContentHeight = $tempContainer.outerHeight();
         $tempContainer.remove();
-
         let finalCalculatedWidth = Math.min(Math.max(naturalContentWidth, minDynamicWidth), maxDesktopFitWidth);
         let finalCalculatedHeight = Math.min(Math.max(naturalContentHeight, minDynamicHeight), maxDesktopFitHeight);
-        
         if ($window.data('ui-resizable')) {
             const resizableMinHeight = $window.resizable("option", "minHeight");
             const resizableMinWidth = $window.resizable("option", "minWidth");
             finalCalculatedWidth = Math.max(finalCalculatedWidth, resizableMinWidth);
             finalCalculatedHeight = Math.max(finalCalculatedHeight, resizableMinHeight);
         }
-        
         $window.css('width', finalCalculatedWidth + 'px').css('height', finalCalculatedHeight + 'px');
         const centerX = (desktopWidth / 2) - (finalCalculatedWidth / 2);
         const centerY = (desktopHeight / 2) - (finalCalculatedHeight / 2);
@@ -331,7 +306,6 @@ $(document).ready(function() {
         const isPostLink = href.startsWith('/posts/');
         const blogPostWindowId = 'window-blog-post';
         
-        // Pass the window title to createWindow
         const finalWindowTitle = $this.data('title') || $this.text() || 'New Window';
 
         if (isPostLink) {
@@ -378,16 +352,7 @@ $(document).ready(function() {
             const $window = $(this).closest('.window');
             maximizeWindow($window.attr('id'));
         } else if ($this.hasClass('mobile-back-button')) {
-            // This is no longer necessary as we are not using the appStack for mobile.
-            // This entire block can be removed.
-            if (appStack.length > 1) {
-                const currentAppId = appStack.pop();
-                $('#' + currentAppId).remove();
-                const prevAppId = appStack[appStack.length - 1];
-                $('#' + prevAppId).show();
-            } else {
-                closeAllMobileApps();
-            }
+             console.error("The mobile-back-button handler is not needed in this version of the script.");
         } else if ($this.hasClass('navbar-button')) {
             const windowId = $(this).data('window-id');
             const $targetWindow = $('#' + windowId);
@@ -405,7 +370,6 @@ $(document).ready(function() {
     });
     
     // --- Context Menu and Close All Windows Functions ---
-    // Your existing context menu logic is preserved here.
     function closeWindowById(windowId) {
         $('#' + windowId).remove();
         $(`.navbar-button[data-window-id="${windowId}"]`).remove();
@@ -424,20 +388,16 @@ $(document).ready(function() {
         $('.navbar-button[data-window-id]').remove();
     }
 
-    // Right-click event listener for the context menu
     $('body').on('contextmenu', function(e) {
         e.preventDefault();
         const $target = $(e.target);
         const menu = $('#context-menu');
-
         $('#context-menu-copy, #context-menu-paste, #copy-paste-divider, #context-menu-minimize, #context-menu-maximize, #min-max-divider, #context-menu-close, #context-menu-close-all').hide();
-
         const isInsideWindow = $target.closest('.window').length > 0;
         const isDesktopBackground = $target.closest('#desktop').length > 0;
         const hasSelection = window.getSelection().toString().length > 0;
         const isEditable = $target.is('input, textarea') || $target.is('[contenteditable="true"]');
         let windowId = null;
-
         if (isInsideWindow) {
             windowId = $target.closest('.window').attr('id');
             menu.data('targetWindowId', windowId);
@@ -457,12 +417,10 @@ $(document).ready(function() {
             menu.hide();
             return;
         }
-
         if (hasSelection) {
             lastSelectedText = window.getSelection().toString();
             $('#context-menu-copy, #copy-paste-divider').show();
         }
-        
         if (isEditable) {
             contextMenuTarget = e.target;
             $('#context-menu-paste, #copy-paste-divider').show();
@@ -574,7 +532,6 @@ $(document).ready(function() {
             $('.window').each(function() {
                 const $window = $(this);
                 if (isMobileDevice()) {
-                    // This logic is no longer necessary as all windows are now appended to #desktop
                     if ($window.data('ui-draggable')) { $window.draggable('destroy'); }
                     if ($window.data('ui-resizable')) { $window.resizable('destroy'); }
                 } else {
