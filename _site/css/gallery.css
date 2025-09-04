@@ -165,3 +165,11 @@ a.custom-lightbox-trigger {
 .modal-img-info.is-visible {
 	display: block;
 }
+
+@container (max-width: 576px) {
+	.custom-lightbox-trigger {
+		flex-shrink: 1;
+		min-width: 1px;
+		max-width: 250px;
+	}
+}
