@@ -392,7 +392,7 @@ $(document).ready(function() {
         e.preventDefault();
         const $target = $(e.target);
         const menu = $('#context-menu');
-        $('#context-menu-copy, #context-menu-paste, #copy-paste-divider, #context-menu-minimize, #context-menu-maximize, #min-max-divider, #context-menu-close, #context-menu-close-all').hide();
+        $('#context-menu-copy, #context-menu-paste, #copy-paste-divider, #context-menu-minimize, #context-menu-maximize, #min-max-divider, #context-menu-close').hide();
         const isInsideWindow = $target.closest('.window').length > 0;
         const isDesktopBackground = $target.closest('#desktop').length > 0;
         const hasSelection = window.getSelection().toString().length > 0;

@@ -61,6 +61,40 @@ function initializeLightbox() {
     if (!modal) {
         return;
     }
+	
+	const containerBreakpoint = 576;
+	
+	// Use a flag to track if the click handler has been added
+    let isClickHandlerAttached = false;
+	
+	// The event handler for toggling controls on a click
+    function toggleMobileControls(event) {
+        // We only want to toggle if the user clicks the image or the overlay, not the buttons themselves.
+        if (!event.target.closest('.modal-buttons, .modal-nav-btn, .modal-img-info, .modal-close-btn')) {
+            modal.classList.toggle('controls-visible');
+        }
+    }
+	
+	const containerObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            const containerWidth = entry.contentRect.width;
+            if (containerWidth <= containerBreakpoint) {
+                // Attach the click handler for small container sizes if it's not already attached
+                if (!isClickHandlerAttached) {
+                    modal.addEventListener('click', toggleMobileControls);
+                    isClickHandlerAttached = true;
+                }
+            } else {
+                // Remove the click handler for large container sizes if it's attached
+                if (isClickHandlerAttached) {
+                    modal.removeEventListener('click', toggleMobileControls);
+                    isClickHandlerAttached = false;
+                    // Ensure controls are visible on large containers, just in case
+                    modal.classList.remove('controls-visible');
+                }
+            }
+        }
+    });
 
     // ✨ NEW: Global variables to store gallery state
     let allGalleryItems;
@@ -147,4 +181,10 @@ function initializeLightbox() {
             closeModal();
         }
     });
+	
+	// This observer will automatically start watching for resizes
+    const galleryContainer = document.querySelector('.gallery-container');
+    if (galleryContainer) {
+        containerObserver.observe(galleryContainer);
+    }
 }

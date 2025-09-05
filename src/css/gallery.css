@@ -172,4 +172,24 @@ a.custom-lightbox-trigger {
 		min-width: 1px;
 		max-width: 250px;
 	}
+	
+	.modal-container:not(.controls-visible) .modal-nav-btn {
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
+	}
+	.modal-container.controls-visible .modal-nav-btn {
+		opacity: 1;
+	}
+	.modal-container:not(.controls-visible) .modal-close-btn,
+	.modal-container:not(.controls-visible) .modal-buttons {
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
+	}
+	.modal-container.controls-visible .modal-close-btn,
+	.modal-container.controls-visible .modal-buttons {
+		opacity: 1;
+	}
+	.window button.modal-nav-btn:hover {
+		opacity: 1;
+	}
 }
