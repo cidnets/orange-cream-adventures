@@ -40,7 +40,7 @@ a.custom-lightbox-trigger {
 }
 
 /* --- The Caption --- */
-.gallery-caption {
+.gallery-item figcaption.gallery-caption {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -91,24 +91,18 @@ a.custom-lightbox-trigger {
 
 /* The box that holds the image */
 .modal-content {
-    position: relative;
-	display: flex;
-    z-index: 1001;
-    background-color: #fff;
-    padding: 0.5rem;
-    border-radius: 8px;
-    max-width: 90%;
-    max-height: 90%;
-	height: auto;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* The image inside the modal */
 .modal-image {
+	position: relative;
     display: block;
-    max-width: 100%;
-    max-height: calc(90vh - 2rem);
+    max-width: 90%;
+	max-height: 90%;
     object-fit: contain;
+	border: 0.5rem solid white;
+	border-radius: 8px;
+	z-index: 1001;
 }
 
 /* Modal navigation buttons */
@@ -139,7 +133,7 @@ a.custom-lightbox-trigger {
 .modal-nav-btn div {
 	padding: 1rem 0.5rem;
 	border: 2px solid var(--text);
-	background-color: var(--accent-5);
+	background-color: var(--blue);
 	aspect-ratio: 1/1;
 }
 .modal-nav-btn.prev-btn {
@@ -153,6 +147,9 @@ a.custom-lightbox-trigger {
 	transition: 0.3s;
 	background-color: transparent;
 	border: none;
+}
+.window button.modal-nav-btn:hover div {
+	background-color: var(--accent-5);
 }
 .modal-img-info {
 	display: none;
