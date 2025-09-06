@@ -34,7 +34,7 @@ a.custom-lightbox-trigger {
 /* --- The Image --- */
 .gallery-item img {
     width: 100%;
-    height: auto; /* Maintains the image's aspect ratio */
+    height: auto;
     object-fit: cover;
     display: block;
 }
@@ -168,6 +168,9 @@ a.custom-lightbox-trigger {
 		flex-shrink: 1;
 		min-width: 1px;
 		max-width: 250px;
+	}
+	.gallery-item img {
+		object-fit: contain;
 	}
 	
 	.modal-container:not(.controls-visible) .modal-nav-btn {
