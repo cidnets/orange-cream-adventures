@@ -217,6 +217,22 @@
 	.navbar {
 		display: none;
 	}
+	.mobile-navbar,
+	.mobile-navbar-button,
+	.mobile-navbar-button,
+	.mobile-status-bar,
+	.app-drawer-container,
+	.app-drawer-container.visible,
+	#open-apps-list,
+	.app-drawer-button,
+	.app-drawer-button,
+	#drawer-controls {
+		display: block;
+	}
+	.mobile-navbar,
+	.mobile-status-bar {
+		z-index: 9999;
+	}
 	.mobile-navbar {
 		display: flex;
 		position: fixed;
@@ -228,7 +244,6 @@
 		color: var(--text);
 		justify-content: space-around;
 		align-items: center;
-		z-index: 9999;
 	}
 	.mobile-navbar-button {
 		background: white;
@@ -305,7 +320,7 @@
 		margin: 0;
 		padding: 0;
 		width: fit-content;
-		background: var(--background);
+		background: transparent;
 		overflow: hidden;
 		user-select: none;
 		border: none;

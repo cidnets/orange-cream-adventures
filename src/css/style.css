@@ -146,6 +146,6 @@ body {
 		margin-top: 1rem;
 	}
 	#desktop {
-		top: var(--statusbar-height);
+		height: 100%;
 	}
 }

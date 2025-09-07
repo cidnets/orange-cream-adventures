@@ -257,6 +257,8 @@
 @media screen and (max-width: 576px) {
 	.app-drawer {
 		position: relative;
+		top: var(--statusbar-height);
+		max-height: var(--desktop-height);
 		height: auto;
 		flex-direction: row;
 		justify-content: space-between;
@@ -287,6 +289,19 @@
 	.window.general-window	{
 		border: none;
 		box-shadow: none;
+	}
+	.window,
+	.window.active,
+	.window.general-window {
+		height: 100%;
+	}
+	.window-body,
+	.window .window-body,
+	.window.active .window-body {
+		position: absolute;
+		height: var(--desktop-height);
+		top: var(--statusbar-height);
+		bottom: var(--navbar-height);
 	}
 	.navbar-button {
 		display: none;
