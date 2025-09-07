@@ -2,16 +2,19 @@
 	{
 		"id": "about",
 		"title": "About Me",
-		"url": "/about/"
+		"url": "/about/",
+		"icon": "🪪"
 	},
 	{
 		"id": "archive",
 		"title": "Archive",
-		"url": "/archive/"
+		"url": "/archive/",
+		"icon": "✉️"
 	},
 	{
 		"id": "contact",
 		"title": "Contact",
-		"url": "/contact/"
+		"url": "/contact/",
+		"icon": "🗨️"
 	}
 ]

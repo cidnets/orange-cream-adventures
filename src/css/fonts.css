@@ -85,16 +85,14 @@ pre {
   font-weight: 700;
   font-style: normal;
 }
-.sora-<bngo> {
+.sora-oca {
   font-family: "Sora", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
   font-style: normal;
 }
-.space-grotesk-<bngo> {
+.space-grotesk-oca {
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
   font-style: normal;
 }
 .walter-turncoat-regular {

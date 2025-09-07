@@ -139,7 +139,13 @@ body {
 }
 
 @media screen and (max-width: 576px) {
+	.site-bg {
+		height: 100%;
+	}
 	.site-credit {
 		margin-top: 1rem;
+	}
+	#desktop {
+		top: var(--statusbar-height);
 	}
 }

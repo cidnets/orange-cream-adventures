@@ -1,7 +1,7 @@
 /* --- The Main Gallery Container --- */
 .page.content:not(.post.content):has(.gallery-container) {
 	padding: 1rem;
-    max-width: 90%;
+    max-width: 100%;
 }
 .gallery-container {
     margin-top: 1rem;
@@ -16,6 +16,7 @@
 a.custom-lightbox-trigger {
     flex-grow: 1;
 	min-width: 250px;
+	max-width: 300px;
     max-height: 500px;
 	height: auto;
     display: flex;
@@ -34,7 +35,7 @@ a.custom-lightbox-trigger {
 /* --- The Image --- */
 .gallery-item img {
     width: 100%;
-    height: auto;
+    height: auto; /* Maintains the image's aspect ratio */
     object-fit: cover;
     display: block;
 }
@@ -172,7 +173,6 @@ a.custom-lightbox-trigger {
 	.gallery-item img {
 		object-fit: contain;
 	}
-	
 	.modal-container:not(.controls-visible) .modal-nav-btn {
 		opacity: 0;
 		transition: opacity 0.3s ease-in-out;

@@ -23,38 +23,40 @@ document.addEventListener('DOMContentLoaded', () => {
 // CLOCK
 // This function updates and displays the current time every second.
 function showTime() {
-  let time = new Date();
-  let hour = time.getHours();
-  let min = time.getMinutes();
-  let am_pm = "AM";
+    let time = new Date();
+    let hour = time.getHours();
+    let min = time.getMinutes();
+    let am_pm = "AM";
 
-  // Adjust hour for 12-hour format
-  if (hour >= 12) {
-    if (hour > 12) hour -= 12;
-    am_pm = "PM";
-  } else if (hour === 0) {
-    hour = 12;
-    am_pm = "AM";
-  }
+    // Adjust hour for 12-hour format
+    if (hour >= 12) {
+        if (hour > 12) hour -= 12;
+        am_pm = "PM";
+    } else if (hour === 0) {
+        hour = 12;
+        am_pm = "AM";
+    }
 
-  // Add leading zero to minutes if less than 10
-  min = min < 10 ? "0" + min : min;
-
-  // Get the time zone abbreviation (e.g., PDT, EST)
-  const timeZone = new Intl.DateTimeFormat('en-US', {
-      timeZoneName: 'short'
+    // Add leading zero to minutes if less than 10
+    min = min < 10 ? "0" + min : min;
+	
+	/*
+    // Get the time zone abbreviation (e.g., PDT, EST)
+    const timeZone = new Intl.DateTimeFormat('en-US', {
+        timeZoneName: 'short'
     })
     .formatToParts(time)
     .find(part => part.type === 'timeZoneName')?.value || '';
+	*/
+	
+    // Construct the current time string
+    const currentTime = `${hour}:${min} ${am_pm}`;
 
-  // Construct the current time string
-  const currentTime = `${hour}:${min} ${am_pm} ${timeZone}`;
-
-  // Update the element with the ID "clock"
-  const clockElement = document.getElementById("clock");
-  if (clockElement) {
-    clockElement.innerHTML = currentTime;
-  }
+    // Update all elements with the class "js-clock-display"
+    const clockElements = document.querySelectorAll(".js-clock-display");
+    clockElements.forEach(element => {
+        element.innerHTML = currentTime;
+    });
 }
 
 // Update the clock every second
