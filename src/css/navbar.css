@@ -205,20 +205,14 @@
 
 
 @media screen and (max-width: 576px) {
+	:root {
+		--navbar-height: 55px;
+	}
 	.navbar {
 		display: none;
 	}
 	
-	.mobile-navbar,
-	.mobile-navbar-button,
-	.mobile-navbar-button,
-	.mobile-status-bar,
-	.app-drawer-container,
-	.app-drawer-container.visible,
-	#open-apps-list,
-	.app-drawer-button,
-	.app-drawer-button,
-	#drawer-controls {
+	.mobile {
 		display: block;
 	}
 	.mobile-navbar,
@@ -335,8 +329,9 @@
 		position: static;
 		margin: 3px;
 		padding: 0;
-		background-color: var(--fill);
-		border: var(--border);
+		background-color: var(--f-white);
+		border: var(--f-border);
+		border-image: var(--f-border-white);
 		text-align: center;
 		grid-column: 1 / -1;
 		grid-row: 1 / span 2;
@@ -362,9 +357,25 @@
 		border-radius: 50%;
 	}
 	.mobile-filler-container {
-		display: block;
-		background-color: var(--pink);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		aspect-ratio: 1/1;
+	}
+	.mobile-quote {
+		background-color: var(--f-pink);
+		border: var(--f-border);
+		border-image: var(--f-border-pink);
+		text-align: center;
+		font-size: clamp(2rem, 5vw, 4rem);
 		grid-column: 3 / span 2;
-		grid-row: 4 / span 2;
+		grid-row: 3 / span 2;
+	}
+	.mobile-placeholder {
+		background-color: var(--f-purple);
+		border: var(--f-border);
+		border-image: var(--f-border-purple);
+		grid-column: 1 / span 2;
+		grid-row: 5 / span 2;
 	}
 }

@@ -267,17 +267,21 @@
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: repeat(6, 1fr);
-		gap: 3px;
+		gap: 10px;
 		align-items: center;
 		justify-items: center;
 	}
 	.app-drawer > * {
 		width: 100%;
-		height: 100%;
 		box-sizing: border-box;
 	}
-	.app-icon span {
+	.app-icon {
+		aspect-ratio: 1/1;
+		margin: 0;
 		background-color: rgba(var(--white-rgb), 0.85);
+	}
+	.app-icon span {
+		background-color: transparent;
 	}
 	.window,
 	.window.active	{

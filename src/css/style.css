@@ -18,6 +18,7 @@
 
 * {
 	box-sizing: border-box;
+	background-clip: padding-box;
 }
 *::before, *::after {
 	display: inline-block;

@@ -144,3 +144,16 @@
 .post-content .post-title {
 	margin-top: 2rem;
 }
+
+@media screen and (max-width: 576px) {
+	.post.content {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+	.post-scroll-wrapper,
+	.window.post-window.active .post-scroll-wrapper	{
+		height: auto;
+		border: none;
+	}
+}
