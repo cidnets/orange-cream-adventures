@@ -199,16 +199,7 @@
 	font-weight: bold;
 }
 
-.mobile-navbar,
-.mobile-navbar-button,
-.mobile-navbar-button,
-.mobile-status-bar,
-.app-drawer-container,
-.app-drawer-container.visible,
-#open-apps-list,
-.app-drawer-button,
-.app-drawer-button,
-#drawer-controls {
+.mobile {
 	display: none;
 }
 
@@ -217,6 +208,7 @@
 	.navbar {
 		display: none;
 	}
+	
 	.mobile-navbar,
 	.mobile-navbar-button,
 	.mobile-navbar-button,
@@ -246,11 +238,15 @@
 		align-items: center;
 	}
 	.mobile-navbar-button {
+		width: 40px;
+		aspect-ratio: 1/1;
+		margin: 0;
+		padding: 0;
 		background: white;
 		border: none;
 		border-radius: 8px;
 		cursor: pointer;
-		padding: 10px;
+		text-align: center;
 		color: var(--text);
 	}
 	.mobile-navbar-button img {
@@ -275,6 +271,9 @@
 	}
 	.app-drawer-container.visible {
 		display: flex;
+	}
+	.app-icon {
+		width: auto;
 	}
 
 	#open-apps-list {
@@ -314,6 +313,7 @@
 		top: 0;
 		width: 100%;
 		height: var(--statusbar-height);
+		padding: 0 8px;
 	}
 	/* Clock */
 	.date-time {
@@ -324,8 +324,47 @@
 		overflow: hidden;
 		user-select: none;
 		border: none;
+		cursor: auto;
 	}
 	.status-icons-cosmetic {
 		margin-left: auto;
+	}
+	.mobile-calendar-widget {
+		display: flex;
+		gap: 10px;
+		position: static;
+		margin: 3px;
+		padding: 0;
+		background-color: var(--fill);
+		border: var(--border);
+		text-align: center;
+		grid-column: 1 / -1;
+		grid-row: 1 / span 2;
+	}
+	#mobile-current-date-display {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 40%;
+	}
+	#mobile-current-date-display > * {
+		font-size: 6ch;
+	}
+	#mobile-mini-calendar {
+		display: grid;
+		flex-grow: 1;
+		grid-template-columns: repeat(7, 1fr);
+		gap: 5px;
+		text-align: center;
+	}
+	.mini-day-cell {
+		border-radius: 50%;
+	}
+	.mobile-filler-container {
+		display: block;
+		background-color: var(--pink);
+		grid-column: 3 / span 2;
+		grid-row: 4 / span 2;
 	}
 }

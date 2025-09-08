@@ -197,6 +197,7 @@
 	width: 100%;
 	height: 100%;
 	padding: 1rem;
+	box-sizing: border-box;
 }
 
 .app-icon {
@@ -259,9 +260,21 @@
 		position: relative;
 		top: var(--statusbar-height);
 		max-height: var(--desktop-height);
-		height: auto;
-		flex-direction: row;
-		justify-content: space-between;
+		height: 100%;
+		width: 100%;
+		max-width: 100vw;
+		padding: 1rem 0.5rem;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(6, 1fr);
+		gap: 3px;
+		align-items: center;
+		justify-items: center;
+	}
+	.app-drawer > * {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
 	}
 	.app-icon span {
 		background-color: rgba(var(--white-rgb), 0.85);
