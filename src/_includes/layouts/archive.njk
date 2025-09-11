@@ -6,18 +6,20 @@ templateClass: tmpl-archive
 
 {# This is the template for the Posts page–it lists the posts in the collection #}
 
-  <div id="page-content" class="archive content" data-pagefind-body>
-    {{ content | safe }}
-    <ul>
-      {% for post in collections.blogPosts %}
-        <li{% if page.url == post.url %} aria-current="page"{% endif %}>
-          <a href="{{ post.url }}">
-			<span>{{ post.date | myDateFormat }}</span>
-            <h2 class="archive-post-title">
-             {{ post.data.title }}
-            </h2>
-          </a>
-		</li>
-      {% endfor %}
-    </ul>    
-  </div>
+<div id="page-content" class="archive content post-content-bg" data-pagefind-body>
+	<div class="archive-content">
+		{{ content | safe }}
+		<ul>
+			{% for post in collections.blogPosts %}
+			<li{% if page.url == post.url %} aria-current="page"{% endif %}>
+			  <a href="{{ post.url }}">
+				<span>{{ post.date | myDateFormat }}</span>
+				<h2 class="archive-post-title">
+				 {{ post.data.title }}
+				</h2>
+			  </a>
+			</li>
+			{% endfor %}
+		</ul> 
+	</div>
+</div>

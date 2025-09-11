@@ -8,7 +8,8 @@
 @import "footer.css";
 @import "windows.css";
 @import "gallery.css";
-
+@import "mobile.css";
+@import "archive.css";
 
 :root {
 	--wrapper-height: 85vh;
@@ -71,7 +72,6 @@ body {
 	height: 100%;
 	background-image: url('/assets/Heart-dot-bg.png');
 	background-position: 50% 1%;
-	background-size: 100px;
 }
 .desktop-bg {
 	width: 33%;
@@ -107,7 +107,9 @@ body {
 	overflow: hidden;
 	flex-wrap: wrap;
 	flex-direction: column;
-	padding: 1rem;
+	border: var(--f-large-border);
+	border-image: var(--f-large-border-blue);
+	background-color: var(--f-l-blue);
 }
 .content > * {
     flex-shrink: 1; 

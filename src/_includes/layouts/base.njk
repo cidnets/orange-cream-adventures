@@ -12,7 +12,7 @@
 		{% for app in desktop_apps %}
 		<a href="#" class="app-launcher app-icon" data-title="{{ app.title }}" data-url="{{ app.url }}" data-id="{{ app.id }}" data-window-target="new">
 			<div class="icon-visual">{{ app.icon }}</div>
-			<span>{{ app.title }}</span>
+			<span class="app-name">{{ app.title }}</span>
 		</a>
 		{% endfor %}
 		{% include "mobile-filler-items.njk" %}		

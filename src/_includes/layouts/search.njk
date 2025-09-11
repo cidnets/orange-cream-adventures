@@ -10,16 +10,4 @@ templateClass: tmpl-search
 		{{ content | safe }}
 
 		<div id="search"></div>
-
-		<script src="/pagefind/pagefind-ui.js"></script>
-
-		<script>
-			window.addEventListener('DOMContentLoaded', (event) => {
-				new PagefindUI({
-				element: "#search",
-				// Optional, but recommended to match your style
-				showSubResults: true
-				});
-			});
-		</script>
 	</div>

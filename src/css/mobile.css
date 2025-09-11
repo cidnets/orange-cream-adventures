@@ -1,39 +1,11 @@
-.mobile-app {
-    display: none; /* Hidden by default */
-}
-
-/* --- Mobile Specific Styles --- */
-@media (max-width: 576px) {
-    #desktop {
-        display: none; /* Hide the entire desktop on mobile */
-    }
-
-    .mobile-app {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1000;
-        background-color: #fff; /* A neutral background for your apps */
-    }
-
-    .mobile-header {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        background-color: #f0f0f0;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .mobile-back-button {
-        /* Style your back button */
-    }
-
-    .mobile-app-title {
-        flex-grow: 1;
-        text-align: center;
-    }
+@media screen and (max-width: 390px) {
+	#mobile-mini-calendar {
+		gap: 0px;
+	}
+	.calendar-header {
+		font-size: 0.9rem;
+	}
+	.mini-day-cell {
+		font-size: 0.8rem;
+	}
 }

@@ -1,8 +1,6 @@
 ---
-layout: layouts/gallery.njk
+layout: layouts/gallery-main.njk
 title: Portfolio
 ---
 
 # Portfolio
-
-![](/assets/logo-colored.png)

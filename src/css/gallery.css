@@ -1,7 +1,19 @@
 /* --- The Main Gallery Container --- */
+.window.general-window.window-portfolio .content {
+	background-color: transparent;
+	border: none;
+}
+
 .page.content:not(.post.content):has(.gallery-container) {
 	padding: 1rem;
     max-width: 100%;
+}
+.gallery-header-content {
+	max-width: var(--content-max-width);
+	margin: auto;
+	background-color: var(--f-l-blue);
+	border: var(--f-large-border);
+	border-image: var(--f-large-border-blue);
 }
 .gallery-container {
     margin-top: 1rem;
@@ -10,6 +22,38 @@
     gap: 8px;
     align-items: stretch;
 	justify-content: center;
+}
+.content .gallery-btn-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
+	margin: 0 auto;
+	width: fit-content;
+	max-width: var(--content-max-width);
+	justify-items: center;
+	text-align: center;
+}
+.gallery-btn {
+	text-align: center;
+	border: var(--f-border);
+	width: 100%;
+}
+.window .window-body .window-content .gallery-btn:hover {
+	background-color: var(--f-yellow);
+	border-image: var(--f-border-yellow);
+}
+.gallery-btn.showall {
+	background-color: var(--f-white);
+	border-image: var(--f-border-white);
+}
+.gallery-btn.traditional {
+	background-color: var(--f-pink);
+	border-image: var(--f-border-pink);
+	
+}
+.gallery-btn.digital {
+	background-color: var(--f-purple);
+	border-image: var(--f-border-purple);
 }
 
 /* --- The Link Tag (Our Flex Item) --- */
@@ -26,7 +70,9 @@ a.custom-lightbox-trigger {
 
 /* --- The Figure Element --- */
 .gallery-item {
-    flex: 1; /* Makes the figure fill the entire space */
+	width: 100%;
+	height: 100%;
+    flex: 1;
     margin: 0;
     position: relative;
     display: flex;
@@ -155,16 +201,31 @@ a.custom-lightbox-trigger {
 .modal-img-info {
 	display: none;
 	position: absolute;
-	padding: 1rem;
+	min-width: 150px;
+	padding: 1.5rem 1rem;
 	z-index: 1002;
-	background-color: var(--fill);
-	border: 2px solid var(--text);
+	background-color: var(--f-white);
+	border: var(--f-border);
+	border-image: var(--f-border-white);
+	text-align: center;
 }
 .modal-img-info.is-visible {
 	display: block;
 }
+.modal-img-info .modal-title {
+	margin: 0;
+}
+.modal-img-info p {
+	margin-top: 0.5rem;
+}
 
 @container (max-width: 576px) {
+	.content .gallery-btn-container {
+		display: block;
+	}
+	.gallery-btn {
+		margin: 10px 0 0;
+	}
 	.custom-lightbox-trigger {
 		flex-shrink: 1;
 		min-width: 1px;

@@ -1,3 +1,18 @@
+.window.window-archive .window-content {
+	padding: 0;
+}
+.window.window-archive .content {
+	max-width: 100%;
+	padding: 0;
+	border-left: none;
+	border-right: none;
+}
+.window.window-archive .archive-content {
+	max-width: 75ch;
+	margin: auto;
+	padding: 0 1rem 2rem;
+}
+
 .archive li:not(:last-child) {
   margin-bottom: 1rem;
 }

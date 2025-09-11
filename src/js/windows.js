@@ -147,12 +147,16 @@ $(document).ready(function() {
                     await window.loadPagefindScript();
                     window.initializePagefindUI();
                 }
-            } else if ($(this).find('.gallery-container').length) {
-                if (typeof initializeGalleryGrid === 'function' && typeof initializeLightbox === 'function') {
-                    initializeGalleryGrid();
-                    initializeLightbox();
-                }
-            }
+            } if ($(this).find('.gallery-container').length) {
+				// New line to make 'digital' the default filter
+				filterGallery('digital');
+
+				// The functions below will now apply to the filtered 'digital' images
+				if (typeof initializeGalleryGrid === 'function' && typeof initializeLightbox === 'function') {
+					initializeGalleryGrid();
+					initializeLightbox();
+				}
+			}
             applyDynamicSizingAndPositioning($window, isInitialLoad);
         });
     }
@@ -338,6 +342,21 @@ $(document).ready(function() {
 		}
     });
 
+	// --- Event Handlers for App Names ---
+    $('body').on('click', '.app-icon', function(e) {
+        // Prevent the click from launching the window right away
+        e.stopPropagation();
+
+        const $this = $(this);
+        // Toggle the class to show/hide the full name
+        $this.toggleClass('show-full-name');
+        
+        // Hide the full name if the user clicks anywhere else on the desktop
+        $('#desktop').one('click', function() {
+            $this.removeClass('show-full-name');
+        });
+    });
+	
     // Universal link click handler.
     $('body').on('click', 'a', function(e) {
         const $this = $(this);
@@ -398,14 +417,14 @@ $(document).ready(function() {
 			const windowId = $window.attr('id');
 			$(`.navbar-button[data-window-id="${windowId}"]`).remove();
 			$window.remove();
-			if (isMobile) updateAppDrawer();
+			if (isMobileDevice()) updateAppDrawer();
 		} else if ($this.hasClass('window-minimize')) {
 			const $window = $(this).closest('.window');
 			const windowId = $window.attr('id');
 			$window.addClass('minimized');
 			$window.removeClass('active');
 			$window.attr('data-window-state', 'minimized');
-			if (!isMobile) {
+			if (!isMobileDevice()) {
 				$(`.navbar-button[data-window-id="${windowId}"]`).addClass('minimized').removeClass('active');
 			} else {
 				updateAppDrawer();
@@ -441,7 +460,7 @@ $(document).ready(function() {
 			$('#app-drawer').removeClass('visible');
 		} else if ($this.attr('id') === 'drawer-clear-all') {
 			closeAllWindows();
-			if (isMobile) updateAppDrawer();
+			if (isMobileDevice()) updateAppDrawer();
 			$('#app-drawer').removeClass('visible');
 		}
 	});

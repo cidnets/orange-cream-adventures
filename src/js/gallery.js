@@ -1,5 +1,33 @@
 console.log("gallery.js has loaded");
 
+// filtering the gallery.
+function filterGallery(type) {
+    const galleryItems = document.querySelectorAll('.gallery-container .custom-lightbox-trigger');
+    const filterButtons = document.querySelectorAll('#gallery-filter-container .gallery-btn');
+
+    // Update active state of filter buttons.
+    filterButtons.forEach(button => {
+        if (button.textContent.toLowerCase().includes(type.toLowerCase())) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+
+    // Loop through all items to show/hide based on the filter type.
+    galleryItems.forEach(item => {
+        const itemType = item.dataset.type;
+        if (type === 'all' || itemType === type) {
+            item.style.display = ''; // Use an empty string to revert to the default display
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    // Re-initialize the grid to adjust to the new layout.
+    initializeGalleryGrid();
+}
+
 // A function to initialize the gallery grid.
 function initializeGalleryGrid() {
     const galleryContainer = document.querySelector('.window.active .gallery-container, .mobile-app.active .gallery-container');
@@ -44,16 +72,16 @@ function initializeGalleryGrid() {
         }
     }
     
-    const allItems = galleryContainer.querySelectorAll('.custom-lightbox-trigger');
-    allItems.forEach(item => {
-        resizeGridItem(item); // Call the function directly
-    });
+    // Select only the visible gallery items to resize.
+    const allItems = galleryContainer.querySelectorAll('.custom-lightbox-trigger:not([style*="display: none"])');
+    allItems.forEach(item => {
+        resizeGridItem(item); // Call the function directly
+    });
 
-    window.addEventListener('resize', () => {
-        allItems.forEach(resizeGridItem);
-    });
+    window.addEventListener('resize', () => {
+        allItems.forEach(resizeGridItem);
+    });
 }
-
 
 // A function to initialize the lightbox modal.
 function initializeLightbox() {
@@ -120,10 +148,10 @@ function initializeLightbox() {
     $('body').on('click', '.custom-lightbox-trigger', function(event) {
         event.preventDefault();
 
-        // Get all gallery items and the index of the clicked item
+        // Get all VISIBLE gallery items and the index of the clicked item
         const galleryContainer = document.querySelector('.window.active .gallery-container, .mobile-app.active .gallery-container');
         if (galleryContainer) {
-            allGalleryItems = Array.from(galleryContainer.querySelectorAll('.custom-lightbox-trigger'));
+            allGalleryItems = Array.from(galleryContainer.querySelectorAll('.custom-lightbox-trigger:not([style*="display: none"])'));
             currentItemIndex = allGalleryItems.indexOf(this);
         } else {
             console.error("Gallery container not found.");

@@ -28,5 +28,11 @@
 		"title": "Portfolio",
 		"url": "/portfolio/",
 		"icon": "🎨"
+	},
+	{
+		"id": "commissions",
+		"title": "Commissions Terms and Conditions",
+		"url": "/commissions/",
+		"icon": "🎁"
 	}
 ]

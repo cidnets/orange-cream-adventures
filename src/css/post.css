@@ -1,15 +1,34 @@
+.window.window-blog-post .window-content {
+	padding: 0;
+}
+
+.window.window-blog-post .content {
+	display: flex;
+	flex-wrap: nowrap;
+	border: none;
+	background-color: transparent;
+}
+
 .post.content {
 	height: 100%;
 	padding: 0;
 }
 
+.post-content-bg {
+	width: 100%;
+	margin: 2rem 0 4rem;
+	border-top: var(--f-large-border);
+	border-bottom: var(--f-large-border);
+	border-image: var(--f-large-border-blue);
+	background-color: var(--f-l-blue);
+}
 .post-content {
-	padding: 1rem;
+	padding: 0 1rem 1rem;
 }
 .content:not(.post.content),
 .post-content {
 	max-width: 75ch;
-	margin: 0 auto 4rem;
+	margin: 2rem auto 4rem;
 }
 .window.post-window .window-content,
 .window.post-window.active .window-content {

@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-gallery
+---
+
+	<div id="page-content" class="content page" data-app-script="/js/gallery.js" data-init-function="initGallery" data-pagefind-body>
+		<div class="gallery-header-content">
+			{% if pageTitle%}
+			<h1>{{ pageTitle }}</h1>
+			{% endif %}
+			{{ content | safe }}
+			
+			<div id="gallery-filter-container" class="gallery-btn-container">
+			  <button class="gallery-btn showall" onclick="filterGallery('all')">Show All</button>
+			  <button class="gallery-btn traditional" onclick="filterGallery('traditional')">Traditional</button>
+			  <button class="gallery-btn digital active" onclick="filterGallery('digital')">Digital</button>
+			</div>
+		</div>
+		
+		<div class="gallery-container">
+			{% for art in gallery_main %}
+				{% include "portfolio/gallery-thumbnails.njk" %}
+			{% endfor %}
+		</div>
+		{% include "portfolio/gallery-modal.njk" %}
+	</div>

@@ -178,7 +178,6 @@
 	text-align: center;
 	font-size: 1.1rem;
 	font-weight: bold;
-	padding-bottom: 0.75rem;
 }
 .day-name {
 	text-align: center;
@@ -190,12 +189,14 @@
 	justify-content: center;
 	align-items: center;
 	height: 2rem;
+	aspect-ratio: 1/1;
 	text-align: center;
-	border-radius: 50%;
 	font-family: var(--font-family);
 }
 .current-day {
-	background-color: var(--accent-1);
+	background-image: url("/assets/tiny-heart-oneColor.png");
+	background-repeat: no-repeat;
+	background-position: center;	
 	font-weight: bold;
 }
 
@@ -344,17 +345,20 @@
 		width: 40%;
 	}
 	#mobile-current-date-display > * {
-		font-size: 6ch;
+		font-size: clamp(2ch, 4ch, 6ch);
 	}
 	#mobile-mini-calendar {
 		display: grid;
 		flex-grow: 1;
+		padding: 8px 0;
 		grid-template-columns: repeat(7, 1fr);
-		gap: 5px;
 		text-align: center;
 	}
+	.calendar-header {
+		font-size: 1rem;
+	}
 	.mini-day-cell {
-		border-radius: 50%;
+		font-size: 0.9rem;
 	}
 	.mobile-filler-container {
 		display: flex;

@@ -1,0 +1,202 @@
+[
+  {
+    "title": "Whitewashed",
+	"date": "2024",
+	"size": "48in x 60in",
+	"medium":"Acrylic",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-Whitewashed-Catalog-4.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-Whitewashed-Catalog-4.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Assimilated",
+	"date": "2024",
+	"size": "60in x 48in",
+	"medium":"Acrylic",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-Whitewashed-Catalog-2.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-Whitewashed-Catalog-2.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "A Lullaby",
+	"date": "2024",
+	"size": "60in x 48in",
+	"medium":"Acrylic",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-Whitewashed-Catalog-3.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-Whitewashed-Catalog-3.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Banana",
+	"date": "2024",
+	"size": "48in x 60in",
+	"medium":"Acrylic",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-Whitewashed-Catalog-1.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-Whitewashed-Catalog-1.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Sneaky Sue",
+	"date": "2021",
+	"size": "36in x 30in",
+	"medium":"Oil",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-SneakySue.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-SneakySue.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Ebenezer's Ice Cream Store",
+	"date": "2021",
+	"size": "18in x 24in",
+	"medium":"Oil",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-IceCream.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-IceCream.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "A Conversation with a Caterpillar",
+	"date": "2021",
+	"size": "18in x 24in",
+	"medium":"Oil",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/SGarcia-caterpillar.jpg",
+    "fullsize_url": "/assets/art/traditional/SGarcia-caterpillar.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Portal 03",
+	"date": "2020",
+	"size": "26in x 20in",
+	"medium":"Pen & Ink",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/portal-3.jpg",
+    "fullsize_url": "/assets/art/traditional/portal-3.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Portal 02",
+	"date": "2020",
+	"size": "26in x 20in",
+	"medium":"Pen & Ink",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/portal-2.jpg",
+    "fullsize_url": "/assets/art/traditional/portal-2.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Portal 01",
+	"date": "2020",
+	"size": "26in x 20in",
+	"medium":"Pen & Ink",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/portal-1.jpg",
+    "fullsize_url": "/assets/art/traditional/portal-1.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "A Page",
+	"date": "2020",
+	"size": "26in x 20in",
+	"medium":"Pen & Ink, Watercolor",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/a-page.jpg",
+    "fullsize_url": "/assets/art/traditional/a-page.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "A Sentence",
+	"date": "2020",
+	"size": "26in x 20in",
+	"medium":"Pen & Ink, Watercolor",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/a-sentence.jpg",
+    "fullsize_url": "/assets/art/traditional/a-sentence.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "A Word",
+	"date": "2020",
+	"size": "26in x 20in",
+	"medium":"Pen & Ink, Watercolor",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/a-word.jpg",
+    "fullsize_url": "/assets/art/traditional/a-word.jpg",
+	"type": "traditional"
+  },
+    {
+    "title": "Space 03",
+	"date": "2020",
+	"size": "18in x 24in",
+	"medium":"Ballpoint Pen",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/untitled-3.jpg",
+    "fullsize_url": "/assets/art/traditional/untitled-3.jpg",
+	"type": "traditional"
+  },
+    {
+    "title": "Space 02",
+	"date": "2020",
+	"size": "18in x 24in",
+	"medium":"Ballpoint Pen",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/untitled-2.jpg",
+    "fullsize_url": "/assets/art/traditional/untitled-2.jpg",
+	"type": "traditional"
+  },
+    {
+    "title": "Space 01",
+	"date": "2020",
+	"size": "18in x 24in",
+	"medium":"Ballpoint Pen",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/untitled-1.jpg",
+    "fullsize_url": "/assets/art/traditional/untitled-1.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Self Portrait 01",
+	"date": "2020",
+	"size": "11in x 14in",
+	"medium":"Ballpoint Pen",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/selfportrait-1.jpg",
+    "fullsize_url": "/assets/art/traditional/selfportrait-1.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Self Portrait 02",
+	"date": "2020",
+	"size": "11in x 14in",
+	"medium":"Graphite",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/selfportrait-2.jpg",
+    "fullsize_url": "/assets/art/traditional/selfportrait-2.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Still Life 01",
+	"date": "2020",
+	"size": "12in x 18in",
+	"medium":"Oil",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/still-life-ROCKS.jpg",
+    "fullsize_url": "/assets/art/traditional/still-life-ROCKS.jpg",
+	"type": "traditional"
+  },
+  {
+    "title": "Still Life 02",
+	"date": "2018",
+	"size": "18in x 24in",
+	"medium":"Soft Pastel",
+    "alt_text": ".",
+    "thumbnail_url": "/assets/art/traditional/thumb/still-life-1.jpg",
+    "fullsize_url": "/assets/art/traditional/still-life-1.jpg",
+	"type": "traditional"
+  }
+]
