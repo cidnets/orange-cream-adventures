@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+---
+
+<div id="page-content" class="content page post-content-bg" data-pagefind-body>
+    <div class="mobile-content-wrapper">
+        {% if pageTitle %}
+            <h1>{{ pageTitle }}</h1>
+        {% endif %}
+
+        <div class="subnav-menu submenu-container random-borders-menu">
+            {% for section in navSections %}
+                <button class="subnav-link submenu-link random-borders-link" data-target="{{ section.id }}">{{ section.title }}</button>
+            {% endfor %}
+        </div>
+
+        <div class="sub-content-container">
+            {{ content | safe }}
+        </div>
+    </div>
+</div>

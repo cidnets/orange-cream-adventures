@@ -2,16 +2,25 @@
 	{
 		"id": "about",
 		"title": "About Me",
-		"url": "/about/"
+		"url": "/about/",
+		"icon": "/assets/icon-placeholder/person.svg"
 	},
 	{
 		"id": "archive",
 		"title": "Archive",
-		"url": "/archive/"
+		"url": "/archive/",
+		"icon": "/assets/icon-placeholder/newspaper.svg"
 	},
 	{
 		"id": "contact",
 		"title": "Contact",
-		"url": "/contact/"
+		"url": "/contact/",
+		"icon": "/assets/icon-placeholder/chat.svg"
+	},
+	{
+		"id": "commissions",
+		"title": "Commissions Terms & Conditions",
+		"url": "/commissions/",
+		"icon": "/assets/icon-placeholder/gift.svg"
 	}
 ]

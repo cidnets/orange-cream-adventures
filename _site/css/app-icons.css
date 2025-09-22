@@ -1,0 +1,15 @@
+.icon-about-me .icon-wrapper {
+	background-image: linear-gradient(to right, var(--pink) , var(--lpurple));
+}
+.icon-archive .icon-wrapper {
+	background-color: var(--cream);
+}
+.icon-contact .icon-wrapper {
+	background-color: var(--f-blue);
+}
+.icon-search .icon-wrapper {
+	background-image: linear-gradient(to right, var(--lpurple), var(--pink));
+}
+.icon-portfolio .icon-wrapper {
+	background-color: var(--yellow);
+}

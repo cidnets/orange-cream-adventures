@@ -3,138 +3,94 @@
 .content.page h3,
 .content.page h4,
 .content.page h5 {
-	margin-left: auto;
-	margin-right: auto;
+	margin: 1rem auto;
 	text-align: center;
 	text-wrap: balance;
 }
-
-/* ARCHIVE PAGE */
-.archive ul {
-	padding: 0;
-	list-style-type: none;
-	border-top: var(--border);
-	border-bottom: var(--border);
-}
-.archive li:not(:last-child) {
-	border-bottom: var(--border);
-}
-.archive li a {
+.window-content h1::after,
+.window-content h2::after,
+.window-content h3::after {
 	display: block;
-	padding: 1rem;
-}
-.archive li a h1,
-.archive li a h2,
-.archive li a h3,
-.archive li a h4,
-.archive li a h5 {
-	margin-top: 0.5em;
-	margin-bottom: auto;
-	text-align: left;
-}
-.archive h1,
-.archive h2,
-.archive h3,
-.archive h4,
-.archive h5 {
-	text-align: center;
-	margin: auto;
-}
-.archive h1 {
-	margin-top: 1em;
-	margin-bottom: 1rem;
-}
-.archive h2 {
-	margin-bottom: 1em;
+	margin-top: 0.5rem;
+	content: url('/assets/Section-dividers.png');
 }
 
-/* CONTACT PAGE */
-#window-contact #page-content {
-	text-align: center;
-	text-wrap: balance;
-}
-#window-contact a:not(:first-of-type) {
-	margin-top: 1rem;
-}
-#window-contact a {
-	display: block;
-	width: fit-content;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0.5rem 1rem;
-	border: var(--border);
-	border-radius: 1rem;
+/* WELCOME WINDOW */
+.window-welcome .content{
 	text-align: center;
 }
-/* RESUME PAGE */
-#window-resume {
-    container-type: inline-size;
+
+/* SEARCH WINDOW */
+.window-search .page {
+	text-align: center;
 }
-#window-resume .content.page h2:not(:first-of-type),
-#window-resume .content.page h3,
-#window-resume .content.page h4,
-#window-resume .content.page h5 {
-	margin: 1rem 0 0;
+.window-search .page .pagefind-ui__drawer {
 	text-align: left;
 }
-#window-resume .content.page ul {
-	margin-top: 0;
+.window-search .page .pagefind-ui__drawer .pagefind-ui__result {
+	border-width: 2px;
+	border-color: var(--green);
+	padding: 0.5rem 0;
 }
-#window-resume .content.page hr:first-of-type {
-	border: none;
+.window-search .page .pagefind-ui__drawer .pagefind-ui__result:not(:first-child) {
+	border-top-style: dashed;
 }
-#window-resume .content.page hr:not(:first-of-type) {
+.window-search .page .pagefind-ui__drawer .pagefind-ui__result:not(:last-child) {
+	border-bottom-style: dashed;	
+}
+.window-search .page .pagefind-ui__drawer .pagefind-ui__result a {
+	text-decoration: var(--accent-2-active) wavy underline;
+	font-family: var(--header);
+	font-size: 1.3rem;
+}
+.window-search .page .pagefind-ui__drawer img {
+	display: none;
+	max-width: 500px;
+}
+.window-search .page .pagefind-ui__drawer mark {
+	background-color: var(--accent-5);
+}
+
+/* RESUME */
+hr {
+	border: 2px dashed var(--green);
+	border-bottom: none;
+}
+.resume-header {
 	width: 100%;
-	margin: 1.5rem 0;
-	border-top: none;
-	border-bottom: 1px solid var(--text);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
-#window-resume .content.page table {
-	margin-top: 1rem;
+.resume-header .resume-header-left,
+.resume-header .resume-header-center,
+.resume-header .resume-header-right {
+	flex-grow: 1;
+	max-width: 33.33%;
 }
-#window-resume .resume-header > * {
-	margin: 0;
+.resume-header .resume-header-center,
+.resume-header .resume-header-right {
+	list-style-type: none;
 }
-
-#window-resume .resume-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    margin-top: 1em;
+.resume-header .resume-header-left {
+	text-align: left;
 }
-
-#window-resume .resume-header-left,
-#window-resume .resume-header-center,
-#window-resume .resume-header-right {
-	width: 33.33%;
+.resume-header .resume-header-center {
+	text-align: center;
 }
-
-#window-resume .resume-header-left {
-    flex-grow: 1;
-    text-align: left;
+.resume-header .resume-header-right {
+	text-align: right;
 }
-
-#window-resume .resume-header-center {
-    flex-grow: 1; 
-    text-align: center;
-}
-
-#window-resume .resume-header-right {
-    flex-grow: 1;
-    text-align: right;
-}
-
 @container (max-width: 576px) {
-    #window-resume .resume-header {
+    .resume-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    #window-resume .resume-header-left,
-    #window-resume .resume-header-center,
-    #window-resume .resume-header-right {
-        text-align: left;
-        flex-grow: 0;
+    .resume-header .resume-header-left,
+    .resume-header .resume-header-center,
+    .resume-header .resume-header-right {
         width: 100%;
+		max-width: 100%;
+        text-align: left;
     }
 }

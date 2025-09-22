@@ -1,12 +1,20 @@
 ---
 layout: layouts/page.njk
 title: About
+pageTitle: About Me
 ---
 
-![](/assets/logo-colored.png)
+![](/assets/art/photo-selfPainting.jpg)
+<!--{.self-portrait}-->
 
-### Hello! Welcome to Orange Cream Adventures!
+Hello, I’m Syd!
 
-I am a tiger made of boba and milkshakes residing in San Jose, California. This little site is a place for me to document my adventures around San Jose visiting places that are cooler than me and eating things more delicious than me.
+I’m an artist who dabbles in a little bit of everything! Whether it’s a painting to hang up in your home, fanart as a gift for a friend, or a website for myself, I love being able to express myself through a variety of media. 
 
-Thank you for joining me on my adventures!
+I have an extensive background in traditional arts, which allows me to add a more hand-drawn touch to my digital work. I especially enjoy coding and creating assets by hand as it allows me to fully customize everything I make.
+
+Much of my style is influenced by my experiences as an Asian American, with heavy inspiration from both Western and Asian media. My heaviest influences come from cartoonists and comic artists like Jorge Jimenez, Dexter Soy, and Io Sakisaka. I believe art is best when it has a story to tell, and I’m so excited you’re taking the time to look at mine!
+
+In my spare time, I like to bake sweets, read sci-fi, and make comics. Maybe someday I’ll share my comics and make comic creation part of my career. 
+
+I am based in San Jose, California and hold a Bachelor of Fine Arts (BFA) in Art, concentration in Pictorial Arts from San Jose State University. 

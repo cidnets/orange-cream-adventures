@@ -1,15 +1,36 @@
-.post.content {
-	height: 100%;
+.window.window-blog-post .window-content {
 	padding: 0;
 }
 
-.post-content {
-	padding: 1rem;
+.window.window-blog-post .content {
+	width: 100%;
+	max-width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	border: none;
+	background-color: transparent;
 }
-.content:not(.post.content),
+
+.post.content {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.post-content-bg {
+	max-width: var(--content-max-width);
+	margin: 2rem auto 4rem;
+	padding: 0 1rem;
+	border: var(--f-large-border);
+	border-image: var(--f-large-border-blue);
+	background-color: var(--f-l-blue);
+}
+
+.content,
 .post-content {
 	max-width: 75ch;
-	margin: 0 auto 4rem;
+	padding-bottom: 2rem;
+	margin: 2rem auto 4rem;
 }
 .window.post-window .window-content,
 .window.post-window.active .window-content {
@@ -32,7 +53,7 @@
 	background-color: var(--accent-1);
 	border-top: 2px solid var(--primary-2);
 	border-bottom: 2px solid var(--primary);
-	font-family: var(--header);
+	font-family: var(--pixel-font);
 }
 .window.active .post-navigation-bar {
 	background-color: var(--window-active-headers);
@@ -47,13 +68,6 @@
 	color: var(--text);
 	text-decoration: none;
 }
-.post-navigation-bar a:hover {
-	background-color: var(--primary-3);
-}
-.window.post-window.active .post-navigation-bar a:hover {
-	background-color: var(--primary-2);
-}
-
 .post-navigation-bar > *:not(.post-navigation-arrows),
 .post-navigation-bar .post-navigation-arrows > * {
 	margin: 0;
@@ -61,20 +75,13 @@
 	border-left: 2px solid var(--primary-2);
 	border-right: 2px solid var(--primary);
 }
-.window.post-window .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):hover,
-.window.post-window .post-navigation-bar .post-navigation-arrows > *:not(.disabled):hover {
-	border-color: var(--border-inset);
-}
 
 .window.post-window.active .post-navigation-bar > *:not(.post-navigation-arrows),
 .window.post-window.active .post-navigation-bar .post-navigation-arrows > * {
 	border-left: 2px solid var(--primary-2-active);
 	border-right: 2px solid var(--primary-active);
 }
-.window.post-window.active .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):hover,
-.window.post-window.active .post-navigation-bar .post-navigation-arrows > *:not(.disabled):hover {
-	border-color: var(--border-inset-active);
-}
+
 .post-navigation-bar .post-navigation-arrows {
 	padding: 0;
 	border: none;
@@ -126,6 +133,7 @@
 
 .post-scroll-wrapper {
 	height: 100%;
+	padding: 0 1rem;
 	flex-grow: 1;
 	overflow-y: auto;
 	border-width: 2px;
@@ -140,7 +148,100 @@
 .post-content img {
 	margin: auto auto 1rem;
 	text-align: center;
+	max-width: 90%;
 }
 .post-content .post-title {
 	margin-top: 2rem;
+}
+.window.window-blog-post .content .post-description {
+	margin: auto auto 1.5rem;
+	text-align: center;
+}
+.window.window-blog-post .content .post-content h1, 
+.window.window-blog-post .content .post-content h2,
+.window.window-blog-post .content .post-content h3, 
+.window.window-blog-post .content .post-content h4,
+.window.window-blog-post .content .post-content h5 {
+	margin: 2rem auto 1.5rem;
+	text-align: center;
+}
+
+@container (max-width: 576px) {
+	.post.content {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+	.post-content-bg,
+	.content.post-content-bg,
+	.post-scroll-wrapper .post-content-bg {
+		width: 100%;
+		margin: 2rem 0 4rem;
+		border-left: none;
+		border-right: none;
+		border-image: var(--f-large-border-blue);
+		background-color: var(--f-l-blue);
+	}
+	.post-scroll-wrapper,
+	.window.post-window.active .post-scroll-wrapper	{
+		height: auto;
+		padding: 0;
+		border: none;
+	}
+	.post-navigation-bar .address-bar-container .address-bar {
+		padding: 0 0 0 4px;
+	}
+	.post-navigation-bar .address-bar-container .address-bar span {
+		padding: 0;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.post-navigation-bar a:hover {
+		background-color: var(--primary-3);
+	}
+	.window.post-window.active .post-navigation-bar a:hover {
+		background-color: var(--primary-2);
+	}
+	.window.post-window .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):hover,
+	.window.post-window .post-navigation-bar .post-navigation-arrows > *:not(.disabled):hover {
+		border-color: var(--border-inset);
+	}
+	.window.post-window.active .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):hover,
+	.window.post-window.active .post-navigation-bar .post-navigation-arrows > *:not(.disabled):hover {
+		border-color: var(--border-inset-active);
+	}
+}
+@media screen and (max-width: 576px) {
+	.post-navigation-bar a,
+	.window.post-window.active .post-navigation-bar a,
+	.window.post-window .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container),
+	.window.post-window .post-navigation-bar .post-navigation-arrows > *:not(.disabled),
+	.window.post-window.active .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container),
+	.window.post-window.active .post-navigation-bar .post-navigation-arrows > *:not(.disabled) {
+		transition: background-color 0.3s ease-out, color 0.3s ease-out;
+	}
+	.post-navigation-bar a:active,
+	.window.post-window.active .post-navigation-bar a:active,
+	.window.post-window .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):active,
+	.window.post-window .post-navigation-bar .post-navigation-arrows > *:not(.disabled):active,
+	.window.post-window.active .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):active,
+	.window.post-window.active .post-navigation-bar .post-navigation-arrows > *:not(.disabled):active {
+		transition: 0s;
+	}
+	
+	.post-navigation-bar a:active {
+		background-color: var(--primary-3);
+	}
+	.window.post-window.active .post-navigation-bar a:active {
+		background-color: var(--primary-2);
+	}
+	.window.post-window .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):active,
+	.window.post-window .post-navigation-bar .post-navigation-arrows > *:not(.disabled):active {
+		border-color: var(--border-inset);
+	}
+	.window.post-window.active .post-navigation-bar > *:not(.post-navigation-arrows):not(.address-bar-container):active,
+	.window.post-window.active .post-navigation-bar .post-navigation-arrows > *:not(.disabled):active {
+		border-color: var(--border-inset-active);
+	}
 }

@@ -1,0 +1,38 @@
+window.desktopApps = [
+	{
+		id: "about",
+		title: "About Me",
+		url: "/about/",
+		icon: "/assets/icon-placeholder/person.svg"
+	},
+	{
+		id: "archive",
+		title: "Archive",
+		icon: "/assets/icon-placeholder/newspaper.svg",
+		url: "/archive/"
+	},
+	{
+		id: "contact",
+		title: "Contact",
+		url: "/contact/",
+		icon: "/assets/icon-placeholder/chat.svg"
+	},
+	{
+		id: "search",
+		title: "Search",
+		url: "/search/",
+		icon: "/assets/icon-placeholder/search.svg"
+	},
+	{
+		id: "portfolio",
+		title: "Portfolio",
+		url: "/portfolio/",
+		icon: "/assets/icon-placeholder/brush.svg"
+	},
+	{
+		id: "commissions",
+		title: "Commissions Terms & Conditions",
+		url: "/commissions/",
+		icon: "/assets/icon-placeholder/gift.svg"
+	}
+];

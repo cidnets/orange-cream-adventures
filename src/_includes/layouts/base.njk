@@ -10,14 +10,16 @@
 
 	<div class="app-drawer">
 		{% for app in desktop_apps %}
-		<a href="#" class="app-launcher app-icon" data-title="{{ app.title }}" data-url="{{ app.url }}" data-id="{{ app.id }}" data-window-target="new">
-			<div class="icon-visual">{{ app.icon }}</div>
-			<span>{{ app.title }}</span>
+		<a href="#" class="app-launcher app-icon" data-title="{{ app.title }}" data-url="{{ app.url }}" data-id="{{ app.id }}" data-window-target="new" data-icon="{{ app.icon | default('') }}">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="{{ app.title }} icon">
+			</div>
+			<span class="app-name">{{ app.title }}</span>
 		</a>
 		{% endfor %}
+		{% include "mobile-filler-items.njk" %}
 	</div>
-	
-    {{ content | safe }}    
+    {{ content | safe }}
   </main>
     {% include "navbar.njk" %}
   <footer id='footer' class="footer">  
@@ -33,6 +35,10 @@
 		<div class="context-menu-divider" id="min-max-divider"></div>
 		<div class="context-menu-item" id="context-menu-close-all">Close All Windows</div>
 	</div>
+	
+	<script>
+		window.desktopApps = {{ desktop_apps | dump | safe }};
+	</script>
 	{% include "scripts.njk" %}
   </body>
 </html>

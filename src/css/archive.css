@@ -1,3 +1,43 @@
+.window.window-archive .archive-content {
+	max-width: 75ch;
+	margin: auto;
+	padding: 2rem 1rem 2rem;
+}
+
+.archive ul {
+	padding: 0;
+	list-style-type: none;
+}
+.archive li:not(:last-child) {
+	border-bottom: 2px dotted var(--text);
+}
+.archive li a {
+	display: block;
+	padding: 1rem;
+}
+.archive li a h1,
+.archive li a h2,
+.archive li a h3,
+.archive li a h4,
+.archive li a h5 {
+	margin-top: 0.5em;
+	margin-bottom: auto;
+	text-align: left;
+}
+.archive h1,
+.archive h2,
+.archive h3,
+.archive h4,
+.archive h5 {
+	text-align: center;
+	margin: auto;
+}
+.archive-content a h1::after,
+.archive-content a h2::after,
+.archive-content a h3::after {
+	content: '';
+}
+
 .archive li:not(:last-child) {
   margin-bottom: 1rem;
 }

@@ -3,9 +3,11 @@ layout: layouts/base.njk
 templateClass: tmpl-home
 ---
 
-	<div id="page-content" class="content page" data-pagefind-body>
-		{% if pageTitle%}
-		<h1>{{ pageTitle }}</h1>
-		{% endif %}
-		{{ content | safe }}
+	<div id="page-content" class="content page post-content-bg" data-pagefind-body>
+		<div class="mobile-content-wrapper">
+			{% if pageTitle%}
+			<h1>{{ pageTitle }}</h1>
+			{% endif %}
+			{{ content | safe }}
+		</div>
 	</div>

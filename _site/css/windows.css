@@ -1,8 +1,11 @@
-.window {
+.window.general-window,
+.window.ui-resizable,
+.window.ui-draggable,
+.window.window-blog-post {
     position: absolute;
-	min-width: 250px;
+	/* min-width: 250px; */
     min-height: 200px;
-    background-color: var(--fill);
+    background-color: var(--accent-1);
     display: flex;
     flex-direction: column;
 	border-width: 2px;
@@ -19,23 +22,19 @@
     align-items: center;
 	background-color: var(--accent-1);
     color: var(--text);
-	font-size: 1.1rem;
-	font-family: var(--header);
+	font-size: 1rem;
     cursor: grab;
 }
-.window-header .window-title {
+.window-title {
 	padding-left: 0.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     flex-grow: 1;
     min-width: 0;
+	text-align: left;
 }
 
-.window .window-header a:hover,
-.window .window-header button:hover {
-	border-color: var(--border-inset);
-}
 .window-controls {
 	display: flex;
 	flex-direction: row;
@@ -60,28 +59,36 @@
     cursor: pointer;
 	aspect-ratio: 1/1;
 }
-.window-controls button:hover {
-	background-color: var(--primary-3);
+
+.window-body {
+    position: relative;
+    flex-grow: 1;
+    margin: 0px 3px 3px;
+	overflow: hidden;
+	font-family: var(--font-family);
+	container-type: size;
 }
 
 .window-content {
-	height: 100%;
-    flex-grow: 1;
+	width: auto;
+    height: 100%;
+	padding: 0 1rem;
+	overflow: auto;
     background-color: var(--fill);
-    overflow: auto;
-	border-width: 2px;
-	border-style: solid;
-	border-color: var(--border-inset);
-}
-
-.navbar-button.active {
-	background-color: var(--primary-2);
+	background-image: url("/assets/heart-cross-pattern.png");
+	background-position: 50% 1%;
+	background-size: 50px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--border-inset);
+	container-type: inline-size;
 }
 .window.active {
 	box-shadow: 6px 6px var(--text);
 	border-width: 2px;
 	border-style: solid;
     border-color: var(--border-outset-active);
+	background-color: var(--window-active-headers);
 }
 .window.active .window-content {
 	background-color: var(--window-active);
@@ -90,12 +97,6 @@
 .window.active a, .window.active a:visited,
 .window.active button {
 	color: var(--window-active-text);
-}
-
-.window.active a:hover,
-.window.active button:hover {
-	background-color: var(--primary-2);
-	border-color: var(--border-inset);
 }
 
 .window.active .window-header,
@@ -107,11 +108,7 @@
 	border-style: solid;
     border-color: var(--border-outset-active);
 }
-.window.active .window-header a:hover,
-.window.active .window-header button:hover {
-	background-color: var(--primary-2);
-	border-color: var(--border-inset-active);
-}
+
 .window.active .window-content {
 	border-width: 2px;
 	border-style: solid;
@@ -147,13 +144,24 @@
 .window.minimized {
     z-index: auto !important;
 }
+.window-icon {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.mobile-content-wrapper,
+.gallery-header-content {
+	padding: auto 1rem;
+}
 
 /* NAVBAR TEMP BUTTONS */
 .navbar-button {
-	display: block;
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
 	width: fit-content;
-	margin-left: 1rem;
-    max-width: 150px;
+	margin: 0 1rem 0 0;
+    max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -162,11 +170,10 @@
 	border-width: 2px;
 	border-style: solid;
 	border-color: var(--border-outset);
+	border-radius: 0;
 	color: var(--text);
 }
-
-.navbar-button.active,
-.navbar-button:hover {
+.navbar-button.active {
     background-color: var(--primary-2);
 	border-width: 2px;
 	border-style: solid;
@@ -182,65 +189,167 @@
 	width: 100%;
 	height: 100%;
 	padding: 1rem;
+	box-sizing: border-box;
 }
 
 .app-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
   width: 80px;
-  margin-bottom: 0.5rem;
-  padding: 4px;
+  margin-bottom: 1rem;
   text-align: center;
   border-radius: 0.5rem;
   color: var(--text);
   text-decoration: none;
 }
-.app-icon span {
-	padding: 0 0.25rem;
-	background-color: rgba(var(--white-rgb), 0.65);
-	border-radius: 0.5rem;
+.icon-wrapper {
+	margin: 8px auto;
+	width: 100%;
+	max-width: 70px;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
 }
-.app-icon:hover {
-  background-color: var(--accent-5);
+.app-icon .app-name {
+	max-width: 100px;
+	padding: 0;
+	text-align: center;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    transition: height 0.3s ease;
+	font-size: 16px;
+	background-color: rgba(var(--white-rgb), 0.3);
+	border-radius: 3px;
+}
+.app-icon.show-full-name .app-name {
+    height: auto;
+    overflow: visible;
+    -webkit-line-clamp: unset;
 }
 .app-icon .icon-visual {
-  font-size: 2.5rem; 
-  margin-bottom: 0.5rem;
+	width: 48px;
+	font-size: 1rem; 
+	margin: auto;
 }
 
 /* RIGHT CLICK TO CLOSE MENU */
 #context-menu {
   display: none; 
   position: absolute;
-  background-color: var(--white);
-  border: 1px solid var(--text);
+  background-color: var(--background);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--border-outset);
   box-shadow: 2px 2px var(--text);
   z-index: 99999;
   min-width: 160px;
   padding: 5px 0;
+  font-family: var(--pixel-font);
 }
-
 .context-menu-item {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.8rem;
 }
+.context-menu-divider {
+	width: 90%;
+	margin: auto;
+	border-top: 1px solid var(--yellow);
+	border-bottom: 1px solid var(--peach);
+	
+}
 
-.context-menu-item:hover {
-  background-color: var(--primary-2);
-  color: var(--text);
+@media screen and (min-width: 576px) {
+	.window .window-header a:hover,
+	.window .window-header button:hover {
+		border-color: var(--border-inset);
+	}
+	.window-controls button:hover {
+		background-color: var(--primary-3);
+	}
+	.window.active a:hover,
+	.window.active button:hover {
+		background-color: var(--primary-2);
+		border-color: var(--border-inset);
+	}
+	.window.active .window-header a:hover,
+	.window.active .window-header button:hover {
+		background-color: var(--primary-2);
+		border-color: var(--border-inset-active);
+	}
+	/* NAVBAR */
+	.navbar-button:hover {
+		background-color: var(--primary-2);
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--border-inset);
+	}
+	/* APP */
+	.app-icon:hover {
+		background-color: rgba(255,208,222,0.5);
+	}
+	.context-menu-item:hover {
+		background-color: var(--primary-2);
+		color: var(--text);
+	}
+}
+
+@container (max-width: 576px) {
+	.window-content {
+		padding: 0;
+	}
 }
 
 @media screen and (max-width: 576px) {
 	.app-drawer {
 		position: relative;
-		height: auto;
-		flex-direction: row;
-		justify-content: space-between;
+		top: var(--statusbar-height);
+		max-height: var(--desktop-height);
+		height: 100%;
+		width: 100%;
+		max-width: 100vw;
+		padding: 0.5rem;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(6, 1fr);
+		gap: 10px;
+		align-items: center;
+		justify-items: center;
 	}
-	.app-icon span {
-	background-color: rgba(var(--white-rgb), 0.85);
+	.app-drawer > *:not(.app-launcher) {
+		width: 100%;
+		max-height: 100%;
+		box-sizing: border-box;
+	}
+	.app-icon {
+		aspect-ratio: 1/1;
+		margin: 0;
+	}
+	.app-icon .icon-wrapper {
+		aspect-ratio: 1/1;
+		margin: auto auto 8px;
+		border: 1px solid transparent;
+		border-radius: 8px;
+		background-color: rgb(var(--white-rgb), 0.3);
+		overflow: clip;
+	}
+	.app-icon .icon-visual {
+		max-width: 100%;
+		min-width: 48px;
+		margin: auto;
+		object-fit: cover;
+	}
+	.app-icon span.app-name {
+		font-size: 14px;
+		background-color: transparent;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.window,
 	.window.active	{
@@ -251,10 +360,114 @@
 		height: 100%;
 		box-shadow: 0px 0px transparent;
 	}
+	.window-body {
+		margin: 0;
+	}
+	.window,
+	.window-body,
+	.window-content,
+	.window .window-body,
+	.window .window-content,
+	.window.active,
+	.window.active .window-body,
+	.window.active .window-content,
+	.window.general-window	{
+		border: none;
+		box-shadow: none;
+		padding: 0;
+	}
+	.window,
+	.window.active,
+	.window.general-window {
+		height: 100%;
+	}
+	.window-body,
+	.window .window-body,
+	.window.active .window-body {
+		position: absolute;
+		height: var(--desktop-height);
+		top: var(--statusbar-height);
+		bottom: var(--navbar-height);
+	}
 	.navbar-button {
 		display: none;
 	}
 	.window-maximize {
 		display: none;
+	}
+	
+/* -- MOBILE SPECIFIC STYLING -- */
+	.mobile-window .window-header {
+		display: none;
+	}
+	.mobile-window {
+	  border: none;
+	  box-shadow: none;
+	}
+	.mobile-window .window-body {
+	  height: 100%;
+	  width: 100%;
+	}
+	.mobile-content-wrapper {
+		padding: 0 1rem;
+	}
+	
+/* -- HOVER to ACTIVE STYLES --*/
+	.window .window-header a,
+	.window .window-header button,
+	.window-controls button,
+	.window.active a,
+	.window.active button,
+	.window.active .window-header a,
+	.window.active .window-header button,
+	.navbar-button,
+	.app-icon,
+	.context-menu-item {
+		transition: background-color 0.3s ease-out, color 0.3s ease-out;
+	}
+	.window .window-header a:active,
+	.window .window-header button:active,
+	.window-controls button:active,
+	.window.active a:active,
+	.window.active button:active,
+	.window.active .window-header a:active,
+	.window.active .window-header button:active,
+	.navbar-button:active,
+	.app-icon:active,
+	.context-menu-item:active {
+		transition: 0s;
+	}
+	
+	.window .window-header a:active,
+	.window .window-header button:active {
+		border-color: var(--border-inset);
+	}
+	.window-controls button:active {
+		background-color: var(--primary-3);
+	}
+	.window.active a:active,
+	.window.active button:active {
+		background-color: var(--primary-2);
+		border-color: var(--border-inset);
+	}
+	.window.active .window-header a:active,
+	.window.active .window-header button:active {
+		background-color: var(--primary-2);
+		border-color: var(--border-inset-active);
+	}
+	/* NAVBAR */
+	.navbar-button:active {
+		background-color: var(--primary-2);
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--border-inset);
+	}
+	/* APP */
+	.app-icon:active {
+		background-color: var(--accent-5);
+	}
+	.context-menu-item:active {
+		background-color: var(--primary-2);
+		color: var(--text);
 	}
 }

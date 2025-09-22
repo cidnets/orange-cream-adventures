@@ -6,8 +6,8 @@
 
 <script src="https://kit.fontawesome.com/ca052c1b0a.js" crossorigin="anonymous"></script>
 
-<title>Contact - Orenchii</title>
-<link rel="icon" type="image/x-icon" href="">
+<title>Contact - SydGarcia</title>
+<link rel="icon" type="image/x-icon" href="/assets/heart-peach.png">
 <link rel="stylesheet" href="/css/style.css"/>
 	
   </head>
@@ -15,14 +15,13 @@
 <body>
 	<div class="site-bg">
 	<div class="site-bg-img-container">
-		<img src="/assets/logo-colored.png" class="desktop-bg">
-	</div>
-	
-	<div class="site-credit">
-		<div class="credit">
-			<p>
-			&copy; <span id="copyright-year"></span> Orange Cream Adventures @Cidnets. All Rights Reserved.
-			</p>
+		<div class="site-logo-container">
+			<img src="/assets/sydgarcia-heart.svg" class="desktop-bg">
+			<div class="desktop-credit credit">
+				<p>
+				&copy; <span id="copyright-year"></span> Syd Garcia @Cidnets. All Rights Reserved.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
@@ -30,42 +29,86 @@
 
 	<div class="app-drawer">
 		
-		<a href="#" class="app-launcher app-icon" data-title="About Me" data-url="/about/" data-id="about" data-window-target="new">
-			<div class="icon-visual">🪪</div>
-			<span>About Me</span>
+		<a href="#" class="app-launcher app-icon" data-title="About Me" data-url="/about/" data-id="about" data-window-target="new" data-icon="/assets/icon-placeholder/person.svg">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="About Me icon">
+			</div>
+			<span class="app-name">About Me</span>
 		</a>
 		
-		<a href="#" class="app-launcher app-icon" data-title="Archive" data-url="/archive/" data-id="archive" data-window-target="new">
-			<div class="icon-visual">🗨️</div>
-			<span>Archive</span>
+		<a href="#" class="app-launcher app-icon" data-title="Archive" data-url="/archive/" data-id="archive" data-window-target="new" data-icon="/assets/icon-placeholder/newspaper.svg">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="Archive icon">
+			</div>
+			<span class="app-name">Archive</span>
 		</a>
 		
-		<a href="#" class="app-launcher app-icon" data-title="Contact" data-url="/contact/" data-id="contact" data-window-target="new">
-			<div class="icon-visual">✉️</div>
-			<span>Contact</span>
+		<a href="#" class="app-launcher app-icon" data-title="Contact" data-url="/contact/" data-id="contact" data-window-target="new" data-icon="/assets/icon-placeholder/chat.svg">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="Contact icon">
+			</div>
+			<span class="app-name">Contact</span>
 		</a>
 		
-		<a href="#" class="app-launcher app-icon" data-title="Search" data-url="/search/" data-id="search" data-window-target="new">
-			<div class="icon-visual">🔍</div>
-			<span>Search</span>
+		<a href="#" class="app-launcher app-icon" data-title="Search" data-url="/search/" data-id="search" data-window-target="new" data-icon="/assets/icon-placeholder/search.svg">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="Search icon">
+			</div>
+			<span class="app-name">Search</span>
 		</a>
 		
+		<a href="#" class="app-launcher app-icon" data-title="Portfolio" data-url="/portfolio/" data-id="portfolio" data-window-target="new" data-icon="/assets/icon-placeholder/brush.svg">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="Portfolio icon">
+			</div>
+			<span class="app-name">Portfolio</span>
+		</a>
+		
+		<a href="#" class="app-launcher app-icon" data-title="Commissions Terms &amp; Conditions" data-url="/commissions/" data-id="commissions" data-window-target="new" data-icon="/assets/icon-placeholder/gift.svg">
+			<div class="icon-wrapper">
+				<img src="" class="icon-visual" alt="Commissions Terms &amp; Conditions icon">
+			</div>
+			<span class="app-name">Commissions Terms &amp; Conditions</span>
+		</a>
+		
+		<div id="mobile-calendar-widget" class="mobile-calendar-widget mobile">
+	<div class="mobile-calendar-container">
+		<div id="mobile-current-date-display">
+		</div>
+		<div id="mobile-mini-calendar">
+		</div>
 	</div>
-	
+</div>
+<div class="mobile-filler-container mobile mobile-one">
+	<img src="/assets/Robot-love.gif"/>
+</div>
+<div class="mobile-filler-container mobile mobile-two">
+	<div class="moon-phase-container">
+		<img id="moon-icon" class="moon-icon" src="" alt="Current Moon Phase">
+		<span id="moon-phase-text" class="moon-phase-text"></span>
+	</div>
+</div>
+	</div>
     
-	<div id="page-content" class="content page" data-pagefind-body>
-		
-		<h2>Want to contact me?</h2>
-<p>Don't.</p>
+	<div id="page-content" class="content page post-content-bg" data-pagefind-body>
+		<div class="mobile-content-wrapper">
+			
+			<h2>Want to contact me?</h2>
+<p>Send me an email!</p>
+<p><a href="mailto:cidnets.no@gmail.com" class="button"><i class="fa-solid fa-envelope"></i> Email</a></p>
+<p>That's it. Also, please don't contact me.</p>
 
+		</div>
 	</div>
-    
+
   </main>
     <div id="navbar" class="navbar">
 	<input type="checkbox" id="navbar-toggle" class="navbar-toggle">
 	<label for="navbar-toggle" class="hamburger">
 		<img src="/assets/heart-start.png">Start
 	</label>
+	
+	<div class="start-divider"></div>
   
 	<div class="nav-links">
 		<button id="close-all-windows"><span>×</span> Close All Windows</button>
@@ -77,17 +120,81 @@
 			
 			<a href="#" class="app-launcher" data-title="Contact" data-url="/contact/" data-id="contact" Contact data-window-target="new">Contact</a>
 			
+			<a href="#" class="app-launcher" data-title="Commissions Terms &amp; Conditions" data-url="/commissions/" data-id="commissions" Commissions Terms &amp; Conditions data-window-target="new">Commissions Terms &amp; Conditions</a>
+			
 		</div>
 	</div>
 	
+	<div class="slider-toggle-container"><label class="switch"><input type="checkbox" class="fullscreen-button"><span class="slider round"></span><svg class="status-icon status-icon-svg fullscreen-icon"><use class="fullscreen-icon-use" href="/assets/icon-sheet.svg#fullscreen-icon"></use></svg></label>
+	</div>
+		
 	<div id="date-time" class="date-time">
 		<div id="date"></div> 
 		<span>|</span>
-		<div id="clock">8:10:45</div>
+		<div id="clock" class="js-clock-display">8:10:45</div>
 	</div>
 	
 	<div id="calendar-container" class="calendar-hidden"></div>
 	
+</div>
+
+<div id="mobile-navbar" class="mobile-navbar mobile">
+	<button id="mobile-back-button" class="mobile-navbar-button">
+		◀
+	</button>
+	<button id="mobile-home-button" class="mobile-navbar-button">
+		●
+	</button>
+	<button id="mobile-app-drawer-button" class="mobile-navbar-button">
+		■
+	</button>
+</div>
+
+<div id="app-drawer" class="app-drawer-container mobile">
+	<div id="open-apps-list">
+		</div>
+	<div id="drawer-controls">
+		<button id="drawer-clear-all">Clear All</button>
+	</div>
+</div>
+
+<div id="mobile-status-bar" class="mobile-status-bar mobile">
+	
+	<div id="mobile-date-time" class="date-time">
+		<div id="mobile-clock" class="js-clock-display">8:10:45</div>
+	</div>
+	
+	<div class="slider-toggle-container"><label class="switch"><input type="checkbox" class="fullscreen-button"><span class="slider round"></span><svg class="status-icon status-icon-svg fullscreen-icon"><use class="fullscreen-icon-use" href="/assets/icon-sheet.svg#fullscreen-icon"></use></svg></label>
+	</div>
+	
+	<div class="status-icons-cosmetic">
+		<a href="#" class="status-icon" 
+			data-message="
+			── .✦જ⁀➴જ⁀➴<br>
+			Connected to the web of creativity!
+			<br>── .✦જ⁀➴જ⁀➴
+			">
+			<svg class="status-icon-svg wifi-icon"><use href="/assets/icon-sheet.svg#wifi-icon"></use></svg>
+		</a><a href="#" class="status-icon" 
+			data-message="⫘⫘⫘<br>
+			Finding new connections... one pixel at a time!
+			<br>⫘⫘⫘">
+			<svg class="status-icon-svg data-icon"><use href="/assets/icon-sheet.svg#data-icon"></use></svg>
+		</a><a href="#" class="status-icon" 
+			data-message="
+			ᕙ(  •̀ ᗜ •́  )ᕗ<br>
+			Powered by pure imagination!"
+			>
+			<svg class="status-icon-svg battery-icon"><use href="/assets/icon-sheet.svg#battery-icon"></use></svg><span>∞%</span>
+		</a>
+	</div>
+	
+</div>
+
+<div id="message-popup" class="message-popup">
+    <div class="message-content">
+        <span id="popup-text"></span>
+    </div>
 </div>
 
 
@@ -95,16 +202,26 @@
   </footer>
    
 	<div id="context-menu">
-		<div class="context-menu-item" id="context-menu-minimize">Minimize</div>
+		<div class="context-menu-item" id="context-menu-copy">Copy</div>
+		<div class="context-menu-item" id="context-menu-paste">Paste</div>
+		<div class="context-menu-divider" id="copy-paste-divider"></div>
+		<div class="context-menu-item" id="context-menu-minimize">Hide</div>
+		<div class="context-menu-item" id="context-menu-maximize">Maximize</div>
 		<div class="context-menu-item" id="context-menu-close">Close</div>
+		<div class="context-menu-divider" id="min-max-divider"></div>
 		<div class="context-menu-item" id="context-menu-close-all">Close All Windows</div>
 	</div>
+	
+	<script>
+		window.desktopApps = [{"id":"about","title":"About Me","url":"/about/","icon":"/assets/icon-placeholder/person.svg"},{"id":"archive","title":"Archive","icon":"/assets/icon-placeholder/newspaper.svg","url":"/archive/"},{"id":"contact","title":"Contact","url":"/contact/","icon":"/assets/icon-placeholder/chat.svg"},{"id":"search","title":"Search","url":"/search/","icon":"/assets/icon-placeholder/search.svg"},{"id":"portfolio","title":"Portfolio","url":"/portfolio/","icon":"/assets/icon-placeholder/brush.svg"},{"id":"commissions","title":"Commissions Terms & Conditions","url":"/commissions/","icon":"/assets/icon-placeholder/gift.svg"}];
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/themes/base/jquery-ui.css">
 
 <script src="https://cdn.jsdelivr.net/npm/markdown-it@latest/dist/markdown-it.min.js"></script>
 
+<script src="/js/moonphase-widget.js"></script>
 <script src="/js/script.js" defer></script>
 <script src="/js/windows.js" defer></script>
   </body>

@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Geo:ital@0;1&family=Jersey+10&family=Jersey+20&family=Silkscreen:wght@400;700&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&family=Walter+Turncoat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=DotGothic16&family=Fira+Code:wght@300..700&family=Gamja+Flower&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-	--font-family: "DotGothic16";
-	--header: "Jersey 20";
+	--font-family: "Outfit";
+	--header: "Sour Gummy";
+	
+	--font-family-basic: "Outfit";
+	--header-basic: "Gamja Flower";
+	
+	--pixel-font: "DotGothic16";
+	--unicode: "Fira Code";
 }
 
 h1, h2, h3, h4, h5 {
@@ -19,21 +25,49 @@ p {
 
 a {
 	text-decoration: none;
-}
-a:hover {
-	background-color: var(--primary-2);
+	color: var(--text);
 }
 
-button {
+@media screen and (min-width: 576px) {
+	a:hover {
+		background-color: var(--primary-2);
+	}
+	button:hover {
+		background-color: var(--primary-2);
+	}
+}
+@media screen and (max-width: 576px) {
+	a, button {
+		transition: background-color 0.3s ease-out, color 0.3s ease-out;
+	}
+	a:active, button:active {
+		transition: 0s;
+	}
+	a:active {
+		background-color: var(--primary-2);
+	}
+	button:active {
+		background-color: var(--primary-2);
+	}
+}
+
+
+a.button {
+	display: block;
+	width: fit-content;
+}
+
+button,
+.button {
 	margin: 1rem 0;
 	padding: 0.5rem 1rem;
-	background-color: var(--primary);
+	background-color: var(--lpurple);
 	border: var(--border);
+	border-radius: 5px;
 	cursor: pointer;
+	color: var(--text);
 }
-button:hover {
-	background-color: var(--primary-2);
-}
+
 
 pre {
 	overflow: auto;
@@ -49,56 +83,48 @@ pre {
 
 /* FONT CLASSES*/
 
+.outfit-garciart {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.sour-gummy-garciart {
+  font-family: "Sour Gummy", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+.gamja-flower-regular {
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 .dotgothic16-regular {
   font-family: "DotGothic16", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
-.geo-regular {
-  font-family: "Geo", sans-serif;
+
+.josefin-slab-garciart {
+  font-family: "Josefin Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.fira-code-garciart {
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.cherry-bomb-one-regular {
+  font-family: "Cherry Bomb One", system-ui;
   font-weight: 400;
   font-style: normal;
 }
 
-.geo-regular-italic {
-  font-family: "Geo", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-.jersey-10-regular {
-  font-family: "Jersey 10", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.jersey-20-regular {
-  font-family: "Jersey 20", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.silkscreen-regular {
-  font-family: "Silkscreen", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.silkscreen-bold {
-  font-family: "Silkscreen", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-.sora-<bngo> {
-  font-family: "Sora", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-}
-.space-grotesk-<bngo> {
-  font-family: "Space Grotesk", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-}
-.walter-turncoat-regular {
-  font-family: "Walter Turncoat", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
+

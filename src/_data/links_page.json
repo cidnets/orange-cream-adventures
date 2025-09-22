@@ -1,34 +1,47 @@
 {
   "pageTitle": {
-    "title": "Brendon Ngo",
-    "description": "Senior Data Scientist // AI Developer"
+    "title": "Cidnets",
+    "description": "Artist, Printmaker, Amateur Coder",
+	"icon": "/assets/art/digital/thumb/Doodle-boba-signature-02.png"
   },
+  "footer": [
+	{
+	  "text": "Website",
+	  "href": "/"
+	},
+	{
+		"text": "About",
+		"href": "/?openwindow=/about/"
+	}
+  ],
   "contact": [
     {
       "type": "email",
       "text": "Email Me",
-      "href": "mailto:your.email@example.com",
+      "href": "mailto:cidnets.no@gmail.com",
       "icon": "<i class='fa-solid fa-envelope'></i>"
     }
   ],
   "mainLinks": [
     {
-      "text": "My Blog",
-      "href": "/blog/",
-      "description": "Read my latest thoughts and articles.",
-      "icon": "<i>0</i>"
-    },
-    {
       "text": "Portfolio",
-      "href": "/portfolio/",
-      "description": "Check out my design and development projects.",
-      "icon": "<span>0</span>"
+      "href": "/?openwindow=/portfolio/",
+      "icon": "⊹𓂃🖌"
     },
+	{
+		"text": "About Me",
+		"href": "/?openwindow=/about/",
+		"icon": "ጸ"
+	},
     {
-      "text": "GitHub Profile",
-      "href": "https://github.com/yourusername",
-      "description": "See my code repositories and contributions.",
-      "icon": ""
+      "text": "Commissions",
+      "href": "https://ko-fi.com/cidnets",
+      "icon": "⋆.˚☕︎"
+    },
+	{
+      "text": "Commissions T&C",
+      "href": "/?openwindow=/commissions/",
+      "icon": "🗎︎"
     }
   ],
   "socials": [
@@ -39,7 +52,7 @@
     },
     {
       "text": "Artstation",
-      "href": "",
+      "href": "https://cidnets.artstation.com/",
       "icon": "<i class='fa-brands fa-artstation'></i>"
     },
     {
@@ -54,7 +67,7 @@
     },
 	{
       "text": "Bluesky",
-      "href": "",
+      "href": "https://bsky.app/profile/cidnets.bsky.social",
       "icon": "<i class='fa-brands fa-bluesky'></i>"
     },
 	{
@@ -99,7 +112,7 @@
     },
 	{
       "text": "Instagram",
-      "href": "",
+      "href": "https://www.instagram.com/cidnets?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       "icon": "<i class='fa-brands fa-instagram'></i>"
     },
 	{
@@ -109,7 +122,7 @@
     },
 	{
       "text": "LinkedIn",
-      "href": "https://www.linkedin.com/in/brendon-ngo/",
+      "href": "",
       "icon": "<i class='fa-brands fa-linkedin-in'></i>"
     },
 	{

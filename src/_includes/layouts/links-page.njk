@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links-Cidnets</title>
+	<link rel="icon" type="image/x-icon" href="/assets/heart-peach.png">
+    <link rel="stylesheet" href="/css/linkspage.css">
+	<script src="https://kit.fontawesome.com/ca052c1b0a.js" crossorigin="anonymous"></script>
+	
+  </head>
+  <body>
+	<div class="links-bg-container"><div class="inner"></div></div>
+    <main class="content">
+		<div class="header-container">
+			<div class="header-inner">
+				<div class="wrapper section">
+					<div class="icon-container">
+						<img src="{{ links_page.pageTitle.icon }}">
+					</div>
+					<h1 class="header-title section-header">{{ links_page.pageTitle.title }}</h1>
+					<p class="header-description">{{ links_page.pageTitle.description }}</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="main-links wrapper">
+			
+			{% set valid_contact_links = links_page.contact | selectattr('href') %}
+			{% if valid_contact_links.length %}
+			<h2 class="section section-header contact-title">Contact</h2>
+			<ul class="contact-link-container">
+				{% for link in valid_contact_links %}
+				<li>
+				  <a href="{{ link.href }}" target="_blank" rel="noopener noreferrer" class="frilly-link contact-link">
+					{{ link.icon | safe }}
+				  </a>
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			
+			{% set valid_mainLinks_links = links_page.mainLinks | selectattr('href') %}
+			{%if valid_mainLinks_links.length %}
+			<h2 class="section section-header mainLinks-title">Links</h2>
+			<ul>
+				{% for link in valid_mainLinks_links %}
+				<li>
+				  <a href="{{ link.href }}" target="_blank" rel="noopener noreferrer" class="frilly-link main-link">
+					<div class="links-icon">{{ link.icon | safe }}</div>
+					{{ link.text }}
+				  </a>
+				  {% if link.description %}
+					<p>{{ link.description }}</p>
+				  {% endif %}
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			
+			{% set valid_socials_links = links_page.socials | selectattr('href') %}
+			{% if valid_socials_links.length %}
+			<h2 class="section section-header socials-title">Socials</h2>
+			<ul class="socials-link-container">
+				{% for link in valid_socials_links %}
+				<li>
+				  <a href="{{ link.href }}" target="_blank" rel="noopener noreferrer" class="frilly-link social-link">
+					{{ link.icon | safe }}
+				  </a>
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			
+		</div>
+    </main>
+	
+	<footer>
+		<div class="inner"></div>
+		<div class="footer-content wrapper">
+			<div class="footer-links">
+				{% for link in links_page.footer %}
+				<a href="{{ link.href }}" >{{ link.text }}</a>
+					{% if not loop.last %}
+					<span class="footer-divider">|</span>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="credit">
+				<p>
+					&copy; <span id="copyright-year"></span> @Cidnets. All Rights Reserved.
+				</p>
+			</div>
+		</div>
+	</footer>
+	
+	<script src="/js/links.js" defer></script>
+	
+  </body>
+</html>

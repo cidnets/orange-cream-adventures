@@ -20,18 +20,21 @@ templateClass: tmpl-home
 		</div>
 		<div class="address-bar-container">
 			<div class="address-bar">
-				<span>orange-cream-adventures.pages.dev/blog{{ page.url }}</span>
+				<span>sydgarcia.pages.dev/blog{{ page.url }}</span>
 			</div>
 		</div>
 		<a href="/archive/" class="app-launcher archive-button" data-title="Archive" data-url="/archive/" data-id="archive" data-window-target="new">Archive</a>
 	</div>
 	<div class="post-scroll-wrapper">
-		<div class="post-content" data-pagefind-body>
-			<h1 class="post-title">{{title}}</h1>
-			{% if featuredImage %}
-			<img src="{{featuredImage}}"/>
-			{% endif %}
-			{{ content | safe }}
+		<div class="post-content-bg">
+			<div class="post-content mobile-content-wrapper" data-pagefind-body>
+				<h1 class="post-title">{{title}}</h1>
+				<h3 class="post-description">{{description}}</h3>
+				{% if featuredImage %}
+				<img src="{{featuredImage}}"/>
+				{% endif %}
+				{{ content | safe }}
+			</div>
 		</div>
 	</div>
 </div>

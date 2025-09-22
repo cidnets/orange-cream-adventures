@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+	<div id="page-content" class="content page" data-pagefind-body>
+		<div class="post-content-bg">
+			{% if pageTitle%}
+			<h1>{{ pageTitle }}</h1>
+			{% endif %}
+			{{ content | safe }}
+		</div>
+	</div>

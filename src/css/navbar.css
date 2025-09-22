@@ -1,5 +1,6 @@
 :root {
 	--navbar-height: 48px;
+	--statusbar-height: 24px;
 }
 
 .navbar {
@@ -14,12 +15,8 @@
 	background-color: var(--orange-3);
 	border-top: var(--border) var(--yellow);
 	color: var(--text);
-	font-family: "DotGothic16";
 	font-size: 1rem;
 	z-index: 9999;
-}
-.mobile-navbar {
-	display: none;
 }
 
 .logo a {
@@ -113,34 +110,146 @@
 	border-color: var(--orange) transparent var(--orange) transparent;
 }
 
-.navbar a:hover,
-.navbar label:hover,
-.date-time:hover,
-.date-time:hover #clock {
-	background-color: var(--primary-2);
+/* -- SLIDER RULES --*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
 }
-.navbar a:hover,
-.navbar label:hover,
-.nav-links a:not(:first-child):not(:last-child):hover,
-.nav-links a:hover,
-.nav-links button:hover {
-	border-width: 2px;
-	border-style: solid;
-	border-color: var(--border-inset);
+.navbar label.switch:hover {
+	background-color: transparent;
+	border: none;
 }
-.nav-links a:not(:first-child):not(:last-child):hover,
-.nav-links a:hover,
-.nav-links button:hover {
-	background-color: var(--accent-1);
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-.navbar a:last-child:hover {
-	border-width: 2px;
-	border-style: solid;
-	border-color: transparent var(--yellow) var(--yellow) var(--orange);
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider::before {
+  position: absolute;
+  content: "";
+  height:  16px;
+  aspect-ratio: 1/1;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--orange);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: var(--blue);
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--blue);
+}
+input:checked + .slider::before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+  background-color: var(--background);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round::before {
+  border-radius: 50%;
+}
+.status-icon.status-icon-svg.fullscreen-icon {
+	position: absolute;
+	top: 1px;
+	left: auto;
+	right: 4px;
+} 
+input:checked ~ .status-icon.status-icon-svg.fullscreen-icon {
+	left: 4px;
+	right: auto;
+}
+/* -- END SLIDER -- */
+
+@media screen and (min-width: 576px) {
+	.navbar a:hover,
+	.navbar label:hover,
+	.date-time:hover,
+	.date-time:hover #clock {
+		background-color: var(--primary-2);
+	}
+	.navbar a:hover,
+	.navbar label:hover,
+	.nav-links a:not(:first-child):not(:last-child):hover,
+	.nav-links a:hover,
+	.nav-links button:hover {
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--border-inset);
+	}
+	.nav-links a:not(:first-child):not(:last-child):hover,
+	.nav-links a:hover,
+	.nav-links button:hover {
+		background-color: var(--accent-1);
+	}
+	.navbar a:last-child:hover {
+		border-width: 2px;
+		border-style: solid;
+		border-color: transparent var(--yellow) var(--yellow) var(--orange);
+	}
+}
+@media screen and (max-width: 576px) {
+	.navbar, .nav-links,
+	.mobile-navbar button.mobile-navbar-button	{
+		transition: background-color 0.3s ease-out, color 0.3s ease-out;
+	}
+	.navbar:active, .nav-links:active,
+	.mobile-navbar button.mobile-navbar-button:active {
+		transition: 0s;
+	}
+	.navbar a:active,
+	.navbar label:active {
+		background-color: var(--primary-2);
+	}
+	.date-time:active,
+	.date-time:active #clock {
+		background-color: transparent;
+	}
+	.navbar a:active,
+	.navbar label:active,
+	.nav-links a:not(:first-child):not(:last-child):active,
+	.nav-links a:active,
+	.nav-links button:active {
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--border-inset);
+	}
+	.nav-links a:not(:first-child):not(:last-child):active,
+	.nav-links a:active,
+	.nav-links button:active {
+		background-color: var(--accent-1);
+	}
+	.navbar a:last-child:active {
+		border-width: 2px;
+		border-style: solid;
+		border-color: transparent var(--yellow) var(--yellow) var(--orange);
+	}
+	.mobile-navbar button.mobile-navbar-button:active {
+		background-color: transparent;
+		color: var(--primary-2);
+	}
 }
 
+/* Clock */
 .date-time {
-	margin-left: auto;
+	margin-left: 1rem;
 	flex-shrink: 0;
 	width: fit-content;
 	background: var(--background);
@@ -179,7 +288,6 @@
 	text-align: center;
 	font-size: 1.1rem;
 	font-weight: bold;
-	padding-bottom: 0.75rem;
 }
 .day-name {
 	text-align: center;
@@ -191,15 +299,169 @@
 	justify-content: center;
 	align-items: center;
 	height: 2rem;
+	aspect-ratio: 1/1;
 	text-align: center;
-	border-radius: 50%;
 	font-family: var(--font-family);
 }
 .current-day {
-	background-color: var(--accent-1);
+	background-image: url("/assets/tiny-heart-oneColor.png");
+	background-repeat: no-repeat;
+	background-position: center;	
 	font-weight: bold;
 }
 
+.mobile {
+	display: none;
+}
+
+
 @media screen and (max-width: 576px) {
+	:root {
+		--navbar-height: 48px;
+	}
+	.navbar {
+		display: none;
+	}
 	
+	.mobile {
+		display: block;
+	}
+	.mobile-navbar,
+	.mobile-status-bar {
+		z-index: 9999;
+	}
+	.mobile-navbar {
+		display: flex;
+		position: fixed;
+		height: var(--navbar-height);
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		background-color: transparent;
+		background-image: linear-gradient(transparent, rgba(var(--white-rgb), 0.5));
+		color: var(--text);
+		justify-content: space-around;
+		align-items: center;
+		font-family: var(--unicode);
+	}
+	.mobile-navbar button.mobile-navbar-button {
+		font-family: var(--unicode);
+	}
+	.mobile-navbar-button {
+		width: 40px;
+		aspect-ratio: 1/1;
+		margin: 0;
+		padding: 0;
+		background: none;
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		text-align: center;
+		color: var(--text);
+	}
+	.mobile-navbar-button img {
+		width: 30px;
+		height: 30px;
+	}
+	body:has(.window.active) .mobile-status-bar,
+	body:has(.window.active) .mobile-status-bar *:not(.slider-toggle-container *)	{
+		color: var(--text);
+		background-color: transparent;
+		background-image: none;
+	}
+	body:has(.window.active) .mobile-navbar {
+		background-color: var(--heart-cross);
+	}
+	body:has(.window.active) .mobile-navbar-button {
+		color: var(--orange);
+	}
+	body:has(.window-blog-post.active) .mobile-status-bar {
+		background-color: var(--accent-2-active);
+		color: var(--text);
+	}
+	
+	.app-drawer-container {
+		display: none;
+		position: fixed;
+		top: var(--statusbar-height);
+		bottom: var(--navbar-height);
+		left: 0;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.8);
+		z-index: 9998;
+		padding: 20px;
+		box-sizing: border-box;
+		overflow-y: auto;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: center;
+	}
+	.app-drawer-container.visible {
+		display: flex;
+	}
+	body:has(.app-drawer-container.visible) .mobile-navbar,
+	body:has(.app-drawer-container.visible) .mobile-status-bar	{
+		color: var(--white);
+		background-color: rgba(0,0,0,0.8);
+		background-image: none;
+	}
+	body:has(.app-drawer-container.visible) .mobile-navbar-button {
+		color: var(--white);
+	}
+	.app-drawer-container.visible ~ .mobile-status-bar,
+	.app-drawer-container.visible ~ .mobile-status-bar *:not(.slider-toggle-container *)	{
+		color: white;
+	}
+	.app-drawer-button-container {
+		margin: 0.5rem auto;
+		aspect-ratio: 1/1;
+		border-radius: 0.5rem;
+	}
+	.app-icon {
+		width: auto;
+	}
+
+	#open-apps-list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 15px;
+		padding-bottom: 20px;
+	}
+
+	.app-drawer-button {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background: transparent;
+		border: none;
+		color: white;
+		text-align: center;
+		width: 80px;
+		cursor: pointer;
+	}
+	.app-drawer-button img {
+		width: 50px;
+		height: 50px;
+		object-fit: contain;
+	}
+
+	#drawer-controls {
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		color: var(--text);
+	}
+	#drawer-controls button {
+		color: var(--text);
+	}
+	
+	.mobile-status-bar {
+		position: fixed;
+		display: flex;
+		top: 0;
+		width: 100%;
+		height: var(--statusbar-height);
+		padding: 0 8px;
+	}
 }

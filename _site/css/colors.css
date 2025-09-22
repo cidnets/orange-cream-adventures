@@ -3,6 +3,8 @@
 	--blue: #99dfeb;
 	
 	--cream: #fff9f1;
+	--heart-cross: #ffedd0;
+	--heart-cross-heart: #f7cd91;
 	
 	--green: #9cd6aa;
 	
@@ -22,6 +24,7 @@
 	--yellow: #fff6bd;
 	
 	--white: #fff;
+	--white-rgb: 255, 255, 255;
 	--black: #49243c;
 	--blacktrue: #000;
 	/*--- END COLORS ---*/
@@ -63,4 +66,37 @@
 	
 	--background: var(--cream);
 	--fill: var(--cream);
+	
+	/* -- FRILLY BORDERS -- */
+	--f-white: #fff;
+	--f-blue: #BDE7FF;
+	--f-l-blue: #F4FCFF;
+	--f-green: #BFEBAC;
+	--f-peach: #FFD5BD;
+	--f-pink: #FFD0DE;
+	--f-purple: #F1CBFF;
+	--f-yellow: #FDFFBD;
+	--f-white-dot-bg: url('/assets/white-dot-border.png');
+	--f-purple-2: #d39ee7;
+	
+	--f-border: 7px solid transparent;
+	--f-border-white: url('/assets/Border-base.png') 33% round;
+	--f-border-blue: url('/assets/Border-blue.png') 33% round;
+	--f-border-green: url('/assets/Border-green.png') 33% round;
+	--f-border-l-blue: url('/assets/Border-l-blue.png') 33% round;
+	--f-border-peach: url('/assets/Border-peach.png') 33% round;
+	--f-border-pink: url('/assets/Border-pink.png') 33% round;
+	--f-border-purple: url('/assets/Border-purple.png') 33% round;
+	--f-border-yellow: url('/assets/Border-yellow.png') 33% round;
+	
+	--f-large-border: 25px solid transparent;
+	--f-large-border-mint: url('/assets/Large-border.png') 20% round;
+	--f-large-border-orange-2: url('/assets/Large-border-orange-2.png') 20% round;
+	--f-large-border-peach: url('/assets/Large-border-peach.png') 20% round;
+	--f-large-border-pink: url('/assets/Large-border-pink.png') 20% round;
+	--f-large-border-blue: url('/assets/Large-border-l-blue.png') 20% round;
+	
+	--tiny-heart-peach: url('/assets/tiny-heart-peach.png');
+	--tiny-heart-pink: url('/assets/tiny-heart-pink.png');
+	--tiny-heart-size: 15px;
 }

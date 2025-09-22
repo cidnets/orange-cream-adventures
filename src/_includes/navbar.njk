@@ -15,13 +15,75 @@
 		</div>
 	</div>
 	
+	<div class="slider-toggle-container"><label class="switch"><input type="checkbox" class="fullscreen-button"><span class="slider round"></span><svg class="status-icon status-icon-svg fullscreen-icon"><use class="fullscreen-icon-use" href="/assets/icon-sheet.svg#fullscreen-icon"></use></svg></label>
+	</div>
+		
 	<div id="date-time" class="date-time">
 		<div id="date"></div> 
 		<span>|</span>
-		<div id="clock">8:10:45</div>
+		<div id="clock" class="js-clock-display">8:10:45</div>
 	</div>
 	
 	<div id="calendar-container" class="calendar-hidden"></div>
 	
+</div>
+
+<div id="mobile-navbar" class="mobile-navbar mobile">
+	<button id="mobile-back-button" class="mobile-navbar-button">
+		◀
+	</button>
+	<button id="mobile-home-button" class="mobile-navbar-button">
+		●
+	</button>
+	<button id="mobile-app-drawer-button" class="mobile-navbar-button">
+		■
+	</button>
+</div>
+
+<div id="app-drawer" class="app-drawer-container mobile">
+	<div id="open-apps-list">
+		</div>
+	<div id="drawer-controls">
+		<button id="drawer-clear-all">Clear All</button>
+	</div>
+</div>
+
+<div id="mobile-status-bar" class="mobile-status-bar mobile">
+	
+	<div id="mobile-date-time" class="date-time">
+		<div id="mobile-clock" class="js-clock-display">8:10:45</div>
+	</div>
+	
+	<div class="slider-toggle-container"><label class="switch"><input type="checkbox" class="fullscreen-button"><span class="slider round"></span><svg class="status-icon status-icon-svg fullscreen-icon"><use class="fullscreen-icon-use" href="/assets/icon-sheet.svg#fullscreen-icon"></use></svg></label>
+	</div>
+	
+	<div class="status-icons-cosmetic">
+		<a href="#" class="status-icon" 
+			data-message="
+			── .✦જ⁀➴જ⁀➴<br>
+			Connected to the web of creativity!
+			<br>── .✦જ⁀➴જ⁀➴
+			">
+			<svg class="status-icon-svg wifi-icon"><use href="/assets/icon-sheet.svg#wifi-icon"></use></svg>
+		</a><a href="#" class="status-icon" 
+			data-message="⫘⫘⫘<br>
+			Finding new connections... one pixel at a time!
+			<br>⫘⫘⫘">
+			<svg class="status-icon-svg data-icon"><use href="/assets/icon-sheet.svg#data-icon"></use></svg>
+		</a><a href="#" class="status-icon" 
+			data-message="
+			ᕙ(  •̀ ᗜ •́  )ᕗ<br>
+			Powered by pure imagination!"
+			>
+			<svg class="status-icon-svg battery-icon"><use href="/assets/icon-sheet.svg#battery-icon"></use></svg><span>∞%</span>
+		</a>
+	</div>
+	
+</div>
+
+<div id="message-popup" class="message-popup">
+    <div class="message-content">
+        <span id="popup-text"></span>
+    </div>
 </div>
 
